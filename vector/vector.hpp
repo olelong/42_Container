@@ -30,6 +30,11 @@ namespace ft
 				(void)alloc;
 			}
 
+			vector (const vector &x){
+				std::cout << "My copy constructor" << std::endl;
+				*this = x;	
+			}			
+
 			~vector() {
 				alloc.deallocate(this->arr, this->_size);
 			}
@@ -42,7 +47,30 @@ namespace ft
 			iterator end() {
 				return iterator(arr + _size);
 			}
+
+			// operator=()
+			vector&	operator=(const vector& x) {
+				std::cout << "My operator=()" << std::endl;
+				this->arr = x.arr;
+				this->_size = x._size;
+				//this->alloc = x.alloc;
+				return *this;
+			}
+
+			//operator[]()
+			reference operator[] (size_type n) {
+				//if (n > _size || n < 0)	
+				std::cout << "My operator[]" << std::endl;
+				return arr[n]; 
+			}
 			
+			const_reference operator[] (size_type n) const{
+				//if (n > _size || n < 0)	
+				std::cout << "My operator[] const" << std::endl;
+				return arr[n]; 
+			}
+			
+			// Front() et Back()
 			reference front(){
 				return arr[0];
 			}
@@ -55,9 +83,13 @@ namespace ft
 			const_reference back() const{
 				return arr[_size - 1];
 			}
+
+			// size()
 			size_type size() const { //problem name size avec variable private donc ajout d'un _devant la variable size 
 				return _size;
 			}
+
+			// empty()
 			bool empty() const {
 				if (_size == 0)
 					return true;

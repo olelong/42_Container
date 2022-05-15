@@ -2,7 +2,7 @@
 NAME		= ft_containers
 REAL		= real
 
-SRCS		= main.cpp
+SRCS		= main2.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/
