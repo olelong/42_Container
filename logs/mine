@@ -1,0 +1,7 @@
+v: 42 42 42 
+v.front() and v.back(): 42 42
+v.size(): 3
+v2: 5 5 
+v: 5 5 
+v3 (copy of v): 5 5 
+v3[0]: 5

@@ -31,7 +31,6 @@ namespace ft
 			}
 
 			vector (const vector &x){
-				std::cout << "My copy constructor" << std::endl;
 				*this = x;	
 			}			
 
@@ -49,9 +48,11 @@ namespace ft
 			}
 
 			// operator=()
-			vector&	operator=(const vector& x) {
-				std::cout << "My operator=()" << std::endl;
-				this->arr = x.arr;
+			vector	&operator=(const vector& x) {
+				this->alloc.deallocate(this->arr, this->_size);
+				this->arr = this->alloc.allocate(x._size);
+				for (size_type i = 0; i < x._size; i++)
+					this->arr[i] = x.arr[i];
 				this->_size = x._size;
 				//this->alloc = x.alloc;
 				return *this;
@@ -60,13 +61,11 @@ namespace ft
 			//operator[]()
 			reference operator[] (size_type n) {
 				//if (n > _size || n < 0)	
-				std::cout << "My operator[]" << std::endl;
 				return arr[n]; 
 			}
 			
 			const_reference operator[] (size_type n) const{
 				//if (n > _size || n < 0)	
-				std::cout << "My operator[] const" << std::endl;
 				return arr[n]; 
 			}
 			
