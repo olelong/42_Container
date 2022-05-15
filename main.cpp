@@ -11,6 +11,6 @@ int main()
 	for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
 		std::cout << *it << std::endl;
 
-	std::cout << v.front() << " " << v.back() << std::endl;
+	std::cout << v.front() << " "  << v.back() << std::endl;
 	return (0);
 }

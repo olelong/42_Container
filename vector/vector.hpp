@@ -42,26 +42,19 @@ namespace ft
 			iterator end() {
 				return iterator(arr + _size);
 			}
-			/*
+			
 			reference front(){
-				return *arr.begin();
-			}
-			reference front(){
-				return *vector.begin();
-			}
-			reference back(){
-				return *arr.end();
+				return arr[0];
 			}
 			const_reference front() const{
-				return *arr.begin();
-			}*/
-			/*
+				return arr[0];
+			}
+			reference back(){
+				return arr[_size - 1];
+			}
 			const_reference back() const{
-				return *std::prev(vector.end());
-			}*/
-			/*const_reference back() const{
-				return *vector.end();
-			}*/
+				return arr[_size - 1];
+			}
 			size_type size() const { //problem name size avec variable private donc ajout d'un _devant la variable size 
 				return _size;
 			}
