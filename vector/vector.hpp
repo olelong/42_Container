@@ -12,11 +12,14 @@ namespace ft
 	{
 		public:
 			typedef 			T									value_type;
-			typedef 			vector_iterator<value_type>			iterator;
-			typedef 			size_t								size_type;
 			typedef 			Alloc								allocator_type;
 			typedef	typename	allocator_type::reference			reference;			
 			typedef typename	allocator_type::const_reference		const_reference;			
+			typedef	typename	allocator_type::pointer				pointer;			
+			typedef typename	allocator_type::const_pointer		const_pointer;			
+			typedef 			vector_iterator<value_type>			iterator;
+			typedef 			size_t								size_type;
+			
 
 			// Constructors & Destructor
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {
@@ -39,9 +42,12 @@ namespace ft
 			iterator end() {
 				return iterator(arr + _size);
 			}
-/*
+			/*
 			reference front(){
 				return *arr.begin();
+			}
+			reference front(){
+				return *vector.begin();
 			}
 			reference back(){
 				return *arr.end();
@@ -49,11 +55,12 @@ namespace ft
 			const_reference front() const{
 				return *arr.begin();
 			}*/
-		/*	const_reference back() const{
-				return *std::prev(.end());
+			/*
+			const_reference back() const{
+				return *std::prev(vector.end());
 			}*/
 			/*const_reference back() const{
-				return *v.end();
+				return *vector.end();
 			}*/
 			size_type size() const { //problem name size avec variable private donc ajout d'un _devant la variable size 
 				return _size;
