@@ -22,7 +22,14 @@ namespace ft
 			
 
 			// Constructors & Destructor
+			explicit vector(const allocator_type& alloc = allocator_type()) {
+				this->alloc = alloc;
+				this->arr = this->alloc.allocate(0);
+				this->_size = 0;
+			}	
+
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {
+				this->alloc = alloc;
 				this->arr = this->alloc.allocate(n);
 				this->_size = n;
 				for (size_type i = 0; i < this->_size; i++)
@@ -30,10 +37,25 @@ namespace ft
 				(void)alloc;
 			}
 
+			/* Need enable_if!
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocatr_type()) {
+				this->alloc = alloc;
+				this->_size = last - first;
+				this->arr = this->alloc.allocate(this->_size);
+				InputIterator i = 0;
+				for(InputIterator it = first; it != last; it++, i++)
+				{
+					this->arr[i] = *it;
+				}
+			}
+			*/
+			
 			vector (const vector &x){
-				*this = x;	
-			}			
-
+				this->arr = this->alloc.allocate(0);
+				*this = x;
+			}
+			
 			~vector() {
 				alloc.deallocate(this->arr, this->_size);
 			}

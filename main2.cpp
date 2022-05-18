@@ -37,6 +37,10 @@ int main()
 	for (vector<int>::iterator it = v3.begin(); it != v3.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl << "v3[0]: " << v3[0] << std::endl;
+
+	vector<int> v4;
+	if (v4.empty())
+		std::cout << "Default Constructor is empty" << std::endl;
 	
 	return (0);
 }
