@@ -8,8 +8,15 @@
 
 using namespace NAMESPACE;
 
+#define CYAN "\033[0;36m"
+#define END_COLOR "\033[0m"
+
 int main()
 {
+	/////////////////////// TEST Vector ////////////////////
+
+	std::cout << std::endl <<  CYAN <<  "************* Test Vector *************" << END_COLOR << std::endl << std::endl;
+
 	vector<int> v(3, 42);
 
 	std::cout << "v: ";
@@ -72,6 +79,18 @@ int main()
 	for (vector<float>::iterator it = v5.begin(); it != v5.end(); it++)
 	std::cout << *it << " ";
 	std::cout << std::endl;*/
+
+	
+	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
+
+	vector<int> v5(4, 7);
+
+	std::cout << "v5: ";
+	for (vector<int>::reverse_iterator<vector_iterator> it = v.rbegin(); it != v.rend(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+	
+
 	return (0);
 }
 
