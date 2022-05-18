@@ -1,0 +1,6 @@
+*.o
+ft_containers
+real
+objs
+objs_r
+logs
