@@ -83,14 +83,9 @@ int main()
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
-	vector<int> v5(4, 7);
-
-	std::cout << "v5: ";
-	for (vector<int>::reverse_iterator<vector_iterator> it = v.rbegin(); it != v.rend(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	
-
+	vector<int> vec(5, 7);
+	reverse_iterator<vector<int>::iterator> rev = vec.rbegin();
+	std::cout << "reverse iterator rev : " << rev[0] << std::endl;
 	return (0);
 }
 

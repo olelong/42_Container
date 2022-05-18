@@ -7,6 +7,7 @@
 # include <sstream>
 # include <stdexcept>
 # include "../iterators/vector_iterator.hpp"
+# include "../iterators/reverse_iterator.hpp"
 
 namespace ft
 {
@@ -23,8 +24,7 @@ namespace ft
 			typedef 			vector_iterator<value_type>					iterator;
 			typedef 			vector_iterator<const value_type>			const_iterator;
 			typedef 			reverse_iterator<iterator>					reverse_iterator;
-			typedef 			reverse_iterator<const iterator>			const_reverse_iterator;
-			//typedef typename	iterator_traits<iterator>::difference_type	difference_type;
+			typedef 			reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef 			size_t										size_type;
 			
 
@@ -98,7 +98,7 @@ namespace ft
 			}
 
 			reverse_iterator rbegin() {
-				return iterator(arr + _size);
+				return iterator(arr - _size);
 			}
 
 			const_reverse_iterator rbegin() const {
