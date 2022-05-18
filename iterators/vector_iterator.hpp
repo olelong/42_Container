@@ -38,6 +38,12 @@ namespace ft
 		void	operator++(int) {
 			this->p++;
 		}
+		difference_type operator-(vector_iterator rhs) {
+			return this->p - rhs.p;
+		}
+		vector_iterator operator-(int n) {
+			return this->p - n;
+		}
 		bool	operator!=(vector_iterator rhs) {
 			if (this->p != rhs.p)
 				return true;
