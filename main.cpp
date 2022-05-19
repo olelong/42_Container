@@ -11,6 +11,7 @@ using namespace NAMESPACE;
 #define CYAN "\033[0;36m"
 #define END_COLOR "\033[0m"
 
+
 int main()
 {
 	/////////////////////// TEST Vector ////////////////////
@@ -84,8 +85,10 @@ int main()
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
 	vector<int> vec(5, 7);
-	reverse_iterator<vector<int>::iterator> rev = vec.rbegin();
-	std::cout << "reverse iterator rev : " << rev[0] << std::endl;
+	reverse_iterator<vector<int>::iterator> r;
+	std::cout << "Default Constructor r: " <<  << " " << std::endl;
+//	reverse_iterator<vector<int>::iterator> rev = vec.rbegin();
+//	std::cout << "reverse iterator rev : " << *rev  << std::endl;
 	return (0);
 }
 

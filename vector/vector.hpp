@@ -24,7 +24,7 @@ namespace ft
 			typedef 			vector_iterator<value_type>					iterator;
 			typedef 			vector_iterator<const value_type>			const_iterator;
 			typedef 			reverse_iterator<iterator>					reverse_iterator;
-			typedef 			reverse_iterator<const_iterator>			const_reverse_iterator;
+			//typedef 			reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef 			size_t										size_type;
 			
 
@@ -97,24 +97,25 @@ namespace ft
 				return ret;
 			}
 
-			reverse_iterator rbegin() {
-				return iterator(arr - _size);
+/*			reverse_iterator rbegin() {
+				reverse_iterator rev = arr - _size;
+				return rev;
 			}
-
-			const_reverse_iterator rbegin() const {
+*/
+		/*	const_reverse_iterator rbegin() const {
 				const_reverse_iterator ret(arr + _size);
 				return ret;
-			}
-
+			}*/
+/*
 			reverse_iterator rend() {
 				return iterator(arr);
 			}
-
+*//*
 			const_reverse_iterator rend() const {
 				const_reverse_iterator ret(arr);
 				return ret;
 			}
-
+*/
 			// Capacity
 			size_type size() const { //problem name size avec variable private donc ajout d'un _devant la variable size 
 				return _size;

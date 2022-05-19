@@ -18,22 +18,25 @@ namespace ft
 
 		// Constructors
 		reverse_iterator()
-		{}
-
+		{
+		//	*this = NULL;
+		//	this->it = 0; //initialiser l'iterateur de base par une valeur
+		}
+/*
 		explicit reverse_iterator(iterator_type it) {
 			this->it = it;
 		}
-
+*//*
 		template <class Iter>
 			reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 				*this = rev_it;
 			}
-
+*/
 		//iterator_type base() const {}
 
 		// Operators
-		reference			operator*() const {
-			return *this;
+/*		reference			operator*() const {
+			return this;
 		}
 
 		reverse_iterator	operator+(difference_type n) const {
@@ -41,15 +44,15 @@ namespace ft
 			return rev;
 		}
 
-		/*pre_increment*/
-		reverse_iterator&	operator++() {
+*/		/*pre_increment*/
+/*		reverse_iterator&	operator++() {
 			reverse_iterator rev = *this;
 			*this--;
 			return rev;
 			//this->it--;
 		}
-		/*post_increment*/
-		reverse_iterator	operator++(int) {
+*/		/*post_increment*/
+/*		reverse_iterator	operator++(int) {
 			reverse_iterator rev = *this;
 			++(*this);
 			return (rev);
@@ -65,15 +68,15 @@ namespace ft
 			return rev;
 		}
 
-		/*pre_increment*/
-		reverse_iterator&	operator--() {
+*/		/*pre_increment*/
+/*		reverse_iterator&	operator--() {
 			reverse_iterator rev = *this;
 			*this++;
 			return rev;
 		}
 
-		/*post_increment*/
-		reverse_iterator	operator--(int) {
+*/		/*post_increment*/
+/*		reverse_iterator	operator--(int) {
 			reverse_iterator rev = *this;
 			--(*this);
 			return rev;
@@ -89,9 +92,9 @@ namespace ft
 		}
 
 		reference			operator[](difference_type n) const {
-			return *this->it[n];
-			//return *this->it = n;
-		}
+			//return *this->it[n];
+			return *this->it = n;
+		}*/
 
 	private :
 		iterator_type		it;
