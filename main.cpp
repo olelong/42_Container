@@ -85,13 +85,10 @@ int main()
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
 	vector<int> vec(5, 7);
-	reverse_iterator<vector<int>::iterator> r;
-	std::cout << "Default Constructor r: " <<  << " " << std::endl;
+	for (reverse_iterator<vector<int>::iterator> r = vec.rbegin(); r != vec.rend(); ++r)
+		std::cout << "in boucle for " << std::endl;
+	
 //	reverse_iterator<vector<int>::iterator> rev = vec.rbegin();
 //	std::cout << "reverse iterator rev : " << *rev  << std::endl;
 	return (0);
 }
-
-// apres avoir fini ce main, tu peux faire l'operator= et le constructeur de copie
-// (qui sont codes par defaut par le c++, donc n'hesite pas a ajouter des cout dedans
-// pour verifier qu'il vient bien dans le tien)
