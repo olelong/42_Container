@@ -86,14 +86,24 @@ int main()
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
-/*	vector<int> vec(5, 7);
+	std::cout << "Test 1: ";
+	vector<int> vec(5, 7);
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
-	std::cout << std::endl;*/
-//	std::cout << "reverse iterator rev : " << *rev  << std::endl;
-
-
-	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
+	std::cout << std::endl;
+	
+	std::cout << "Test 2: ";
+	vector<int>::iterator from(vec.begin());
+	vector<int>::iterator until(vec.end());
+	reverse_iterator<vector<int>::iterator> rev_until(from);
+	reverse_iterator<vector<int>::iterator> rev_from(until);
+	while (rev_from != rev_until)
+		std::cout << *rev_from++ << " ";
+	std::cout << std::endl;
+/*	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
 
 		
 	std::cout << "  * Constructor of stack Test : *  " << std::endl;
@@ -102,7 +112,7 @@ int main()
 	std::cout << "size of empty stack: " << first.size() << std::endl;
 	stack<int> second (mydeque);		// stack initialized to copy of deque
 	std::cout << "size of stack copy of deque: " << second.size() << std::endl;
-/*
+*//*
 	stack<int> c1;
 	c1.push(5);
 	std::cout << "Stack c1 size: " << c1.size() << std::endl;
