@@ -14,8 +14,18 @@ namespace ft
 				typedef typename	std::iterator_traits<Iterator>::pointer				pointer;
 				typedef typename	std::iterator_traits<Iterator>::reference			reference;
 				
+				// Constructors
+
+				reverse_iterator() : p(NULL) {}
+				
+				explicit reverse_iterator(iterator_type it)
+				{
+					this->p = &(*it); // Construct a reverse iterator from original iterator it
+					//except that it iterates through its pointed elements in the reverse order.
+				}
 				
 			private :
+				pointer	p;
 		};
 }
 

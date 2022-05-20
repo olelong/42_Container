@@ -83,26 +83,30 @@ int main()
 	std::cout << *it << " ";
 	std::cout << std::endl;*/
 
+	////////////////////// TEST REVERSE_ITERATOR ////////////////////////
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
 	std::cout << "Test 1: ";
 	vector<int> vec(5, 7);
-	vec.push_back(1);
+/*	vec.push_back(1);
 	vec.push_back(2);
 	vec.push_back(3);
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;
-	
+*/	
 	std::cout << "Test 2: ";
-	vector<int>::iterator from(vec.begin());
-	vector<int>::iterator until(vec.end());
-	reverse_iterator<vector<int>::iterator> rev_until(from);
-	reverse_iterator<vector<int>::iterator> rev_from(until);
-	while (rev_from != rev_until)
-		std::cout << *rev_from++ << " ";
+//	vector<int>::iterator from(vec.begin());
+//	vector<int>::iterator until(vec.end());
+	reverse_iterator<vector<int>::iterator> rev_until(vec.begin());
+	reverse_iterator<vector<int>::iterator> rev_from(vec.end());
+//	while (rev_from != rev_until)
+//		std::cout << *rev_from++ << " ";
 	std::cout << std::endl;
+
+	////////////////////// TEST STACK //////////////////////////////
+
 /*	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
 
 		

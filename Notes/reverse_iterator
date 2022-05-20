@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+voir l'iterateur comme un pointeur car il stocke aussi une adresse.
+
+constructor (iterator it ou reverse_iterator rev_it)
+    this->p = &(*it); // recuperer le p de l'iterateur malgre le fait qu il soit prive
+
+
+int main()
+{
+    vector<float> victor(4, 12.5f);
+    victor.push_back(6.7f);
+			    
+    reverse_iterator<vector<float>::iterator> serge = victor.rbegin();
+			    
+	// Test pour savoir si il y a un decalage entre begin() et rend() et l'inverse
+	//				en effet, rend() pointe sur begin() - 1
+    std::cout << victor.data() + victor.size() << std::endl; // on affiche la end() de victor
+    std::cout << &(*victor.end()) << std::endl;
+    std::cout << &(*victor.rbegin()) << std::endl;
+    std::cout << &(*victor.begin()) << std::endl;
+	std::cout << &(*victor.rend()) << std::endl;
+	
+
+	//test iterator basic
+	for (vector<float>::reverse_iterator rit = victor.rbegin(); rit != victor.rend(); rit++)
+		std::cout << *rit << std::endl;
+
+	//operator +
+	vector<float>::reverse_iterator nelson = victor.cbegin(), wael;
+	wael = nelson + 2; // operator+
+	//ret  *this->p n
+																			    
+    return 0;
+	}
+
+operator+
+    reverse_iterator wael //creer un reverse iterator que l'on retournera a la fin
+    wael.p  = this->p + 2; // ajouter difference_type n a this->p
+    return wael; 
+
+// rbegin = end - 1 (pour l'adresse)
+// rend = begin - 1 (pour l'adresse)
