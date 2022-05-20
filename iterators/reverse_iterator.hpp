@@ -102,7 +102,7 @@ namespace ft
 		iterator_type		it;
 	};
 }
-
+/*
 template <class Iterator>
 	bool operator==(const_reverse_iterator<Iterator>& lhs,
 		const_reverse_iterator<Iterator>& rhs) {
@@ -118,7 +118,7 @@ template <class Iterator>
 				return true;
 			return false;
 		}
-/*
+*//*
 template <class Iterator>
 	bool operator<(const_reverse_iterator<Iterator>& lhs,
 		const_reverse_iterator<Iterator>& rhs) {

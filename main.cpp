@@ -2,8 +2,10 @@
 
 #ifdef MINE
 	#include "vector/vector.hpp"
+	#include "stack/stack.hpp"
 #else
 	#include <vector>
+	#include <stack>
 #endif
 
 using namespace NAMESPACE;
@@ -84,11 +86,32 @@ int main()
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
 
-	vector<int> vec(5, 7);
-	for (reverse_iterator<vector<int>::iterator> r = vec.rbegin(); r != vec.rend(); ++r)
-		std::cout << "in boucle for " << std::endl;
-	
-//	reverse_iterator<vector<int>::iterator> rev = vec.rbegin();
+/*	vector<int> vec(5, 7);
+    for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
+	        std::cout << *it << " ";
+	std::cout << std::endl;*/
 //	std::cout << "reverse iterator rev : " << *rev  << std::endl;
-	return (0);
+
+
+	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
+
+		
+	std::cout << "  * Constructor of stack Test : *  " << std::endl;
+	std::deque<int> mydeque(3, 10);
+	stack<int> first; 				    // empty stack
+	std::cout << "size of empty stack: " << first.size() << std::endl;
+	stack<int> second (mydeque);		// stack initialized to copy of deque
+	std::cout << "size of stack copy of deque: " << second.size() << std::endl;
+/*
+	stack<int> c1;
+	c1.push(5);
+	std::cout << "Stack c1 size: " << c1.size() << std::endl;
+	stack<int> c2(c1);
+	std::cout << "Copy stack c1 in c2 size: " << c2.size() << std::endl;
+	c2.push(6);
+	c2.push(3);
+	c2.push(2);
+	std::cout << "Stack c2 size after push: " << c2.size() << std::endl;
+*/
+	return 0;
 }
