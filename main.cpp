@@ -103,7 +103,7 @@ int main()
 	reverse_iterator<vector<int>::iterator> rev_end(from);
 	reverse_iterator<vector<int>::iterator> rev_begin(until);
 	while (rev_end != rev_begin)
-		std::cout << *rev_from++ << " ";
+		std::cout << *rev_begin++ << " ";
 	std::cout << std::endl;
 
 	std::cout << "rev.base(): "<< std::endl;
@@ -112,8 +112,8 @@ int main()
 //		std::cout << *it << " " << std::endl;
 	////////////////////// TEST STACK //////////////////////////////
 
-/*	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
-
+	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
+/*
 		
 	std::cout << "  * Constructor of stack Test : *  " << std::endl;
 	std::deque<int> mydeque(3, 10);

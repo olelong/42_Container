@@ -19,6 +19,7 @@ namespace ft
 				reverse_iterator() : p(NULL) { // point to no object
 					value_type val;
 					iterator_type it(val); // base_iterator is value-initialized
+					this->it = it;
 				}
 				
 				explicit reverse_iterator(iterator_type it)
@@ -26,8 +27,8 @@ namespace ft
 					value_type v = *it;
 					pointer tmp = &v;
 					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
+					this->it = it;
 					//except that it iterates through its pointed elements in the reverse order.
-					//this->it = v;
 				}
 				
 				/*template <class Iter>
@@ -40,14 +41,25 @@ namespace ft
 
 				iterator_type base() const {
 					iterator_type base = this->it;
-					return base; // + 1; decalage de -1 par rapport a l'iterateur de base
+					return base;
 				}
 
 				// Operators Overload
 
 				reference operator*() const
 				{
-					
+					return *this->p;
+				}
+
+				reverse_iterator& operator++() { // pre increment
+					this->p--;
+					return *this;
+				}
+
+				reverse_iterator operator++(int) { // post increment
+					reverse_iterator tmp(*this);
+					this->operator++();
+					return tmp;
 				}
 
 			private :

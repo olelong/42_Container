@@ -17,21 +17,29 @@ namespace ft
 				// Constructors/Destructors
 								// Default constructor and copy constructor of ctnr
 				explicit stack(const container_type& ctnr = container_type()) {
-					this->_size = ctnr.size();
+					/*this->_size = ctnr.size();
 					if (_size > 0)
 						for(size_t i = 0; i < _size; i++)
 							this->arr[i] = ctnr;
+*/
+					ctnr(arr);
 				}
 
 				~stack()
 				{
-
+		//			for (size_type i = 0; i < this->_size; i++)
+//						std::allocator<T>.destroy(this->arr + i);
+//					std::allocator<T>.deallocate(this->arr, this->_size);
 				}
 
+				size_type size() const {
+					return this->ctnr.size();
+				}
 
 			private :
-				T*			arr;
-				size_type	_size;
+				container_type	ctnr;
+				T*				arr;
+				size_type		_size;
 
 		};
 }
