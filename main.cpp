@@ -89,22 +89,27 @@ int main()
 
 	std::cout << "Test 1: ";
 	vector<int> vec(5, 7);
-/*	vec.push_back(1);
-	vec.push_back(2);
+//	vec.push_back(1);
+/*	vec.push_back(2);
 	vec.push_back(3);
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;
 */	
 	std::cout << "Test 2: ";
-//	vector<int>::iterator from(vec.begin());
-//	vector<int>::iterator until(vec.end());
-	reverse_iterator<vector<int>::iterator> rev_until(vec.begin());
-	reverse_iterator<vector<int>::iterator> rev_from(vec.end());
-//	while (rev_from != rev_until)
-//		std::cout << *rev_from++ << " ";
+
+	vector<int>::iterator from(vec.begin());
+	vector<int>::iterator until(vec.end() - 1); //mine segfault without -1 !!!!!!!!
+	reverse_iterator<vector<int>::iterator> rev_end(from);
+	reverse_iterator<vector<int>::iterator> rev_begin(until);
+	while (rev_end != rev_begin)
+		std::cout << *rev_from++ << " ";
 	std::cout << std::endl;
 
+	std::cout << "rev.base(): "<< std::endl;
+	rev_end.base();
+//	for(vector<int>::iterator it = rev_end.base(); it != rev_begin.base(); ++it)
+//		std::cout << *it << " " << std::endl;
 	////////////////////// TEST STACK //////////////////////////////
 
 /*	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;

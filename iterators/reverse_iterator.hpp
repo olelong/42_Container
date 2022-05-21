@@ -16,17 +16,51 @@ namespace ft
 				
 				// Constructors
 
-				reverse_iterator() : p(NULL) {}
+				reverse_iterator() : p(NULL) { // point to no object
+					value_type val;
+					iterator_type it(val); // base_iterator is value-initialized
+				}
 				
 				explicit reverse_iterator(iterator_type it)
 				{
-					this->p = &(*it); // Construct a reverse iterator from original iterator it
+					value_type v = *it;
+					pointer tmp = &v;
+					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
 					//except that it iterates through its pointed elements in the reverse order.
+					//this->it = v;
 				}
 				
+				/*template <class Iter>
+					reverse_iterator(const reverse_iterator<Iter>& rev_it)
+					{
+						this->p = &(*rev_it);
+					}*/
+				
+				// Base()
+
+				iterator_type base() const {
+					iterator_type base = this->it;
+					return base; // + 1; decalage de -1 par rapport a l'iterateur de base
+				}
+
+				// Operators Overload
+
+				reference operator*() const
+				{
+					
+				}
+
 			private :
 				pointer	p;
+				iterator_type it;
 		};
 }
 
+template <class Iterator>
+	bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		if (lhs != rhs)
+			return true;
+		return false;
+	}
 #endif

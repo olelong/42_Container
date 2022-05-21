@@ -44,3 +44,13 @@ operator+
 
 // rbegin = end - 1 (pour l'adresse)
 // rend = begin - 1 (pour l'adresse)
+
+int main()
+{
+	std::vector<int> vec(5, 12);
+	std::vector<int>::iterator it = vec.begin();
+	std::vector<int>::iterator it2 = vec.end();
+
+	std::vector<int>::reverse_iterator rev;
+	rev = &(*it2);
+}
