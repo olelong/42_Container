@@ -2,7 +2,7 @@
 NAME		= ft_containers
 REAL		= real
 
-SRCS		= main_wael.cpp
+SRCS		= main_w.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/
@@ -12,7 +12,7 @@ OBJS_R		= ${SRCS:%.cpp=${OBJS_D_R}%.o}
 HEADERS		= vector/vector.hpp \
 			  iterators/vector_iterator.hpp
 
-CXX			= c++ -g3 -fsanitize=address
+CXX			= c++ #-g3 -fsanitize=address
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 RM			= rm -f
 

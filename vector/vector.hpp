@@ -371,7 +371,7 @@ namespace ft
 				x._size = tmp_size;
 			}
 
-			void clear() {
+			void clear() {				// Remove all elements from the vector(which are destroyed), leaving the container with a size of 0
 				for (size_type i = 0; i < this->_size; i++)
 					this->_alloc.destroy(this->arr + i);
 				this->_size = 0;
