@@ -89,14 +89,21 @@ int main()
 
 	std::cout << "Test 1: ";
 	vector<int> vec(5, 7);
-//	vec.push_back(1);
-/*	vec.push_back(2);
+	vec.push_back(1);
+	vec.push_back(2);
 	vec.push_back(3);
+	std::cout << std::endl;
+	std::cout << "Iterator vec : ";
+    for(vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
+	        std::cout << *it << " ";
+	std::cout << std::endl;	
+	std::cout << "Reverse Iterator vec : ";
+//	std::cout << "vec.rbegin() :  " << vec.rbegin() << std::endl;
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;
-*/	
-	std::cout << "Test 2: ";
+	
+/*	std::cout << "Test 2: ";
 
 	vector<int>::iterator from(vec.begin());
 	vector<int>::iterator until(vec.end() - 1); //mine segfault without -1 !!!!!!!!
@@ -105,12 +112,13 @@ int main()
 	while (rev_end != rev_begin)
 		std::cout << *rev_begin++ << " ";
 	std::cout << std::endl;
-
-	std::cout << "rev.base(): "<< std::endl;
+*//*
+	std::cout << " Test base " << std::endl << "rev.base(): "<< std::endl;
 	rev_end.base();
-	for(vector<int>::iterator it = rev_end.base(); it != rev_begin.base(); it++)
+	for(vector<int>::iterator it = rev_begin.base(); it != rev_end.base(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+*/
 	////////////////////// TEST STACK //////////////////////////////
 
 	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;

@@ -27,10 +27,10 @@ namespace ft
 					pointer tmp = &v;
 					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
 					this->it = it;
-					//except that it iterates through its pointed elements in the reverse order.
 				}
 				
-				/*template <class Iter>
+				/* Need enable_if
+				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						this->p = &(*rev_it);
 					}*/
@@ -65,13 +65,16 @@ namespace ft
 					return tmp;
 				}
 
+
 			private :
 				pointer	p;
 				iterator_type it;
 		};
 }
 
-template <class Iterator>
+// Relational Operators
+
+template <class Iterator> 
 	bool operator==(const ft::reverse_iterator<Iterator>& lhs,
 		const ft::reverse_iterator<Iterator>& rhs) {
 			if (&(*lhs) != &(*rhs))
@@ -86,5 +89,28 @@ template <class Iterator>
 	}
 
 
+template <class Iterator>
+	bool operator<(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		return std::lexicographical_compare(lhs.rbegin(), lhs.rend(), rhs.begin(), rhs.rend());
+	}
+
+template <class Iterator>
+	bool operator<=(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		return !(rhs < lhs);
+	}
+
+template <class Iterator>
+	bool operator>(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		return (rhs < lhs);
+	}
+
+template <class Iterator>
+	bool operator>=(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		return !(lhs < rhs);
+	}
 
 #endif

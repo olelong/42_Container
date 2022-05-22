@@ -93,25 +93,25 @@ namespace ft
 			}
 									/* Reverse Iterator  */
 			reverse_iterator rbegin() {
-				iterator it(arr + this->_size - 1);//(arr - _size); // this->end() - 1
+				iterator it(this->end() - 1);//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rbegin() const {
-				iterator it(arr + this->_size - 1);
+				iterator it(this->end() - 1);//(arr + this->_size - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
 
 			reverse_iterator rend() {
-				iterator it(arr - 1); // this->begin() - 1
+				iterator it(this->begin() - 1);//(arr - 1); // this->begin() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(arr - 1);
+				iterator it(this->begin() - 1);//(arr - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
@@ -164,39 +164,39 @@ namespace ft
 			
 			// Element Access
 			reference operator[] (size_type n) {
-				return arr[n]; 
+				return this->arr[n]; 
 			}
 			
 			const_reference operator[] (size_type n) const{
-				return arr[n]; 
+				return this->arr[n]; 
 			}
 
 			reference at(size_type n) {		// Return a reference to the element at position n in the vector
 				if (n >= this->_size)	// It checks whether n is within the bounds of valid elements in contrast with operator[]
 					throw std::out_of_range(this->out_of_range_what(n));
-				return arr[n];
+				return this->arr[n];
 			}
 
 			const_reference at(size_type n) const {
 				if (n >= this->_size)
 					throw std::out_of_range(this->out_of_range_what(n));
-				return arr[n];
+				return this->arr[n];
 			}
 
 			reference front() {		// Access first element in the vector
-				return arr[0];
+				return this->arr[0];
 			}
 			
 			const_reference front() const {
-				return arr[0];
+				return this->arr[0];
 			}
 			
 			reference back() {		// Access last element in the vector
-				return arr[_size - 1];
+				return this->arr[_size - 1];
 			}
 			
 			const_reference back() const {
-				return arr[_size - 1];
+				return this->arr[_size - 1];
 			}
 
 			value_type* data() {	// Returns a direct pointer to the memory array used by the vector to store its owned elements
@@ -440,7 +440,8 @@ namespace ft
 	};
 
 	// Relational Operators
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		if (lhs.size() != rhs.size())
 			return false;
@@ -449,29 +450,34 @@ namespace ft
 				return false;
 		return true;
 	}
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return !(lhs == rhs);
 	}
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return !(rhs < lhs);
 	}
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator>(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return rhs < lhs;
 	}
-	template <class T, class Alloc>
+
+template <class T, class Alloc>
 	bool operator>=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return !(lhs < rhs);
 	}
 
 	// Swap non member
-	template <class T, class Alloc>
+template <class T, class Alloc>
 	void swap(vector<T, Alloc>& x, vector<T, Alloc>& y) {
 		x.swap(y);
 	}
