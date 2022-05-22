@@ -65,6 +65,40 @@ namespace ft
 					return tmp;
 				}
 
+				reverse_iterator& operator+=(difference_type n) {
+					this->p -= n;
+					return *this;
+				}
+
+				reverse_iterator operator-(difference_type n) const {
+					reverse_iterator tmp(*this);
+					tmp.p = this->p + n;
+					return tmp;
+				}
+
+				reverse_iterator& operator--() { // pre increment
+					this->p++;
+					return *this;
+				}
+
+				reverse_iterator operator--(int) { // post increment
+					reverse_iterator tmp(*this);
+					this->operator--();
+					return tmp;
+				}
+				
+				reverse_iterator& operator-=(difference_type n) {
+					this->p += n;
+					return *this;
+				}
+
+				pointer operator->() const {
+					return &(operator*());
+				}
+
+				reference operator[](difference_type n) const {
+					return this->p[n]; //this->p[n - 1];
+				}
 
 			private :
 				pointer	p;
