@@ -54,3 +54,7 @@ int main()
 	std::vector<int>::reverse_iterator rev;
 	rev = &(*it2);
 }
+
+
+Certaines explications de la documentation sont liees a l'utilisation de la fonction ou du conteneur
+et donc n'es pas a prendre en compte. La doc est destinee aux utilisateurs.

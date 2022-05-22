@@ -35,15 +35,34 @@ namespace ft
 		value_type	operator*() const {
 			return *this->p;
 		}
-		void	operator++(int) {
+		vector_iterator	&operator++() { // pre incrementation
 			this->p++;
+			return *this;
 		}
+		
+		vector_iterator	operator++(int) { // post incrementation
+			vector_iterator tmp(*this);
+			this->operator++();
+			return tmp;
+		}
+
+		vector_iterator	operator+(int n) {
+			return this->p + n;
+		}
+
 		difference_type operator-(vector_iterator rhs) {
 			return this->p - rhs.p;
 		}
 		vector_iterator operator-(int n) {
 			return this->p - n;
 		}
+
+		bool	operator==(vector_iterator rhs) {
+			if (this->p != rhs.p)
+				return false;
+			return true;
+		}
+
 		bool	operator!=(vector_iterator rhs) {
 			if (this->p != rhs.p)
 				return true;

@@ -1,4 +1,3 @@
-
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
@@ -6,6 +5,7 @@
 # include <string>
 # include <sstream>
 # include <stdexcept>
+# include <typeinfo>
 # include "../iterators/vector_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
 
@@ -29,56 +29,51 @@ namespace ft
 			
 
 			// Constructors & Destructor
-			explicit vector(const allocator_type& alloc = allocator_type()) {
-				this->_alloc = alloc;
-				this->arr = this->_alloc.allocate(0);
-				this->_capacity = 0;
-				this->_size = 0;
-			}	
+			explicit vector(const allocator_type& alloc = allocator_type()) 		// empty container
+				: arr(NULL), _alloc(alloc), _size(0), _capacity(0), old_resize(0){}
 
-			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {
-				this->_alloc = alloc;
-				this->arr = this->_alloc.allocate(n);
-				this->_capacity = n;
-				this->_size = n;
-				for (size_type i = 0; i < this->_size; i++)
-					this->arr[i] = val;
+			explicit vector(size_type n, const value_type& val = value_type(),   	// fill container
+				const allocator_type& alloc = allocator_type()) 
+				: arr(NULL), _alloc(alloc), _size(0), _capacity(0), old_resize(0){
+					this->assign(n, val);
 			}
 
 			/* Need enable_if!
 			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocatr_type()) {
-				this->_alloc = alloc;
-				this->_size = last - first;
-				this->arr = this->_alloc.allocate(this->_size);
-				size_type i = 0;
-				for(InputIterator it = first; it != last; it++, i++)
-				{
-					this->_arr[i] = *it;
+			vector (InputIterator first, InputIterator last,						// range container
+				const allocator_type& alloc = allocatr_type()) {
+					this->_alloc = alloc;
+					this->_size = last - first;
+					this->arr = this->_alloc.allocate(this->_size);
+					size_type i = 0;
+					for(InputIterator it = first; it != last; it++, i++)
+					{
+						this->_arr[i] = *it;
+					}
 				}
-			}
 			*/
 			
-			vector (const vector &x){
-				this->arr = this->_alloc.allocate(0);
+			vector (const vector &x) : arr(NULL), _size(0), _capacity(0), old_resize(0) {	// copy constructor
 				*this = x;
 			}
 						
 			~vector() {
-				_alloc.deallocate(this->arr, this->_capacity);
+				this->deallocate();
 			}
 			
 			// Operators=
-			vector	&operator=(const vector& x) {
-				this->_alloc.deallocate(this->arr, this->_size);
-				this->arr = this->_alloc.allocate(x._size);
+			vector& operator=(const vector& x) {
+				this->deallocate();
+				this->allocate(x._size);
 				for (size_type i = 0; i < x._size; i++)
-					this->arr[i] = x.arr[i];
+					this->_alloc.construct(arr + i, x.arr[i]);
 				this->_size = x._size;
 				return *this;
 			}
 
 			// Iterators
+
+										/*  Iterator  */
 			iterator begin() {
 				return iterator(arr);
 			}
@@ -89,47 +84,82 @@ namespace ft
 			}
 
 			iterator end() {
-				return iterator(arr + _size);
+				return iterator(arr + this->_size);
 			}
 
 			const_iterator end() const {
-				const_iterator ret(arr + _size);
+				const_iterator ret(arr + this->_size);
 				return ret;
 			}
-
+									/* Reverse Iterator  */
 			reverse_iterator rbegin() {
-				iterator it(arr - _size);
+				iterator it(arr + this->_size - 1);//(arr - _size); // this->end() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rbegin() const {
-				iterator it(arr + _size);
-				const_reverse_iterator ret(it);
-				return ret;
+				iterator it(arr + this->_size - 1);
+				const_reverse_iterator rev(it);
+				return rev;
 			}
 
 			reverse_iterator rend() {
-				iterator it(arr);
+				iterator it(arr - 1); // this->begin() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(arr);
+				iterator it(arr - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
 
 			// Capacity
-			size_type size() const { //problem name size avec variable private donc ajout d'un _devant la variable size 
-				return _size;
+			size_type size() const {   // Return the number of elements in the vector
+				return this->_size;
 			}
 
-			bool empty() const {
+			size_type max_size() const {	// Return the maximum number of elements that the vector can hold
+				return this->_alloc.max_size();
+			}
+
+			void resize(size_type n, value_type val = value_type()) { // Resizes the container, it contains n elements
+				if (n < this->_size)
+					for (size_t i = n; i < this->_size; i++)
+						this->_alloc.destroy(this->arr + i);
+				else {
+					if (n > this->_capacity) {
+						size_type new_capacity;
+						if (this->old_resize == 0 || n > this->old_resize * 2)
+							new_capacity = n;
+						else
+							new_capacity = this->old_resize * 2; // add a capacity de size * 2 de la taille precedente
+						this->reallocate(new_capacity);
+					}
+					for (size_type i = this->_size; i < n; i++)
+						this->_alloc.construct(this->arr + i, val);
+				}
+				this->_size = n;
+				this->old_resize = n;
+			}
+
+			size_type capacity() const {	// Return the size of the storage space currently allocated for the vector
+				return this->_capacity;
+			}
+
+			bool empty() const {	// Test if the vector is empty
 				if (_size == 0)
 					return true;
 				return false;
+			}
+
+			void reserve(size_type n) { // Request a change in capacity, for the container be at leat enough to contain n elements
+				if (n > this->_capacity) // if (this->_capacity >= n) return ; this->reallocate(n);
+					this->reallocate(n);
+				//else
+				//	return ;
 			}
 			
 			// Element Access
@@ -141,41 +171,224 @@ namespace ft
 				return arr[n]; 
 			}
 
-			reference at(size_type n) {
+			reference at(size_type n) {		// Return a reference to the element at position n in the vector
+				if (n >= this->_size)	// It checks whether n is within the bounds of valid elements in contrast with operator[]
+					throw std::out_of_range(this->out_of_range_what(n));
+				return arr[n];
+			}
+
+			const_reference at(size_type n) const {
 				if (n >= this->_size)
 					throw std::out_of_range(this->out_of_range_what(n));
 				return arr[n];
 			}
 
-			const_reference at(size_type n) const{
-				if (n >= this->_size)
-					throw std::out_of_range(this->out_of_range_what(n));
-				return arr[n];
-			}
-
-			reference front(){
+			reference front() {		// Access first element in the vector
 				return arr[0];
 			}
-			const_reference front() const{
-				return arr[0];
-			}
-			reference back(){
-				return arr[_size - 1];
-			}
-			const_reference back() const{
-				return arr[_size - 1];
-			}
-
 			
+			const_reference front() const {
+				return arr[0];
+			}
+			
+			reference back() {		// Access last element in the vector
+				return arr[_size - 1];
+			}
+			
+			const_reference back() const {
+				return arr[_size - 1];
+			}
+
+			value_type* data() {	// Returns a direct pointer to the memory array used by the vector to store its owned elements
+				return this->arr;
+			}
+
+			const value_type* data() const {
+				return this->arr;
+			}
 
 			// Modifiers
+
+								/*   Assign    */
+			// Assign new contents to the vector, replacing its current contents and modifying its size accordingly
+			template <class InputIterator> // Range // New contents constructed in the range between first and last
+				void assign(InputIterator first, InputIterator last) {
+					size_t new_size = 0;
+					for (InputIterator it = first; it != last; it++) // Recover the size of new contents to add
+						new_size++;
+					if (new_size > this->_capacity) { // Check if allocation is needed
+						this->deallocate();
+						this->allocate(new_size);
+						size_type i = 0;
+						for (InputIterator it = first; it != last; it++, i++)
+							this->_alloc.construct(arr + i, *it);
+					} else {
+						size_type i = 0;
+						for (InputIterator it = first; it != last; it++, i++) {
+							this->_alloc.destroy(arr + i);
+							this->_alloc.construct(arr + i, *it);
+						}
+					}
+					this->_size = new_size; // Update the size with the new one
+				}
+
+			void assign(size_type n, const value_type& val) { // Fill // new contents are n elements, each initialized to a copy of val
+				if (n > this->_capacity) {
+					this->deallocate();
+					this->allocate(n);
+					for (size_type i = 0; i < n; i++)
+						this->_alloc.construct(arr + i, val);
+				} else {
+					for (size_type i = 0; i < n; i++) {
+						this->_alloc.destroy(arr + i);
+						this->_alloc.construct(arr + i, val);
+					}
+				}
+				this->_size = n;
+			}
+
+								/*  push/pop_back  */
+
+			void push_back(const value_type& val) {		// Add element to the end of the vector
+				if (this->_size + 1 > this->_capacity) { // If size > at current capacity
+					size_type new_capacity = this->_capacity; // Stock the current capacity in new_capacity
+					if (new_capacity == 0) // ??????????????????
+						new_capacity = 1;
+					else
+						new_capacity *= 2; // Need more capacity so reallocate the double of current capacity
+					this->reallocate(new_capacity);
+					this->_alloc.construct(this->arr + this->_size, val);
+				}
+				else // size <= to the current capacity so just need to construct the new object in the vector
+					this->_alloc.construct(this->arr + this->_size, val);
+				this->_size++; // Size increases as we add an element to the vector
+			}
+
+			void pop_back() { 	// Delete the last element in the vector
+				this->_alloc.destroy(this->arr + this->size() - 1);
+				this->_size--;
+			}
+
+								/*   Insert   */
+			// Vector is extended by inserting new elements before the element at the specified position
+			iterator insert(iterator position, const value_type& val) { // Single element
+				size_type id = position - this->begin();	// Find where we need to insert an element
+				if (this->_size + 1 > this->_capacity)		// Need to reallocate cause size + 1 > at current capacity
+					this->reallocate(this->_size + 1);
+				if (this->empty()) {	// If it's empty, just need to construct the new element at the begin()
+					this->_alloc.construct(this->arr, val);
+					this->_size++;
+					return this->begin();
+				}
+				for (size_type i = this->_size; i > id; i--) // Add the element in the array
+					this->arr[i] = this->arr[i - 1];
+				this->_alloc.construct(this->arr + id, val);
+				this->_size++;								 // Increased the size by + 1 for the new element
+				return this->begin() + id;
+			}
+
+			void insert(iterator position, size_type n, const value_type& val) { // Fill
+				size_type id = position - this->begin();
+				if (this->_size + n > this->_capacity)
+					this->reallocate(this->_size + n);
+				if (this->empty()) {
+					for (size_type i = 0; i < n; i++)
+						this->_alloc.construct(this->arr + i, val);
+					this->_size += n;
+					return ;
+				}
+				for (size_type i = this->_size + n - 1; i >= n; i--)
+					this->arr[i] = this->arr[i - n];
+				for (size_type i = 0; i < n; i++)
+					this->_alloc.construct(this->arr + id + i, val);
+				this->_size += n;				
+			}
+
+			/* Needs enable_if
+			template<class InputIterator>
+				void insert(Iterator position, InputIterator first, InputIterator last) { // Range
+					size_type id = position - this->begin();
+					size_type new_size = 0;
+					for (InputIterator it = first; it != last; it ++)
+						new_size++;
+					if (this->_size + new_size > this->_capacity)
+						this->reallocate(this->_size + new_size);
+					if (this->empty()) {
+						size_type i = 0;
+						for (InputIterator it = first; it != last; it ++, i++)
+							this->_alloc.construct(this->arr + i, *it);
+						this->_size += new_size;
+						return ;
+					}
+					for (size_type i = this->_size + new_size - 1; i >= new_size; i--)
+						this->arr[i] = this->arr[i - new_size];
+					size_type i = 0;
+					for (InputIterator it = first; it != last; it ++, i++)
+						this->_alloc.construct(this->arr + id + i, *it);
+					this->_size += new_size;
+				}
+			*/
+						/*   Erase   */
+
+			iterator erase(iterator position) {		// Remove a single element at position
+				size_type id = position - this->begin();
+				this->_alloc.destroy(this->arr + id);
+				for (size_type i = id; i < this->_size - 1; i++)
+					this->arr[i] = this->arr[i + 1];
+				this->_size--;
+				return this->begin() + id;
+			}
+
+			iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
+				size_type new_size = 0;
+				for (iterator it = first; it != last; it++) {
+					this->_alloc.destroy(this->arr + (it - this->begin())); // Destroy elements from first to last
+					new_size++;												// Recover the size between firts and last
+				}
+				for (size_type i = first - this->begin(); i < this->_size - new_size; i++)
+					this->arr[i] = this->arr[i + new_size];		// Relocate all the elements after the segment erased to their new positions
+				this->_size -= new_size;						// Reduces the container size by the number of elements removed, which are destroyed
+				return this->begin() + (first - this->begin());
+			}
+
+						/*  Swap/Clear  */
+
+			void swap(vector& x) {		// Exchange the content of the container by the content of x
+				pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
+				for (size_type i = 0; i < this->_size; i++) // Add in tmp elements of current vector to deallocate it after
+					this->_alloc.construct(tmp + i, this->arr[i]);
+				this->deallocate();
+				this->allocate(x._size);					// Allocate the current vector of x size
+				for (size_type i = 0; i < x._size; i++)
+					this->_alloc.construct(this->arr + i, x.arr[i]);	// Fill the current vector of the element of the vector x
+				x.deallocate();
+				x.allocate(this->_size);					// Allocate the vector x of current vector size
+				for (size_type i = 0; i < this->_size; i++)
+					x._alloc.construct(x.arr + i, tmp[i]);	// Fill the vector x of the elements of the current vector
+				this->deallocate(tmp, this->_size);
+				size_type tmp_size = this->_size;			// Update size of each one
+				this->_size = x._size;
+				x._size = tmp_size;
+			}
+
+			void clear() {
+				for (size_type i = 0; i < this->_size; i++)
+					this->_alloc.destroy(this->arr + i);
+				this->_size = 0;
+			}
+
 			// Allocator
+
+			allocator_type get_allocator() const {
+				return this->_alloc;
+			}
 			
 		private:
 			pointer			arr;
 			allocator_type	_alloc;
 			size_type		_size; // cause size already taken by method
 			size_type		_capacity; // allocated size of the vector
+			size_type		old_resize;
 
 			// Get the error message for out_of_range exception
 			std::string out_of_range_what(size_type n) const {
@@ -190,7 +403,78 @@ namespace ft
 				what.push_back(')');
 				return what;
 			}
+
+			// Allocation Manager
+			void allocate(size_type n) {
+				if (n > this->max_size())
+					throw std::length_error("vector::reserve");
+				this->arr = NULL;
+				if (n > this->_capacity) {
+					this->arr = (n != 0) ? this->_alloc.allocate(n) : NULL;
+					this->_capacity = n;
+				}
+			}
+
+			void deallocate() {
+				this->deallocate(this->arr, this->_capacity);
+				this->_capacity = 0;
+			}
+
+			void deallocate(pointer p, size_type capacity) {
+				for (size_type i = 0; i < this->_size; i++)
+					this->_alloc.destroy(p + i);
+				if (p)
+					this->_alloc.deallocate(p, capacity);
+			}
+
+			void reallocate(size_type new_capacity) {
+				pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
+				for (size_type i = 0; i < this->_size; i++)
+					this->_alloc.construct(tmp + i, this->arr[i]);
+				this->deallocate();
+				this->allocate(new_capacity);
+				for (size_type i = 0; i < this->_size; i++)
+					this->_alloc.construct(this->arr + i, tmp[i]);
+				this->deallocate(tmp, this->_size);
+			}
 	};
+
+	// Relational Operators
+	template <class T, class Alloc>
+	bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		if (lhs.size() != rhs.size())
+			return false;
+		for (typename vector<T>::size_type i = 0; i < lhs.size(); i++)
+			if (lhs[i] != rhs[i])
+				return false;
+		return true;
+	}
+	template <class T, class Alloc>
+	bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return !(lhs == rhs);
+	}
+	template <class T, class Alloc>
+	bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+	template <class T, class Alloc>
+	bool operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return !(rhs < lhs);
+	}
+	template <class T, class Alloc>
+	bool operator>(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return rhs < lhs;
+	}
+	template <class T, class Alloc>
+	bool operator>=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return !(lhs < rhs);
+	}
+
+	// Swap non member
+	template <class T, class Alloc>
+	void swap(vector<T, Alloc>& x, vector<T, Alloc>& y) {
+		x.swap(y);
+	}
 }
 
 #endif // VECTOR_HPP

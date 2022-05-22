@@ -22,8 +22,7 @@ namespace ft
 					this->it = it;
 				}
 				
-				explicit reverse_iterator(iterator_type it)
-				{
+				explicit reverse_iterator(iterator_type it) {
 					value_type v = *it;
 					pointer tmp = &v;
 					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
@@ -32,8 +31,7 @@ namespace ft
 				}
 				
 				/*template <class Iter>
-					reverse_iterator(const reverse_iterator<Iter>& rev_it)
-					{
+					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						this->p = &(*rev_it);
 					}*/
 				
@@ -46,9 +44,14 @@ namespace ft
 
 				// Operators Overload
 
-				reference operator*() const
-				{
+				reference operator*() const {
 					return *this->p;
+				}
+	
+				reverse_iterator operator+(difference_type n) const {
+					reverse_iterator tmp(*this);
+					tmp.p = this->p - n;
+					return tmp;
 				}
 
 				reverse_iterator& operator++() { // pre increment
@@ -69,10 +72,19 @@ namespace ft
 }
 
 template <class Iterator>
+	bool operator==(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+			if (&(*lhs) != &(*rhs))
+				return false;
+			return true;
+		}
+
+template <class Iterator>
 	bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
 		const ft::reverse_iterator<Iterator>& rhs) {
-		if (lhs != rhs)
-			return true;
-		return false;
+		return !(lhs == rhs);
 	}
+
+
+
 #endif

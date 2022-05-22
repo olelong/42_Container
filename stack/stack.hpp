@@ -17,12 +17,12 @@ namespace ft
 				// Constructors/Destructors
 								// Default constructor and copy constructor of ctnr
 				explicit stack(const container_type& ctnr = container_type()) {
-					/*this->_size = ctnr.size();
+					this->_size = ctnr.size();
 					if (_size > 0)
 						for(size_t i = 0; i < _size; i++)
 							this->arr[i] = ctnr;
-*/
-					ctnr(arr);
+
+					
 				}
 
 				~stack()
