@@ -147,4 +147,21 @@ template <class Iterator>
 		return !(lhs < rhs);
 	}
 
+// operators +/-
+
+template <class Iterator>
+	ft::reverse_iterator<Iterator> operator+(typename ft::reverse_iterator<Iterator>::difference_type n, const ft::reverse_iterator<Iterator>& rev_it) {
+		//reverse_iterator tmp(rev_it);
+		//&(*tmp) = &(*rev_it) + n;
+		//return tmp;
+		return rev_it + n;
+	}
+
+template <class Iterator>
+	typename ft::reverse_iterator<Iterator>::difference_type operator-(const ft::reverse_iterator<Iterator>& lhs,
+		const ft::reverse_iterator<Iterator>& rhs) {
+		return lhs - rhs;
+	}
+
+
 #endif
