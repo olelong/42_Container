@@ -86,7 +86,7 @@ int main()
 	////////////////////// TEST REVERSE_ITERATOR ////////////////////////
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
-
+/*
 	std::cout << "Test 1: ";
 	vector<int> vec(5, 7);
 	vec.push_back(1);
@@ -98,48 +98,54 @@ int main()
 	        std::cout << *it << " ";
 	std::cout << std::endl;	
 	std::cout << "Reverse Iterator vec : ";
-//	std::cout << "vec.rbegin() :  " << vec.rbegin() << std::endl;
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;
-	
-/*	std::cout << "Test 2: ";
-
+*/	
+	std::cout << "Test 2: ";
+/*
 	vector<int>::iterator from(vec.begin());
-	vector<int>::iterator until(vec.end() - 1); //mine segfault without -1 !!!!!!!!
+	vector<int>::iterator until(vec.end()); //mine segfault without -1 !!!!!!!!
 	reverse_iterator<vector<int>::iterator> rev_end(from);
 	reverse_iterator<vector<int>::iterator> rev_begin(until);
 	while (rev_end != rev_begin)
 		std::cout << *rev_begin++ << " ";
 	std::cout << std::endl;
-*//*
-	std::cout << " Test base " << std::endl << "rev.base(): "<< std::endl;
+
+//	std::cout << " Test base " << std::endl << "rev.base(): "<< std::endl;
 	rev_end.base();
-	for(vector<int>::iterator it = rev_begin.base(); it != rev_end.base(); it++)
-		std::cout << *it << " ";
+	//for(vector<int>::iterator it = rev_begin.base(); it != rev_end.base(); it++)
+	//	std::cout << *it << " ";
 	std::cout << std::endl;
+// heap buffer overflow
 */
 	////////////////////// TEST STACK //////////////////////////////
 
 	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
 
 		
-/*	std::cout << "  * Constructor of stack Test : *  " << std::endl;
+	std::cout << "  * Constructor of stack Test : *  " << std::endl;
 	std::deque<int> mydeque(3, 10);
 	stack<int> first; 				    // empty stack
 	std::cout << "size of empty stack: " << first.size() << std::endl;
+	if (first.empty())
+		std::cout << " test empty(), first is empty" << std::endl;
+	
 	stack<int> second (mydeque);		// stack initialized to copy of deque
 	std::cout << "size of stack copy of deque: " << second.size() << std::endl;
-*//*
+	if (!second.empty())
+		std::cout << " test empty(), second is not empty" << std::endl;
+	std::cout << " test top(): " << second.top() << std::endl;	
+
 	stack<int> c1;
-	c1.push(5);
+//	c1.push(5);
 	std::cout << "Stack c1 size: " << c1.size() << std::endl;
 	stack<int> c2(c1);
 	std::cout << "Copy stack c1 in c2 size: " << c2.size() << std::endl;
-	c2.push(6);
-	c2.push(3);
-	c2.push(2);
+//	c2.push(6);
+//	c2.push(3);
+//	c2.push(2);
 	std::cout << "Stack c2 size after push: " << c2.size() << std::endl;
-*/
+
 	return 0;
 }

@@ -16,13 +16,8 @@ namespace ft
 
 				// Constructors/Destructors
 								// Default constructor and copy constructor of ctnr
-				explicit stack(const container_type& ctnr = container_type()) {
+				explicit stack(const container_type& ctnr = container_type()) : _ctnr(ctnr), arr(NULL) {
 					this->_size = ctnr.size();
-					if (_size > 0)
-						for(size_t i = 0; i < _size; i++)
-							this->arr[i] = ctnr;
-
-					
 				}
 
 				~stack()
@@ -32,12 +27,28 @@ namespace ft
 //					std::allocator<T>.deallocate(this->arr, this->_size);
 				}
 
-				size_type size() const {
-					return this->ctnr.size();
+				// Element access
+
+				value_type& top() { // need to fill the array before
+					return this->arr[this->_size - 1];
 				}
 
+				// Capacity
+
+				bool empty() const {
+					if (this->_size == 0)
+						return true;
+					return false;
+				}
+
+				size_type size() const {
+					return this->_ctnr.size();
+				}
+
+				// Modifiers
+
 			private :
-				container_type	ctnr;
+				container_type _ctnr;
 				T*				arr;
 				size_type		_size;
 

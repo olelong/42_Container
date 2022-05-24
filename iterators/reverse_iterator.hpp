@@ -38,7 +38,7 @@ namespace ft
 				// Base()
 
 				iterator_type base() const {
-					iterator_type base = this->it;
+					iterator_type base = this->it;// - 1; error segfault in mai error segfault in main
 					return base;
 				}
 
