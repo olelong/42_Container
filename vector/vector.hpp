@@ -272,19 +272,20 @@ namespace ft
 								/*   Insert   */
 			// Vector is extended by inserting new elements before the element at the specified position
 			iterator insert(iterator position, const value_type& val) { // Single element
-				size_type id = position - this->begin();	// Find where we need to insert an element
+				size_type id = position - this->begin();	// calculate the distance between the adress of begin() and the adress of position (adresse - adresse = int distance)
 				if (this->_size + 1 > this->_capacity)		// Need to reallocate cause size + 1 > at current capacity
 					this->reallocate(this->_size + 1);
-				if (this->empty()) {	// If it's empty, just need to construct the new element at the begin()
+				if (this->empty()) {	// If it's empty, just need to construct the new element at the begin() and we can t use an iterator in an empty array
 					this->_alloc.construct(this->arr, val);
 					this->_size++;
 					return this->begin();
 				}
-				for (size_type i = this->_size; i > id; i--) // Add the element in the array
+				for (size_type i = this->_size; i > id; i--) // Offset(decaler) the element of the vector from the end to the id to let spaces for new elements
 					this->arr[i] = this->arr[i - 1];
 				this->_alloc.construct(this->arr + id, val);
 				this->_size++;								 // Increased the size by + 1 for the new element
-				return this->begin() + id;
+				return this->begin() + id; // return begin + position - begin = position But as we have shifted the elements the position address 
+								// is not valid anymore so we use id to get our new position
 			}
 
 			void insert(iterator position, size_type n, const value_type& val) { // Fill
