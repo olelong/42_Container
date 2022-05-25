@@ -280,7 +280,7 @@ namespace ft
 					this->_size++;
 					return this->begin();
 				}
-				for (size_type i = this->_size; i > id; i--) // Offset(decaler) the element of the vector from the end to the id to let spaces for new elements
+				for (size_type i = this->_size; i > id; i--) // Offset(decaler) the element of the vector from the end to before the id to let spaces for new elements // Offset the end to the right to insert the element at position 
 					this->arr[i] = this->arr[i - 1];
 				this->_alloc.construct(this->arr + id, val);
 				this->_size++;								 // Increased the size by + 1 for the new element
@@ -334,7 +334,7 @@ namespace ft
 			iterator erase(iterator position) {		// Remove a single element at position
 				size_type id = position - this->begin();
 				this->_alloc.destroy(this->arr + id);
-				for (size_type i = id; i < this->_size - 1; i++)
+				for (size_type i = id; i < this->_size - 1; i++) // Offest elements from begin to position to the left to erase the element at position
 					this->arr[i] = this->arr[i + 1];
 				this->_size--;
 				return this->begin() + id;

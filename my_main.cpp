@@ -86,7 +86,7 @@ int main()
 	////////////////////// TEST REVERSE_ITERATOR ////////////////////////
 	
 	std::cout << std::endl << CYAN << "********** Test Reverse Iterator **********" << END_COLOR << std::endl << std::endl;
-/*
+
 	std::cout << "Test 1: ";
 	vector<int> vec(5, 7);
 	vec.push_back(1);
@@ -101,7 +101,7 @@ int main()
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;
-*/	
+	
 	std::cout << "Test 2: ";
 /*
 	vector<int>::iterator from(vec.begin());
@@ -135,7 +135,7 @@ int main()
 	std::cout << "size of stack copy of deque: " << second.size() << std::endl;
 	if (!second.empty())
 		std::cout << " test empty(), second is not empty" << std::endl;
-	std::cout << " test top(): " << second.top() << std::endl;	
+	//std::cout << " test top(): " << second.top() << std::endl;	
 
 	stack<int> c1;
 //	c1.push(5);

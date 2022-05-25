@@ -85,3 +85,16 @@ template <class InputIterator1, class InputIterator2>
   }
   return (first2!=last2);
 }
+
+Relationnal operators : lecture des tableau de la doc
+operator on
+reverse iterators	equivalent used on
+					base iterators
+	==						==
+	!=						!=
+	< 						>
+	<=						>=
+	> 						<
+	>=						<=
+
+exemple operator<(lhs, rhs) {if (lhs > rhs) return false; return true;}

@@ -49,9 +49,10 @@ namespace ft
 				}
 	
 				reverse_iterator operator+(difference_type n) const {
-					reverse_iterator tmp(*this);
-					tmp.p = this->p - n;
-					return tmp;
+			//		reverse_iterator tmp(*this);
+			//		tmp.p = this->p - n;
+			//		return tmp;
+					return this->p - n;
 				}
 
 				reverse_iterator& operator++() { // pre increment
@@ -71,9 +72,10 @@ namespace ft
 				}
 
 				reverse_iterator operator-(difference_type n) const {
-					reverse_iterator tmp(*this);
-					tmp.p = this->p + n;
-					return tmp;
+					//reverse_iterator tmp(*this);
+				//	tmp.p = this->p + n;
+				//	return tmp;
+					return this->p + n;
 				}
 
 				reverse_iterator& operator--() { // pre increment
@@ -93,75 +95,88 @@ namespace ft
 				}
 
 				pointer operator->() const {
-					return &(operator*());
+					return this->p;
+					//return &(operator*());
 				}
 
 				reference operator[](difference_type n) const {
-					return this->p[n]; //this->p[n - 1];
+					reverse_iterator rev = *this + n;
+					return *rev;
+					//return this->p[n]; //this->p[n - 1];
 				}
 
 			private :
 				pointer	p;
 				iterator_type it;
 		};
-}
 
-// Relational Operators
+	// Relational Operators non member
 
-template <class Iterator> 
-	bool operator==(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-			if (&(*lhs) != &(*rhs))
+	template <class Iterator> 
+		bool operator==(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+				//if (&(*lhs) != &(*rhs))
+				//	return false;
+				//return true;
+				return lhs == rhs;
+		}
+
+	template <class Iterator>
+		bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			//return !(lhs == rhs);
+			return lhs != rhs;
+		}
+
+	template <class Iterator>
+		bool operator<(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			if (lhs > rhs)
+				return false;
+			return true;
+			//return std::lexicographical_compare(lhs.rbegin(), lhs.rend(), rhs.begin(), rhs.rend());
+		}
+
+	template <class Iterator>
+		bool operator<=(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			if (lhs >= rhs)
+				return false;
+			return true;
+			//return !(rhs < lhs);
+		}
+
+	template <class Iterator>
+		bool operator>(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			if (lhs < rhs)
 				return false;
 			return true;
 		}
 
-template <class Iterator>
-	bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return !(lhs == rhs);
-	}
+	template <class Iterator>
+		bool operator>=(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			if (lhs <= rhs)
+				return false;
+			return true;
+		}
 
+	// operators +/- non member
 
-template <class Iterator>
-	bool operator<(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return std::lexicographical_compare(lhs.rbegin(), lhs.rend(), rhs.begin(), rhs.rend());
-	}
+	template <class Iterator>
+		ft::reverse_iterator<Iterator> operator+(typename ft::reverse_iterator<Iterator>::difference_type n, const ft::reverse_iterator<Iterator>& rev_it) {
+			//reverse_iterator tmp(rev_it);
+			//&(*tmp) = &(*rev_it) + n;
+			//return tmp;
+			return rev_it + n;
+		}
 
-template <class Iterator>
-	bool operator<=(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return !(rhs < lhs);
-	}
-
-template <class Iterator>
-	bool operator>(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return (rhs < lhs);
-	}
-
-template <class Iterator>
-	bool operator>=(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return !(lhs < rhs);
-	}
-
-// operators +/-
-
-template <class Iterator>
-	ft::reverse_iterator<Iterator> operator+(typename ft::reverse_iterator<Iterator>::difference_type n, const ft::reverse_iterator<Iterator>& rev_it) {
-		//reverse_iterator tmp(rev_it);
-		//&(*tmp) = &(*rev_it) + n;
-		//return tmp;
-		return rev_it + n;
-	}
-
-template <class Iterator>
-	typename ft::reverse_iterator<Iterator>::difference_type operator-(const ft::reverse_iterator<Iterator>& lhs,
-		const ft::reverse_iterator<Iterator>& rhs) {
-		return lhs - rhs;
-	}
-
+	template <class Iterator>
+		typename ft::reverse_iterator<Iterator>::difference_type operator-(const ft::reverse_iterator<Iterator>& lhs,
+			const ft::reverse_iterator<Iterator>& rhs) {
+			return lhs - rhs;
+		}
+}
 
 #endif
