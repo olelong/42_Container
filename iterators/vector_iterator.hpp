@@ -3,6 +3,7 @@
 # define VECTOR_ITERATOR_HPP
 
 # include <iostream>
+# include <unistd.h>
 
 namespace ft
 {
@@ -40,6 +41,11 @@ namespace ft
 		}
 
 		bool operator!=(vector_iterator rhs) const {
+			char cond = !(*this == rhs) + '0';
+			write(1, "h", 1);
+			write(1, &cond, 1);
+			write(1, "h", 1);
+			std::cout << this->p << " " << rhs.p << std::endl;
 			return !(*this == rhs);
 		}
 

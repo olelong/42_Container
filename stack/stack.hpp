@@ -1,12 +1,12 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-#include <deque>
+#include "../vector/vector.hpp"
 
 namespace ft
 {
 	template <	class T, 						// Type of element stored
-				class Container = std::deque<T> >	// Type of underlying container to use to store the elements
+				class Container = ft::vector<T> >	// Type of underlying container to use to store the elements
 		class stack
 		{
 			public :
@@ -16,7 +16,7 @@ namespace ft
 
 				// Constructors/Destructors
 								// Default constructor and copy constructor of ctnr
-				explicit stack(const container_type& ctnr = container_type()) : _ctnr(ctnr), arr(NULL) {
+				explicit stack(const container_type& ctnr = container_type()) : _ctnr(ctnr) {
 					this->_size = ctnr.size();
 				}
 
@@ -30,7 +30,7 @@ namespace ft
 				// Element access
 
 				value_type& top() { // need to fill the array before
-					return this->arr[this->_size - 1];
+					//return this->arr[this->_size - 1];
 				}
 
 				// Capacity
@@ -49,7 +49,6 @@ namespace ft
 
 			private :
 				container_type _ctnr;
-				T*				arr;
 				size_type		_size;
 
 		};

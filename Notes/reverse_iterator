@@ -98,3 +98,7 @@ reverse iterators	equivalent used on
 	>=						<=
 
 exemple operator<(lhs, rhs) {if (lhs > rhs) return false; return true;}
+
+
+Faire operateurs overload manquant comme =
+Utiliser que this->it, plus besoin de p

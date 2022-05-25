@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 
 #ifdef MINE
 	#include "vector/vector.hpp"
@@ -98,18 +99,33 @@ int main()
 	        std::cout << *it << " ";
 	std::cout << std::endl;	
 	std::cout << "Reverse Iterator vec : ";
-    for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend(); it++)
-	        std::cout << *it << " ";
+	reverse_iterator<vector<int>::iterator> rit = vec.rbegin();
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit++;
+	std::cout << *rit << std::endl;
+	rit = vec.rend() - 1;
+	std::cout << *rit << std::endl;
+    for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend() - 1; it++)
+    {
+		write(1, "heyy ", 5);
+		std::cout << *it << " ";
+	}
 	std::cout << std::endl;
 	
 	std::cout << "Test 2: ";
-/*
+
 	vector<int>::iterator from(vec.begin());
 	vector<int>::iterator until(vec.end()); //mine segfault without -1 !!!!!!!!
 	reverse_iterator<vector<int>::iterator> rev_end(from);
 	reverse_iterator<vector<int>::iterator> rev_begin(until);
-	while (rev_end != rev_begin)
-		std::cout << *rev_begin++ << " ";
+//	while (rev_end != rev_begin)
+//		std::cout << *rev_begin++ << " ";
 	std::cout << std::endl;
 
 //	std::cout << " Test base " << std::endl << "rev.base(): "<< std::endl;
@@ -118,14 +134,14 @@ int main()
 	//	std::cout << *it << " ";
 	std::cout << std::endl;
 // heap buffer overflow
-*/
+
 	////////////////////// TEST STACK //////////////////////////////
 
 	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
 
 		
 	std::cout << "  * Constructor of stack Test : *  " << std::endl;
-	std::deque<int> mydeque(3, 10);
+	vector<int> mydeque(3, 10);
 	stack<int> first; 				    // empty stack
 	std::cout << "size of empty stack: " << first.size() << std::endl;
 	if (first.empty())

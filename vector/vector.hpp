@@ -252,7 +252,7 @@ namespace ft
 			void push_back(const value_type& val) {		// Add element to the end of the vector
 				if (this->_size + 1 > this->_capacity) { // If size > at current capacity
 					size_type new_capacity = this->_capacity; // Stock the current capacity in new_capacity
-					if (new_capacity == 0) // ??????????????????
+					if (new_capacity == 0) // If the capacity = 0, we can t double 0 so we initialized new_capacity = 1
 						new_capacity = 1;
 					else
 						new_capacity *= 2; // Need more capacity so reallocate the double of current capacity

@@ -1,6 +1,8 @@
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
 
+#include <unistd.h>
+
 namespace ft
 {
 	template <class Iterator>
@@ -23,8 +25,8 @@ namespace ft
 				}
 				
 				explicit reverse_iterator(iterator_type it) {
-					value_type v = *it;
-					pointer tmp = &v;
+					//value_type v = *it;
+					pointer tmp = &(*it);
 					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
 					this->it = it;
 				}
@@ -38,8 +40,9 @@ namespace ft
 				// Base()
 
 				iterator_type base() const {
-					iterator_type base = this->it;// - 1; error segfault in mai error segfault in main
-					return base;
+				//	iterator_type base = this->it;// - 1; error segfault in mai error segfault in main
+				//	return base;
+					return this->it;
 				}
 
 				// Operators Overload
@@ -56,7 +59,7 @@ namespace ft
 				}
 
 				reverse_iterator& operator++() { // pre increment
-					this->p--;
+					this->it--;
 					return *this;
 				}
 
@@ -75,7 +78,8 @@ namespace ft
 					//reverse_iterator tmp(*this);
 				//	tmp.p = this->p + n;
 				//	return tmp;
-					return this->p + n;
+					reverse_iterator ret(this->p + n);
+					return ret;
 				}
 
 				reverse_iterator& operator--() { // pre increment
@@ -115,23 +119,21 @@ namespace ft
 	template <class Iterator> 
 		bool operator==(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-				//if (&(*lhs) != &(*rhs))
-				//	return false;
-				//return true;
-				return lhs == rhs;
+				return lhs.base() == rhs.base();
 		}
 
 	template <class Iterator>
 		bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			//return !(lhs == rhs);
-			return lhs != rhs;
+			char cond = (lhs.base() != rhs.base()) + '0';
+			write(1, &cond, 1);
+			return lhs.base() != rhs.base();
 		}
 
 	template <class Iterator>
 		bool operator<(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			if (lhs > rhs)
+			if (lhs.base() > rhs.base())
 				return false;
 			return true;
 			//return std::lexicographical_compare(lhs.rbegin(), lhs.rend(), rhs.begin(), rhs.rend());
@@ -140,7 +142,7 @@ namespace ft
 	template <class Iterator>
 		bool operator<=(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			if (lhs >= rhs)
+			if (lhs.base() >= rhs.base())
 				return false;
 			return true;
 			//return !(rhs < lhs);
@@ -149,7 +151,7 @@ namespace ft
 	template <class Iterator>
 		bool operator>(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			if (lhs < rhs)
+			if (lhs.base() < rhs.base())
 				return false;
 			return true;
 		}
@@ -157,7 +159,7 @@ namespace ft
 	template <class Iterator>
 		bool operator>=(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			if (lhs <= rhs)
+			if (lhs.base() <= rhs.base())
 				return false;
 			return true;
 		}
@@ -169,13 +171,13 @@ namespace ft
 			//reverse_iterator tmp(rev_it);
 			//&(*tmp) = &(*rev_it) + n;
 			//return tmp;
-			return rev_it + n;
+			return rev_it.base() + n;
 		}
 
 	template <class Iterator>
 		typename ft::reverse_iterator<Iterator>::difference_type operator-(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
-			return lhs - rhs;
+			return lhs.base() - rhs.base();
 		}
 }
 
