@@ -1,25 +1,22 @@
-
 #ifndef VECTOR_ITERATOR_HPP
 # define VECTOR_ITERATOR_HPP
 
 # include <iostream>
-# include <unistd.h>
+# include <iterator>
 
 namespace ft
 {
-	template <	class T,											// iterator::value_type
-				class Category = std::random_access_iterator_tag,	// iterator::iterator_category
-				class Distance = std::ptrdiff_t,					// iterator::difference_type
-				class Pointer = T*,									// iterator::pointer
-				class Reference = T&>								// iterator::reference
-	class vector_iterator
+	template <class T>
+	class vector_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	{
+	private:
+		typedef typename std::iterator<std::random_access_iterator_tag, T> iterator;
 	public:
-		typedef T			value_type;			// Type of the elements pointed by the iterator
-		typedef Distance	difference_type;	// Type to represent the difference between two iterators
-		typedef Pointer		pointer;			// Type to represent a pointer to an element pointed by the iterator
-		typedef Reference	reference;			// Type to represent a reference to an element pointed by the iterator
-		typedef Category	iterator_category;	// Category to which the iterator belongs to.
+		typedef typename iterator::value_type			value_type;
+		typedef typename iterator::difference_type		difference_type;
+		typedef typename iterator::pointer				pointer;
+		typedef typename iterator::reference			reference;
+		typedef typename iterator::iterator_category	iterator_category;
 		
 		// Canonical form
 		vector_iterator() : p(NULL) {}
@@ -31,104 +28,111 @@ namespace ft
 			this->p = it.p;
 			return *this;
 		}
+		template <typename U>
+		operator vector_iterator<const U>() const {
+			vector_iterator<const U> ret((const U*)this->p);
+			return ret;
+		}
 
-		// Operators
-			// Equality comparisons
-		bool operator==(vector_iterator rhs) const {
+		/// OPERATORS
+		// Equality Comparisons
+		bool operator==(const vector_iterator& rhs) const {
 			if (this->p == rhs.p)
 				return true;
 			return false;
 		}
-
-		bool operator!=(vector_iterator rhs) const {
-			/* DEBUG for reverse_Iterator operator overload !=:
-			char cond = !(*this == rhs) + '0';
-			write(1, "h", 1);
-			write(1, &cond, 1);
-			write(1, "h", 1);
-			std::cout << this->p << " " << rhs.p << std::endl;
-			*/
+		bool operator!=(const vector_iterator& rhs) const {
 			return !(*this == rhs);
 		}
+		template <typename U, typename V>
+		friend bool operator==(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
+		template <typename U, typename V>
+		friend bool operator!=(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
 
-			// Dereferencing
-
-		value_type	operator*() const {
+		// Dereferencing
+		value_type operator*() const {
 			return *this->p;
 		}
-
 		value_type *operator->() {
 			return this->p;
 		}
-
-		value_type &operator*() { // dereferencing as an lvalue
+		value_type &operator*() { // Dereferencing as an lvalue
 			return *this->p;
 		}
 
-			// Increment/Decrement
-
-		vector_iterator	&operator++() { // pre incrementation
+		// Increment & Decrement
+		vector_iterator &operator++() { // Pre-incrementation
 			this->p++;
 			return *this;
 		}
-		
-		vector_iterator	operator++(int) { // post incrementation
+		vector_iterator	operator++(int) { // Post-incrementation
 			vector_iterator tmp(*this);
 			this->operator++();
 			return tmp;
 		}
-
-		vector_iterator &operator--() {
+		vector_iterator &operator--() { // Pre-decrementation
 			this->p--;
 			return *this;
 		}
-
-		vector_iterator operator--(int) {
+		vector_iterator	operator--(int) { // Post-decrementation
 			vector_iterator tmp(*this);
 			this->operator--();
 			return tmp;
 		}
 
-		// Addition/substraction
-
-		vector_iterator	operator+(int n) const {
+		// Arithmetic operations
+		vector_iterator operator+(int n) const {
 			return this->p + n;
-		}
-
-		difference_type operator-(vector_iterator rhs) const {
-			return this->p - rhs.p;
 		}
 		vector_iterator operator-(int n) const {
 			return this->p - n;
 		}
+		difference_type operator-(const vector_iterator& rhs) const {
+			return this->p - rhs.p;
+		}
+		template <typename U, typename V>
+		friend typename vector_iterator<U>::difference_type operator-(
+					const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
 
-		// Inequality comparisons
-
-		bool operator<(vector_iterator rhs) const {
+		// Inequality Comparisons
+		bool operator<(const vector_iterator& rhs) const {
 			if (this->p < rhs.p)
 				return true;
 			return false;
 		}
+		bool operator>(const vector_iterator& rhs) const {
+			return (rhs < *this);
+		}
+		bool operator<=(const vector_iterator& rhs) const {
+			return (*this < rhs || *this == rhs);
+		}
+		bool operator>=(const vector_iterator& rhs) const {
+			return (rhs < *this || *this == rhs);
+		}
+		template <typename U, typename V>
+		friend bool operator<(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
+		template <typename U, typename V>
+		friend bool operator>(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
+		template <typename U, typename V>
+		friend bool operator<=(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
+		template <typename U, typename V>
+		friend bool operator>=(const vector_iterator<U>& lhs, const vector_iterator<V>& rhs);
 
-		bool operator>(vector_iterator lhs) const {
-			return lhs < *this;
+		// Increment & Decrement assigment
+		vector_iterator &operator+=(const int n) {
+			this->p += n;
+			return *this;
+		}
+		vector_iterator &operator-=(const int n) {
+			this->p -= n;
+			return *this;
 		}
 
-		bool operator<=(vector_iterator lhs) const {
-			return (*this < lhs || *this == lhs);
-		}
-		
-		bool operator>=(vector_iterator lhs) const {
-			return (lhs < *this || *this == lhs);
-		}
-	
 		// Offset dereference
-
 		value_type operator[](int i) const {
 			vector_iterator tmp = *this + i;
 			return *tmp;
 		}
-
 		value_type &operator[](int i) {
 			vector_iterator tmp = *this + i;
 			return *tmp;
@@ -137,12 +141,47 @@ namespace ft
 	private:
 		pointer	p;	
 	};
+	
+	template <class T>
+	vector_iterator<T> operator+(int n, vector_iterator<T> vit) {
+		return vit + n;
+	}
 
-		template <class T, class Category, class Distance, class Pointer, class Reference>
-			vector_iterator<T, Category, Distance, Pointer, Reference>
-				operator+(int n, vector_iterator<T, Category, Distance, Pointer, Reference> vit) {
-					return vit + n;
-				}
+	template <typename T, typename U>
+	bool operator==(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		if (lhs.p == rhs.p)
+			return true;
+		return false;
+	}
+	template <typename T, typename U>
+	bool operator!=(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		return !(lhs == rhs);
+	}
+	
+	template <typename T, typename U>
+	typename vector_iterator<T>::difference_type operator-(
+				const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		return lhs.p - rhs.p;
+	}
+
+	template <typename T, typename U>
+	bool operator<(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		if (lhs.p < rhs.p)
+			return true;
+		return false;
+	}
+	template <typename T, typename U>
+	bool operator>(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		return (rhs < lhs);
+	}
+	template <typename T, typename U>
+	bool operator<=(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		return (lhs < rhs || lhs == rhs);
+	}
+	template <typename T, typename U>
+	bool operator>=(const vector_iterator<T>& lhs, const vector_iterator<U>& rhs) {
+		return (rhs < lhs || lhs == rhs);
+	}
 }
 
 #endif // ITERATOR_HPP

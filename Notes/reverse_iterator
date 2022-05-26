@@ -100,5 +100,24 @@ reverse iterators	equivalent used on
 exemple operator<(lhs, rhs) {if (lhs > rhs) return false; return true;}
 
 
-Faire operateurs overload manquant comme =
-Utiliser que this->it, plus besoin de p
+(fait)Faire operateurs overload manquant comme =
+(fait)Utiliser que this->it, plus besoin de p
+
+Erreurs :
+
+Constructeurs testes :
+copie
+initialization
+default
+
+Operateurs testes :
+operator=()
+operator*()
+operator!=()
+operator++()
+second operator++()
+operator-()
+
+non member operator!=()
+non member operator-()
+
