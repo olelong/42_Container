@@ -25,23 +25,20 @@ namespace ft
 				}
 				
 				explicit reverse_iterator(iterator_type it) {
-					//value_type v = *it;
 					pointer tmp = &(*it);
 					this->p = tmp;//&(*it); // Construct a reverse iterator from original iterator it
 					this->it = it;
 				}
 				
-				/* Need enable_if
+				/* Need enable_if ?*/
 				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						this->p = &(*rev_it);
-					}*/
+					}
 				
 				// Base()
 
 				iterator_type base() const {
-				//	iterator_type base = this->it;// - 1; error segfault in mai error segfault in main
-				//	return base;
 					return this->it;
 				}
 
@@ -52,9 +49,6 @@ namespace ft
 				}
 	
 				reverse_iterator operator+(difference_type n) const {
-			//		reverse_iterator tmp(*this);
-			//		tmp.p = this->p - n;
-			//		return tmp;
 					return this->p - n;
 				}
 
@@ -75,9 +69,6 @@ namespace ft
 				}
 
 				reverse_iterator operator-(difference_type n) const {
-					//reverse_iterator tmp(*this);
-				//	tmp.p = this->p + n;
-				//	return tmp;
 					reverse_iterator ret(this->p + n);
 					return ret;
 				}
@@ -100,13 +91,11 @@ namespace ft
 
 				pointer operator->() const {
 					return this->p;
-					//return &(operator*());
 				}
 
 				reference operator[](difference_type n) const {
 					reverse_iterator rev = *this + n;
 					return *rev;
-					//return this->p[n]; //this->p[n - 1];
 				}
 
 			private :
@@ -125,8 +114,10 @@ namespace ft
 	template <class Iterator>
 		bool operator!=(const ft::reverse_iterator<Iterator>& lhs,
 			const ft::reverse_iterator<Iterator>& rhs) {
+			/* DEBUG
 			char cond = (lhs.base() != rhs.base()) + '0';
 			write(1, &cond, 1);
+			*/
 			return lhs.base() != rhs.base();
 		}
 
@@ -168,9 +159,6 @@ namespace ft
 
 	template <class Iterator>
 		ft::reverse_iterator<Iterator> operator+(typename ft::reverse_iterator<Iterator>::difference_type n, const ft::reverse_iterator<Iterator>& rev_it) {
-			//reverse_iterator tmp(rev_it);
-			//&(*tmp) = &(*rev_it) + n;
-			//return tmp;
 			return rev_it.base() + n;
 		}
 

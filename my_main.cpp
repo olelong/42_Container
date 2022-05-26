@@ -98,22 +98,23 @@ int main()
     for(vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
 	        std::cout << *it << " ";
 	std::cout << std::endl;	
-	std::cout << "Reverse Iterator vec : ";
+	std::cout << "Reverse Iterator vec without boucle for: ";
 	reverse_iterator<vector<int>::iterator> rit = vec.rbegin();
-	std::cout << *rit << std::endl;
+	std::cout << *rit << " ";
 	rit++;
-	std::cout << *rit << std::endl;
+	std::cout << *rit << " ";
 	rit++;
-	std::cout << *rit << std::endl;
+	std::cout << *rit << " ";
 	rit++;
-	std::cout << *rit << std::endl;
+	std::cout << *rit << " ";
 	rit++;
-	std::cout << *rit << std::endl;
+	std::cout << *rit << " ";
 	rit = vec.rend() - 1;
-	std::cout << *rit << std::endl;
+	std::cout << " rend() - 1 du vector: " << *rit << std::endl << std::endl;
+	std::cout << "Reverse Iterator vec with boucle for: ";
     for(reverse_iterator<vector<int>::iterator> it = vec.rbegin(); it != vec.rend() - 1; it++)
     {
-		write(1, "heyy ", 5);
+		//write(1, "heyy ", 5); // to DEBUG
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
@@ -121,19 +122,21 @@ int main()
 	std::cout << "Test 2: ";
 
 	vector<int>::iterator from(vec.begin());
-	vector<int>::iterator until(vec.end()); //mine segfault without -1 !!!!!!!!
+	vector<int>::iterator until(vec.end());
 	reverse_iterator<vector<int>::iterator> rev_end(from);
 	reverse_iterator<vector<int>::iterator> rev_begin(until);
-//	while (rev_end != rev_begin)
-//		std::cout << *rev_begin++ << " ";
+	while (rev_end != rev_begin)
+		std::cout << *rev_begin++ << " ";
 	std::cout << std::endl;
 
-//	std::cout << " Test base " << std::endl << "rev.base(): "<< std::endl;
-	rev_end.base();
-	//for(vector<int>::iterator it = rev_begin.base(); it != rev_end.base(); it++)
-	//	std::cout << *it << " ";
+	std::cout << " Test base " << std::endl << "rev.base(): "; 
+	std::cout << *rev_end.base() << std::endl;
+	for(vector<int>::iterator it = rev_begin.base(); it != rev_end.base(); it++)
+	{
+		std::cout << "Hey " << std::endl;
+		std::cout << *it << " ";
+	}
 	std::cout << std::endl;
-// heap buffer overflow
 
 	////////////////////// TEST STACK //////////////////////////////
 
