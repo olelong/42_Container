@@ -104,6 +104,7 @@ exemple operator<(lhs, rhs) {if (lhs > rhs) return false; return true;}
 (fait)Utiliser que this->it, plus besoin de p
 
 Erreurs :
+Resoudre pb operator-() et template operator=()
 
 Constructeurs testes :
 copie
@@ -117,7 +118,17 @@ operator!=()
 operator++()
 second operator++()
 operator-()
+operator+()
+operator--()
+operator-=()
+operator+=()
+operator[]()
+operator->()
 
 non member operator!=()
-non member operator-()
+non member operator==()
+non member operator <=()
+non member operator <()
+non member operator >=()
+non member operator >()
 
