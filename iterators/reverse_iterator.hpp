@@ -16,10 +16,10 @@ namespace ft
 				
 				// Constructors
 
-				reverse_iterator() { // point to no object
+				reverse_iterator() : it() { // point to no object
 					std::cout << "Default constructor called" << std::endl;
-					iterator_type it;//iterator_type it(val); // base_iterator is value-initialized
-					this->it = it;
+					//iterator_type it;//iterator_type it(val); // base_iterator is value-initialized
+				//	this->it = it;
 				}
 				
 				explicit reverse_iterator(iterator_type it) {

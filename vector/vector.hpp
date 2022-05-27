@@ -8,6 +8,10 @@
 # include <typeinfo>
 # include "../iterators/vector_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
+# include "../utils/iterator_traits.hpp"
+# include "../utils/lexicographical_compare.hpp"
+# include "../utils/enable_if.hpp"
+# include "../utils/is_integral.hpp"
 
 namespace ft
 {
@@ -15,17 +19,18 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef 			T											value_type;
-			typedef 			Alloc										allocator_type;
-			typedef	typename	allocator_type::reference					reference;			
-			typedef typename	allocator_type::const_reference				const_reference;			
-			typedef	typename	allocator_type::pointer						pointer;			
-			typedef typename	allocator_type::const_pointer				const_pointer;			
-			typedef 			vector_iterator<value_type>					iterator;
-			typedef 			vector_iterator<const value_type>			const_iterator;
+			typedef 			T												value_type;
+			typedef 			Alloc											allocator_type;
+			typedef	typename	allocator_type::reference						reference;			
+			typedef typename	allocator_type::const_reference					const_reference;			
+			typedef	typename	allocator_type::pointer							pointer;			
+			typedef typename	allocator_type::const_pointer					const_pointer;			
+			typedef 			vector_iterator<value_type>						iterator;
+			typedef 			vector_iterator<const value_type>				const_iterator;
 			typedef 			ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef				ft::reverse_iterator<const_iterator>			const_reverse_iterator;
-			typedef 			size_t										size_type;
+			typedef typename	ft::iterator_traits<iterator>::difference_type	difference_type;
+			typedef 			size_t											size_type;
 			
 
 			// Constructors & Destructor
@@ -38,20 +43,13 @@ namespace ft
 					this->assign(n, val);
 			}
 
-			/* Need enable_if!
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last,						// range container
-				const allocator_type& alloc = allocatr_type()) {
-					this->_alloc = alloc;
-					this->_size = last - first;
-					this->arr = this->_alloc.allocate(this->_size);
-					size_type i = 0;
-					for(InputIterator it = first; it != last; it++, i++)
-					{
-						this->_arr[i] = *it;
-					}
+				const allocator_type& alloc = allocator_type(),
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+				: arr(NULL), _alloc(alloc), _size(0), _capacity(0), old_resize(0) {
+					this->assign(first, last);
 				}
-			*/
 			
 			vector (const vector &x) : arr(NULL), _size(0), _capacity(0), old_resize(0) {	// copy constructor
 				*this = x;
@@ -212,7 +210,8 @@ namespace ft
 								/*   Assign    */
 			// Assign new contents to the vector, replacing its current contents and modifying its size accordingly
 			template <class InputIterator> // Range // New contents constructed in the range between first and last
-				void assign(InputIterator first, InputIterator last) {
+				void assign(InputIterator first, InputIterator last, 
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)  {
 					size_t new_size = 0;
 					for (InputIterator it = first; it != last; it++) // Recover the size of new contents to add
 						new_size++;
@@ -257,10 +256,8 @@ namespace ft
 					else
 						new_capacity *= 2; // Need more capacity so reallocate the double of current capacity
 					this->reallocate(new_capacity);
-					this->_alloc.construct(this->arr + this->_size, val);
 				}
-				else // size <= to the current capacity so just need to construct the new object in the vector
-					this->_alloc.construct(this->arr + this->_size, val);
+				this->_alloc.construct(this->arr + this->_size, val);
 				this->_size++; // Size increases as we add an element to the vector
 			}
 
@@ -298,16 +295,16 @@ namespace ft
 					this->_size += n;
 					return ;
 				}
-				for (size_type i = this->_size + n - 1; i >= n; i--)
+				for (size_type i = this->_size + n - 1; i >= id + n; i--)
 					this->arr[i] = this->arr[i - n];
 				for (size_type i = 0; i < n; i++)
 					this->_alloc.construct(this->arr + id + i, val);
 				this->_size += n;				
 			}
 
-			/* Needs enable_if
 			template<class InputIterator>
-				void insert(Iterator position, InputIterator first, InputIterator last) { // Range
+				void insert(iterator position, InputIterator first, InputIterator last,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) { // Range
 					size_type id = position - this->begin();
 					size_type new_size = 0;
 					for (InputIterator it = first; it != last; it ++)
@@ -321,14 +318,13 @@ namespace ft
 						this->_size += new_size;
 						return ;
 					}
-					for (size_type i = this->_size + new_size - 1; i >= new_size; i--)
+					for (size_type i = this->_size + new_size - 1; i >= id + new_size; i--)
 						this->arr[i] = this->arr[i - new_size];
 					size_type i = 0;
 					for (InputIterator it = first; it != last; it ++, i++)
 						this->_alloc.construct(this->arr + id + i, *it);
 					this->_size += new_size;
 				}
-			*/
 						/*   Erase   */
 
 			iterator erase(iterator position) {		// Remove a single element at position
@@ -337,7 +333,7 @@ namespace ft
 				for (size_type i = id; i < this->_size - 1; i++) // Offest elements from begin to position to the left to erase the element at position
 					this->arr[i] = this->arr[i + 1];
 				this->_size--;
-				return this->begin() + id;
+				return position;//this->begin() + id;
 			}
 
 			iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
@@ -349,27 +345,21 @@ namespace ft
 				for (size_type i = first - this->begin(); i < this->_size - new_size; i++)
 					this->arr[i] = this->arr[i + new_size];		// Relocate all the elements after the segment erased to their new positions
 				this->_size -= new_size;						// Reduces the container size by the number of elements removed, which are destroyed
-				return this->begin() + (first - this->begin());
+				return first;//this->begin() + (first - this->begin());
 			}
 
 						/*  Swap/Clear  */
 
 			void swap(vector& x) {		// Exchange the content of the container by the content of x
-				pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
-				for (size_type i = 0; i < this->_size; i++) // Add in tmp elements of current vector to deallocate it after
-					this->_alloc.construct(tmp + i, this->arr[i]);
-				this->deallocate();
-				this->allocate(x._size);					// Allocate the current vector of x size
-				for (size_type i = 0; i < x._size; i++)
-					this->_alloc.construct(this->arr + i, x.arr[i]);	// Fill the current vector of the element of the vector x
-				x.deallocate();
-				x.allocate(this->_size);					// Allocate the vector x of current vector size
-				for (size_type i = 0; i < this->_size; i++)
-					x._alloc.construct(x.arr + i, tmp[i]);	// Fill the vector x of the elements of the current vector
-				this->deallocate(tmp, this->_size);
-				size_type tmp_size = this->_size;			// Update size of each one
+				pointer tmp = this->arr;
+				this->arr = x.arr;
+				x.arr = tmp;
+				size_type tmp_size = this->_size;
 				this->_size = x._size;
 				x._size = tmp_size;
+				size_type tmp_capacity = this->_capacity;
+				this->_capacity = x._capacity;
+				x._capacity = tmp_capacity;
 			}
 
 			void clear() {				// Remove all elements from the vector(which are destroyed), leaving the container with a size of 0
