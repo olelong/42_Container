@@ -16,12 +16,12 @@ namespace ft
 				
 				// Constructors
 
-				reverse_iterator() : it() { // point to no object
+				reverse_iterator() : it(), p(NULL) { // point to no object
 					//std::cout << "Default constructor called" << std::endl;
 					//base_iterator is value-initialized
 				}
 				
-				explicit reverse_iterator(iterator_type it) {
+				explicit reverse_iterator(iterator_type it) : p(pointer()) {
 					//std::cout << "constructor 1 called" << std::endl;
 					it--;
 					this->it = it;
@@ -31,6 +31,8 @@ namespace ft
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 					//	std::cout << "copy constructor called" << std::endl;
 						this->it = &(*rev_it);
+						this->p = &(*rev_it);
+						this->p--;
 					}
 
 				// Operators Assignment =
@@ -38,6 +40,8 @@ namespace ft
 				reverse_iterator& operator=(const reverse_iterator<U>& other) {
 					//std::cout << "template operator=" << std::endl;
 					this->it = other.base();
+					this->p = other.p;
+					this->p--;
 					return *this;
 				}
 				
@@ -46,7 +50,7 @@ namespace ft
 				iterator_type base() const {
 					//std::cout << "in base()" << std::endl;
 					iterator_type tmp(this->it);
-					tmp++;
+					//tmp++;
 					return tmp;
 				}
 
@@ -54,36 +58,29 @@ namespace ft
 
 				reference operator*() const {
 				//	std::cout << "in operator*" << std::endl;
-					//iterator_type tmp(this->base());//this->it;
-					//iterator_type tmp = this->base();//this->it;
-					//iterator_type tmp(this->it);
-					
-					//iterator_type tmp = this->it;
-					iterator_type tmp(this->it);
-					
-					//tmp--;
-					return *tmp;
+					return *this->p;
 				}
 	
 				reverse_iterator operator+(difference_type n) const {
 					//std::cout << "in operator+()" << std::endl;
-					//reverse_iterator rev(this->base() - n);
-					//reverse_iterator rev(this->it - n);
-					reverse_iterator rev = this->it - n;
-					//reverse_iterator rev(this->base() - n);
+					this->it - n;
+					reverse_iterator rev(this->p - n);
+					/*for (int i = 0; i < n; i++)
+						this->p--;*/
 					return rev;
-					//return this->it - n;
 				}
 
 				reverse_iterator& operator++() { // pre increment
 					//std::cout << "in operator++()" << std::endl;
 					this->it--;
+					this->p--;
 					return *this;
 				}
 
 				reverse_iterator operator++(int) { // post increment
 				//	std::cout << "in second operator++()" << std::endl;
-					reverse_iterator tmp = *this;
+					reverse_iterator tmp(*this);
+					//reverse_iterator tmp = *this;
 					this->operator++();
 					return tmp;
 				}
@@ -91,6 +88,7 @@ namespace ft
 				reverse_iterator& operator+=(difference_type n) {
 					//std::cout << "in operator+=()" << std::endl;
 					this->it -= n;
+					this->p -= n;
 					return *this;
 				}
 
@@ -98,7 +96,9 @@ namespace ft
 					//std::cout << "in operator-()" << std::endl;
 					//reverse_iterator rev(this->base() + n);
 					//reverse_iterator rev(this->base() + n);
-					reverse_iterator rev(this->it + n);
+					//reverse_iterator rev(this->it + n);
+					this->it + n;
+					reverse_iterator rev(this->p + n);
 					//Iterator tmp1(this->base() + n);
 					//reverse_iterator rev(tmp1);
 					return rev;
@@ -106,14 +106,15 @@ namespace ft
 
 				reverse_iterator& operator--() { // pre increment
 					this->it++;
+					this->p++;
 				//	std::cout << "in operator--()" << std::endl;
 					return *this;
 				}
 
 				reverse_iterator operator--(int) { // post increment
 				//	std::cout << "in second operator--()" << std::endl;
-					//reverse_iterator tmp(*this);
-					reverse_iterator tmp = *this;
+					reverse_iterator tmp(*this);
+					//reverse_iterator tmp = *this;
 					this->operator--();
 					return tmp;
 				}
@@ -121,6 +122,7 @@ namespace ft
 				reverse_iterator& operator-=(difference_type n) {
 					//std::cout << "in operator-=()" << std::endl;
 					this->it += n;
+					this->p += n;
 					return *this;
 				}
 
@@ -137,7 +139,7 @@ namespace ft
 				}
 
 			protected :
-				//pointer	p;
+				pointer	p;
 				iterator_type it;
 		};
 

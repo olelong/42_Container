@@ -105,6 +105,7 @@ exemple operator<(lhs, rhs) {if (lhs > rhs) return false; return true;}
 
 Erreurs :
 Resoudre pb operator-() et template operator=()
+Testeur mli
 
 Constructeurs testes :
 copie
@@ -132,3 +133,12 @@ non member operator <()
 non member operator >=()
 non member operator >()
 
+
+Le reverse iterator a besoin d'un iterateur copie de celui passe en parametre quisera traverse dans le sens inverse mais aussi d'un pointeur qui permettra d'afficher avec un decalage de 1 le contenu de reverse_iterator.
+
+vec (0, 1, 2);
+iterator = vec.begin();
+rev(iterator);
+
+std::cout << *rev << std::endl; (pointeur) -> affichera 1 (decale de 1 par rapport a l'iterateur)
+std::cout << *rev.base() << std::endl; (base) -> affichera 2

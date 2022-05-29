@@ -275,9 +275,19 @@ int main()
 	std::cout << *t3 << std::endl;
 
 
+	std::cout << YELLOW << "Test 7: Difference between pointer and base() " << END_COLOR << std::endl;
 	//vector<float>::const_iterator cit = vct.begin();
 	//vector<float>::const_reverse_iterator crit1(it);
-	
+    vector<int> vect;
+    vect.push_back(1);
+    vect.push_back(2);
+    vect.push_back(3);
+
+    reverse_iterator<vector<int>::iterator> rite(vect.rbegin() + 1);
+    std::cout << *rite << " "  << *rite.base() << std::endl;
+    std::cout << (*rite == *rite) << std::endl;
+    std::cout << (*rite.base() != *rite.base()) << std::endl;
+
 	////////////////////// TEST STACK //////////////////////////////
 
 	std::cout << std::endl << CYAN << "************ Test Stack ************" << END_COLOR << std::endl << std::endl;
