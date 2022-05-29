@@ -2,8 +2,8 @@
 NAME		= ft_containers
 REAL		= real
 
-SRCS_DIR	= mains/mine/#mains/mli/#mains/w/#mains/mine/
-SRCS		= my_main.cpp
+SRCS_DIR	= mains/mli/#mains/w/#mains/mine/
+SRCS		= rite2.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/
@@ -15,7 +15,7 @@ HEADERS		= vector/vector.hpp \
 			  iterators/reverse_iterator.hpp \
 			  stack/stack.hpp
 
-CXX			= c++ #-g3 -fsanitize=address
+CXX			= c++ -g3 -fsanitize=address
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
 RM			= rm -f
 

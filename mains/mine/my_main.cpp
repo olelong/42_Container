@@ -153,7 +153,7 @@ int main()
 	std::cout << std::endl << std::endl;
 
 	std::cout << YELLOW << "Test 4: Base " << END_COLOR << std::endl << "rev.base(): "; 
-	std::cout << *rev_end.base() << std::endl; // Probleme retour base pas bon
+	std::cout << *rev_end.base() << std::endl; 
 	for(reverse_iterator<vector<int>::iterator> rit = vec.rbegin(); rit != vec.rend(); rit++)
 		std::cout << *rit << " ";
 	std::cout << std::endl << std::endl;
@@ -235,16 +235,7 @@ int main()
 	std::cout << GREEN << "The operator[] works!" << END_COLOR << std::endl << std::endl;
 // find how test operator->()	
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	std::cout << YELLOW << "Test 7: Non Members Overload operators " << END_COLOR << std::endl;
-	std::cout << "Test on rit the non member operator+ and -: " << std::endl;// "and the operator->(): " << std::endl;
-	/*std::cout << "rit before: " << *rit3 << std::endl;
-	rit3 + 3.0f;
-	std::cout << "rit = 3 + vec.rbegin(): " << *rit3 << std::endl;
-	rit3 - 3.0f;
-	std::cout << "rit = 2 - vec.rbegin(): " << *rit3 << std::endl;
-*/
-	std::cout << std::endl;
 	
 	std::cout << "Test on rit the non member relational operators: " << std::endl;// "and the operator->(): " << std::endl;
 	vector<int> re(4,2);
@@ -274,6 +265,7 @@ int main()
 	std::cout << "Test non member operator-(): " << std::endl;
 	const reverse_iterator<vector<int>::iterator>::difference_type tr = lhs - rhss;
 	std::cout << tr << std::endl;
+	std::cout << (lhs - rhss) << std::endl;
 	std::cout << "Test non member operator+(): " << std::endl;
 	reverse_iterator<vector<int>::iterator> tr2 = 3 + rhss;
 	std::cout << *tr2 << std::endl;
