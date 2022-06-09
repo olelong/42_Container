@@ -16,23 +16,25 @@ namespace ft
 				
 				// Constructors
 
-				reverse_iterator() : it(), p(NULL) { // point to no object
+				reverse_iterator() : p(NULL), it() { // point to no object
 					//std::cout << "Default constructor called" << std::endl;
 					//base_iterator is value-initialized
 				}
 				
-				explicit reverse_iterator(iterator_type it) : p(pointer()) {
+				explicit reverse_iterator(iterator_type it) { // : p(pointer()) {
 					//std::cout << "constructor 1 called" << std::endl;
-					it--;
+					//this->it = it + 1;
 					this->it = it;
+					this->p = &(*it);
+					this->p--;
 				}
 				
 				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
-					//	std::cout << "copy constructor called" << std::endl;
+						//std::cout << "copy constructor called" << std::endl;
 						this->it = &(*rev_it);
 						this->p = &(*rev_it);
-						this->p--;
+					//	this->p--;
 					}
 
 				// Operators Assignment =
@@ -40,8 +42,8 @@ namespace ft
 				reverse_iterator& operator=(const reverse_iterator<U>& other) {
 					//std::cout << "template operator=" << std::endl;
 					this->it = other.base();
-					this->p = other.p;
-					this->p--;
+					this->p = &(*other);
+					//this->p--;
 					return *this;
 				}
 				
@@ -63,10 +65,12 @@ namespace ft
 	
 				reverse_iterator operator+(difference_type n) const {
 					//std::cout << "in operator+()" << std::endl;
-					this->it - n;
-					reverse_iterator rev(this->p - n);
-					/*for (int i = 0; i < n; i++)
-						this->p--;*/
+					/*std::cout << "pointer: " << this->p << std::endl;
+					this->it.printAddress();*/
+					reverse_iterator rev(this->it - n);
+					/*std::cout << "pointer: " << rev.p << std::endl;
+					rev.it.printAddress();*/
+					//rev.p++;
 					return rev;
 				}
 
@@ -94,13 +98,7 @@ namespace ft
 
 				reverse_iterator operator-(difference_type n) const {
 					//std::cout << "in operator-()" << std::endl;
-					//reverse_iterator rev(this->base() + n);
-					//reverse_iterator rev(this->base() + n);
-					//reverse_iterator rev(this->it + n);
-					this->it + n;
-					reverse_iterator rev(this->p + n);
-					//Iterator tmp1(this->base() + n);
-					//reverse_iterator rev(tmp1);
+					reverse_iterator rev(this->it + n);
 					return rev;
 				}
 
@@ -148,9 +146,16 @@ namespace ft
 	template <class Iterator1, class Iterator2> 
 		bool operator==(const ft::reverse_iterator<Iterator1>& lhs,
 			const ft::reverse_iterator<Iterator2>& rhs) {
-				//std::cout << "in non member operator==()" << std::endl;
+				std::cout << "in non member operator==()" << std::endl;
 				if ( lhs.base() == rhs.base())
+				{
+					std::cout << "true ";
 					return true;
+				}
+				if (&(*lhs) == &(*rhs))
+					return true;
+
+				std::cout << "false ";
 				return false;
 		}
 
@@ -202,17 +207,14 @@ namespace ft
 	template <class Iterator>
 		ft::reverse_iterator<Iterator> operator+(typename ft::reverse_iterator<Iterator>::difference_type n, const ft::reverse_iterator<Iterator>& rev_it) {
 			//std::cout << "in non member operator+()" << std::endl;
-			reverse_iterator<Iterator> rev(rev_it.base() - n);
-			return rev;
+			return rev_it + n;
 		}
 
 	template <class Iterator1, class Iterator2>
 		typename ft::reverse_iterator<Iterator1>::difference_type operator-(const ft::reverse_iterator<Iterator1>& lhs,
 			const ft::reverse_iterator<Iterator2>& rhs) {
-			//std::cout << "in non member operator-()" << std::endl;
-			Iterator1 tmp1 = lhs.base();
-			Iterator1 tmp2 = rhs.base();
-			return  tmp2 - tmp1;
+			std::cout << "in non member operator-()" << std::endl;
+			return rhs.base() - lhs.base();
 		}
 }
 

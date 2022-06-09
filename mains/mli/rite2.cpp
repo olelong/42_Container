@@ -24,11 +24,22 @@ int		main(void)
 	vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
 
 	for (int i = 0; i < size; ++i)
+	{
 		it[i] = (size - i) * 5;
-
+		std::cout << it[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "1: " << *it << std::endl;
+	
 	it = it + 5;
+	std::cout << "2: " << *it << std::endl;
+	
 	it = 1 + it;
+	std::cout << "3: " << *it << std::endl;
+	
 	it = it - 4;
+	std::cout << "4: " << *it << std::endl;
+	
 	std::cout << *(it += 2) << std::endl;
 	std::cout << *(it -= 1) << std::endl;
 
@@ -38,8 +49,14 @@ int		main(void)
 	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
 
 	std::cout << "(it == const_it): " << (ite == it) << std::endl;
-	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "ite: " << *ite << " it: " << *it << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl << std::endl;
+	//std::cout << "ite + 3: " << (*ite + 3) << " it: " << *it << std::endl;
 	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+	//std::cout << "ite: " << &(*ite) << " it: " << &(*it) << std::endl;
+	ite = ite + 3;
+	//std::cout << (ite == it) << std::endl;
+	std::cout << "ite + 3: "; ite.base().printAddress(); std::cout << " it: " << &(*it) << std::endl;
 
 	printSize(vct);
 	return (0);

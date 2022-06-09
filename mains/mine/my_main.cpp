@@ -26,12 +26,13 @@ int main()
 
 	vector<int> v(3, 42);
 
+	std::cout << YELLOW << "Test 1: Basic functions empty(), front(), back(), size()" << END_COLOR << std::endl;
 	std::cout << "v: ";
 	for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 	if (v.empty())
-		std::cout << "hey" << std::endl;
+		std::cout << "V is empty" << std::endl;
 
 	std::cout << "v.front() and v.back(): ";
 	std::cout << v.front() << " " << v.back() << std::endl;
@@ -39,7 +40,9 @@ int main()
 	std::cout << "v.size(): ";
 	if (!v.empty())
 		std::cout << v.size() << std::endl;
-	
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Test 2: boucle from begin() to end()" << END_COLOR << std::endl;
 	vector<int> v2(2, 5);
 	v = v2;
 	std::cout << "v2: ";
@@ -51,7 +54,9 @@ int main()
 	for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+	std::cout << std::endl;
 	
+	std::cout << YELLOW << "Test 3: Copy Constructor" << END_COLOR << std::endl;
 	vector<int> v3(v);	
 	std::cout << "v3 (copy of v): ";
 	for (vector<int>::iterator it = v3.begin(); it != v3.end(); it++)
@@ -63,11 +68,15 @@ int main()
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-
+	std::cout << std::endl;
+ 
+	std::cout << YELLOW << "Test 4: Default constructor" << END_COLOR << std::endl;
 	vector<int> v4;
 	if (v4.empty())
-		std::cout << "Default Constructor is empty " << std::endl;
+		std::cout << GREEN << "Default Constructor is empty " << END_COLOR << std::endl;
+	std::cout << std::endl;
 
+	std::cout << YELLOW << "Test 5: " << END_COLOR << std::endl;
 	const vector<int> vc(v3);
 	std::cout << *vc.begin() << std::endl;
 	vector<int>::const_iterator last = vc.end() - 1;
@@ -80,6 +89,35 @@ int main()
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	std::cout << std::endl;
+	std::cout << YELLOW << "Test 5: iterator incrementation & decrementation" << END_COLOR << std::endl;
+	v3.push_back(10);
+	v3.push_back(11);
+	v3.push_back(12);
+	v3.push_back(13);
+	v3.push_back(14);
+    for(vector<int>::iterator it = v3.begin(); it != v3.end(); it++)
+	        std::cout << *it << " ";
+	vector<int>::iterator it3(v3.begin());
+	std::cout << "test -= and += with iterator" << std::endl;
+	it3 += 2;
+	std::cout << "Increment it += 2: "<< *it3 << std::endl;
+	std::cout << "Increment it += 2: "<< *(it3 += 2) << std::endl;
+	it3 -= 2;
+	std::cout << "Decrement it-=2: " << *it3 << std::endl;
+	std::cout << "Decrement it-=2: " << *(it3 -= 2) << std::endl;
+	
+	std::cout << std::endl;
+	vector<int>::const_iterator it4(v3.begin());
+	std::cout << "test -= and += with const iterator" << std::endl;
+	it4 += 2;
+	std::cout << "Increment it += 2: "<< *it4 << std::endl;
+	std::cout << "Increment it += 2: "<< *(it4 += 2) << std::endl;
+	it4 -= 2;
+	std::cout << "Decrement it-=2: " << *it4 << std::endl;
+	std::cout << "Decrement it-=2: " << *(it4 -= 2) << std::endl;
+	std::cout << std::endl;
 
 	/*vector<float> v5(v3.begin(), v3.end());
 	std::cout << "v5 Range constructor: ";
@@ -223,17 +261,42 @@ int main()
 	std::cout << "Decrement rit--: " << *rit3 << std::endl;
 	rit3 += 2;
 	std::cout << "Increment rit += 2: "<< *rit3 << std::endl;
+	std::cout << "Increment rit += 2: "<< *(rit3 += 2) << std::endl;
 	rit3 -= 2;
 	std::cout << "Decrement rit-=2: " << *rit3 << std::endl;
+	std::cout << "Decrement rit-=2: " << *(rit3 -= 2) << std::endl;
 	std::cout << GREEN << "The assignment, increment, decrement " << std::endl << "and arithmetic operators work!" << END_COLOR << std::endl;
 	std::cout << std::endl;
-
-	std::cout << "Test on rit the operator[](): " << std::endl;// "and the operator->(): " << std::endl;
-	std::cout << "rit3[0] " << rit3[0] << std::endl;
-	std::cout << "rit3[3] " << rit3[3] << std::endl;
-	std::cout << "rit3[5] " << rit3[5] << std::endl;
-	std::cout << GREEN << "The operator[] works!" << END_COLOR << std::endl << std::endl;
-// find how test operator->()	
+	vector<float> vct1;
+	vct1.push_back(4);
+	vct1.push_back(5);
+	vct1.push_back(6);
+	vct1.push_back(7);
+	vct1.push_back(8);
+	vct1.push_back(9);
+	for(reverse_iterator<vector<float>::iterator> rit = vct1.rbegin(); rit != vct1.rend(); rit++)
+		std::cout << *rit << " ";
+	std::cout << std::endl;
+	vector<float>::reverse_iterator rit5(vct1.rbegin());
+	std::cout << "test -= and += with reverse_iterator" << std::endl;
+	rit5 += 2;
+	std::cout << "Increment rit += 2: "<< *rit5 << std::endl;
+	std::cout << "Increment rit += 2: "<< *(rit5 += 2) << std::endl;
+	rit5 -= 2;
+	std::cout << "Decrement rit-=2: " << *rit5 << std::endl;
+	std::cout << "Decrement rit-=2: " << *(rit5 -= 2) << std::endl;
+	
+	std::cout << std::endl;
+	vector<float>::const_reverse_iterator rit4(vct1.rbegin());
+	std::cout << "test -= and += with const reverse_iterator" << std::endl;
+	std::cout << *rit4 << std::endl;
+	rit4 += 2;
+	std::cout << "Increment rit += 2: "<< *rit4 << std::endl;
+	std::cout << "Increment rit += 2: "<< *(rit4 += 2) << std::endl;
+	rit4 -= 2;
+	std::cout << "Decrement rit-=2: " << *rit4 << std::endl;
+	std::cout << "Decrement rit-=2: " << *(rit4 -= 2) << std::endl;
+	
 
 	std::cout << YELLOW << "Test 7: Non Members Overload operators " << END_COLOR << std::endl;
 	
@@ -263,9 +326,10 @@ int main()
 	std::cout << "Compare if lhs <= rhs" << std::endl;
 	std::cout << ((lhs <= rhss) ? MAGENTA : GREEN)  << ((lhs <= rhss) ? "invalid: true " : "valid: false ") << END_COLOR << (lhs <= rhss) << std::endl;
 	std::cout << "Test non member operator-(): " << std::endl;
-	const reverse_iterator<vector<int>::iterator>::difference_type tr = lhs - rhss;
+	const reverse_iterator<vector<int>::iterator> rhsss(re.begin());
+	const reverse_iterator<vector<int>::iterator>::difference_type tr = lhs - rhsss;
 	std::cout << tr << std::endl;
-	std::cout << (lhs - rhss) << std::endl;
+	std::cout << (lhs - rhsss) << std::endl;
 	std::cout << "Test non member operator+(): " << std::endl;
 	reverse_iterator<vector<int>::iterator> tr2 = 3 + rhss;
 	std::cout << *tr2 << std::endl;
@@ -273,9 +337,9 @@ int main()
 	reverse_iterator<vector<int>::const_iterator> t3;
 	t3 = rhss;
 	std::cout << *t3 << std::endl;
+	std::cout << std::endl;
 
-
-	std::cout << YELLOW << "Test 7: Difference between pointer and base() " << END_COLOR << std::endl;
+	std::cout << YELLOW << "Test 8: Difference between pointer and base() " << END_COLOR << std::endl;
 	//vector<float>::const_iterator cit = vct.begin();
 	//vector<float>::const_reverse_iterator crit1(it);
     vector<int> vect;

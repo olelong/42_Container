@@ -60,6 +60,12 @@ namespace ft
 			return *this->p;
 		}
 
+		// temporaire
+		void printAddress() const {
+			std::cout << "print address iterator: ";
+			std::cout << this->p << std::endl;
+		}
+
 		// Increment & Decrement
 		vector_iterator &operator++() { // Pre-incrementation
 			this->p++;

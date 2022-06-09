@@ -103,7 +103,7 @@ namespace ft
 			}
 
 			reverse_iterator rend() {
-				iterator it(this->begin());//(arr - 1); // this->begin() - 1
+				iterator it(this->begin());
 				reverse_iterator rev(it);
 				return rev;
 			}
