@@ -91,25 +91,25 @@ namespace ft
 			}
 									/* Reverse Iterator  */
 			reverse_iterator rbegin() {
-				iterator it(this->end());//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
+				iterator it(this->end() - 1);//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rbegin() const {
-				iterator it(this->end());//(arr + this->_size - 1);
+				iterator it(this->end() - 1);//(arr + this->_size - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
 
 			reverse_iterator rend() {
-				iterator it(this->begin());
+				iterator it(this->begin() - 1);
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(this->begin());//(arr - 1);
+				iterator it(this->begin()- 1);//(arr - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}

@@ -23,18 +23,16 @@ namespace ft
 				
 				explicit reverse_iterator(iterator_type it) { // : p(pointer()) {
 					//std::cout << "constructor 1 called" << std::endl;
-					//this->it = it + 1;
-					this->it = it;
+					this->it = it + 1;
 					this->p = &(*it);
-					this->p--;
 				}
 				
 				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						//std::cout << "copy constructor called" << std::endl;
-						this->it = &(*rev_it);
-						this->p = &(*rev_it);
-					//	this->p--;
+						//this->it = &(*rev_it);
+						//this->p = &(*rev_it);
+						*this = rev_it;
 					}
 
 				// Operators Assignment =
@@ -43,7 +41,6 @@ namespace ft
 					//std::cout << "template operator=" << std::endl;
 					this->it = other.base();
 					this->p = &(*other);
-					//this->p--;
 					return *this;
 				}
 				
@@ -52,7 +49,6 @@ namespace ft
 				iterator_type base() const {
 					//std::cout << "in base()" << std::endl;
 					iterator_type tmp(this->it);
-					//tmp++;
 					return tmp;
 				}
 
