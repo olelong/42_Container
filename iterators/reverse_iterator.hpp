@@ -25,7 +25,7 @@ namespace ft
 					//std::cout << "constructor 1 called" << std::endl;
 					this->it = it;
 					this->p = &(*it);
-					this->p--;
+					//this->p--;
 				}
 				
 				template <class Iter>
@@ -40,6 +40,7 @@ namespace ft
 				reverse_iterator& operator=(const reverse_iterator<U>& other) {
 					//std::cout << "template operator=" << std::endl;
 					this->it = other.base();
+					//this->it--;
 					this->p = &(*other);
 					return *this;
 				}
@@ -49,6 +50,7 @@ namespace ft
 				iterator_type base() const {
 					//std::cout << "in base()" << std::endl;
 					iterator_type tmp(this->it);
+					//tmp++;
 					return tmp;
 				}
 

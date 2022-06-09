@@ -109,7 +109,7 @@ namespace ft
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(this->begin()- 1);//(arr - 1);
+				iterator it(this->begin() - 1);//(arr - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
