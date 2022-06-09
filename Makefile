@@ -3,7 +3,7 @@ NAME		= ft_containers
 REAL		= real
 
 SRCS_DIR	= mains/mine/
-SRCS		= my_main.cpp
+SRCS		= test_reverse_iterator.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/

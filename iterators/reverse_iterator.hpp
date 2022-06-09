@@ -23,16 +23,16 @@ namespace ft
 				
 				explicit reverse_iterator(iterator_type it) { // : p(pointer()) {
 					//std::cout << "constructor 1 called" << std::endl;
-					this->it = it + 1;
+					this->it = it;
 					this->p = &(*it);
+					this->p--;
 				}
 				
 				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						//std::cout << "copy constructor called" << std::endl;
-						//this->it = &(*rev_it);
-						//this->p = &(*rev_it);
-						*this = rev_it;
+						this->it = &(*rev_it);
+						this->p = &(*rev_it);
 					}
 
 				// Operators Assignment =
