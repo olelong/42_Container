@@ -1,0 +1,39 @@
+------------------------ MAP -------------------------
+
+Map est un ensemble de conteneur qui vont stocker les elements formes
+par une combinaison entre une cle et une valeur.
+
+La cle permet de trier et d'identifier les elements.
+Les types peuvent etre different entre une cle et sa valeur.
+On creer une paire.
+
+
+
+Arbre binaire simple sans tri et equilibre:
+exemple :
+
+				42
+			  /    \
+            40      45
+			/\	   /  \
+		  38 41   43   47
+		   		        \
+						 49
+						/  \
+					   48   55
+
+Ici, 42 est le root. 41 est son child de gauche car il est plus petit et 45 son child droit.
+42 est donc le parent de 41 et 45.
+
+Si on supprime 40, 38 va seulement prendre la place de 40.
+Si on supprime 49, c'est 48 qui prend sa place.
+Si on supprime 48, il ne se passe rien de special.
+Si on supprime 42, 41 va etre celui qui remontera et prendra la place de 42.
+Si on veut ajouter par exemple 44, il arrivera en tant que child droit de 43.
+
+Child droit : plus grand que parent
+Child gauche : plus petit que parent
+
+
+Red black tree :
+Arbre binaire equilibree entre des nodes rouges et noires et suivant des regles strictes.
