@@ -3,7 +3,7 @@ NAME		= ft_containers
 REAL		= real
 
 SRCS_DIR	= mains/mli/
-SRCS		= rite.cpp
+SRCS		= rite2.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/

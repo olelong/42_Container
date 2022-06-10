@@ -16,22 +16,19 @@ namespace ft
 				
 				// Constructors
 
-				reverse_iterator() : p(NULL), it() { // point to no object
+				reverse_iterator() : p() { // point to no object
 					//std::cout << "Default constructor called" << std::endl;
 					//base_iterator is value-initialized
 				}
 				
 				explicit reverse_iterator(iterator_type it) { // : p(pointer()) {
 					//std::cout << "constructor 1 called" << std::endl;
-					this->it = it;
 					this->p = &(*it);
-					//this->p--;
 				}
 				
 				template <class Iter>
 					reverse_iterator(const reverse_iterator<Iter>& rev_it) {
 						//std::cout << "copy constructor called" << std::endl;
-						this->it = &(*rev_it);
 						this->p = &(*rev_it);
 					}
 
@@ -39,8 +36,6 @@ namespace ft
 				template<class U>
 				reverse_iterator& operator=(const reverse_iterator<U>& other) {
 					//std::cout << "template operator=" << std::endl;
-					this->it = other.base();
-					//this->it--;
 					this->p = &(*other);
 					return *this;
 				}
@@ -49,7 +44,7 @@ namespace ft
 
 				iterator_type base() const {
 					//std::cout << "in base()" << std::endl;
-					iterator_type tmp(this->it);
+					iterator_type tmp(this->p);
 					//tmp++;
 					return tmp;
 				}
@@ -58,23 +53,17 @@ namespace ft
 
 				reference operator*() const {
 				//	std::cout << "in operator*" << std::endl;
-					return *this->p;
+					return *(this->p);
 				}
 	
 				reverse_iterator operator+(difference_type n) const {
 					//std::cout << "in operator+()" << std::endl;
-					/*std::cout << "pointer: " << this->p << std::endl;
-					this->it.printAddress();*/
-					reverse_iterator rev(this->it - n);
-					/*std::cout << "pointer: " << rev.p << std::endl;
-					rev.it.printAddress();*/
-					//rev.p++;
+					reverse_iterator rev(this->base() - n);
 					return rev;
 				}
 
 				reverse_iterator& operator++() { // pre increment
 					//std::cout << "in operator++()" << std::endl;
-					this->it--;
 					this->p--;
 					return *this;
 				}
@@ -89,19 +78,17 @@ namespace ft
 
 				reverse_iterator& operator+=(difference_type n) {
 					//std::cout << "in operator+=()" << std::endl;
-					this->it -= n;
 					this->p -= n;
 					return *this;
 				}
 
 				reverse_iterator operator-(difference_type n) const {
 					//std::cout << "in operator-()" << std::endl;
-					reverse_iterator rev(this->it + n);
+					reverse_iterator rev(this->base() + n);
 					return rev;
 				}
 
 				reverse_iterator& operator--() { // pre increment
-					this->it++;
 					this->p++;
 				//	std::cout << "in operator--()" << std::endl;
 					return *this;
@@ -117,7 +104,6 @@ namespace ft
 				
 				reverse_iterator& operator-=(difference_type n) {
 					//std::cout << "in operator-=()" << std::endl;
-					this->it += n;
 					this->p += n;
 					return *this;
 				}
@@ -136,7 +122,6 @@ namespace ft
 
 			protected :
 				pointer	p;
-				iterator_type it;
 		};
 
 	// Relational Operators non member
