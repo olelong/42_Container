@@ -2,8 +2,8 @@
 #include <unistd.h>
 
 #ifdef MINE
-	#include "../../vector/vector.hpp"
-	#include "../../stack/stack.hpp"
+	#include "../../containers/vector.hpp"
+	#include "../../containers/stack.hpp"
 #else
 	#include <vector>
 	#include <stack>

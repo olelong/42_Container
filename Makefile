@@ -3,17 +3,18 @@ NAME		= ft_containers
 REAL		= real
 
 SRCS_DIR	= mains/mine/
-SRCS		= test_stack.cpp
+SRCS		= main_stack.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/
 OBJS		= ${SRCS:%.cpp=${OBJS_D}%.o}
 OBJS_R		= ${SRCS:%.cpp=${OBJS_D_R}%.o}
 
-HEADERS		= vector/vector.hpp \
+HEADERS		= containers/vector.hpp \
+			  containers/map.hpp \
+			  containers/stack.hpp \
 			  iterators/vector_iterator.hpp \
-			  iterators/reverse_iterator.hpp \
-			  stack/stack.hpp
+			  iterators/reverse_iterator.hpp
 
 CXX			= c++ #-g3 -fsanitize=address
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic
@@ -48,6 +49,12 @@ test:
 			echo "\033[92m  Success!\033[0m";\
 		fi;\
 		exit 0
+		@echo "\033[93m\n--- TIME ---"
+		@echo -n "\033[96mstd: "
+		@ts=$$(date +%s%N) ; ./${REAL} > /dev/null ; tt=$$((($$(date +%s%N) - $$ts)/1000000)) ; echo "$$tt ms"
+		@echo -n "\033[92mft: "
+		@ts=$$(date +%s%N) ; ./${NAME} > /dev/null ; tt=$$((($$(date +%s%N) - $$ts)/1000000)) ; echo "$$tt ms"
+		@echo -n "\033[0m"
 
 clean:
 		rm -rf ${OBJS_D} ${OBJS_D_R}
