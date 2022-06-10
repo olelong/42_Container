@@ -144,16 +144,11 @@ namespace ft
 	template <class Iterator1, class Iterator2> 
 		bool operator==(const ft::reverse_iterator<Iterator1>& lhs,
 			const ft::reverse_iterator<Iterator2>& rhs) {
-				std::cout << "in non member operator==()" << std::endl;
+			//	std::cout << "in non member operator==()" << std::endl;
 				if ( lhs.base() == rhs.base())
-				{
-					std::cout << "true ";
 					return true;
-				}
 				if (&(*lhs) == &(*rhs))
 					return true;
-
-				std::cout << "false ";
 				return false;
 		}
 
@@ -211,7 +206,7 @@ namespace ft
 	template <class Iterator1, class Iterator2>
 		typename ft::reverse_iterator<Iterator1>::difference_type operator-(const ft::reverse_iterator<Iterator1>& lhs,
 			const ft::reverse_iterator<Iterator2>& rhs) {
-			std::cout << "in non member operator-()" << std::endl;
+			//std::cout << "in non member operator-()" << std::endl;
 			return rhs.base() - lhs.base();
 		}
 }

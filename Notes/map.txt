@@ -17,8 +17,8 @@ exemple :
             40      45
 			/\	   /  \
 		  38 41   43   47
-		   		        \
-						 49
+		  /		   \     \
+		37		   44	 49
 						/  \
 					   48   55
 
@@ -31,9 +31,17 @@ Si on supprime 48, il ne se passe rien de special.
 Si on supprime 42, 41 va etre celui qui remontera et prendra la place de 42.
 Si on veut ajouter par exemple 44, il arrivera en tant que child droit de 43.
 
+erase(): exemples
+43 : only right child
+41 : no child
+38 : only left child
+45 : Both child : pas de relink juste a la place de 45 se met 44
+
 Child droit : plus grand que parent
 Child gauche : plus petit que parent
 
+Dans un arbre binaire ou listes chainees, on peut pas faire d'operateur=() car trop dangereux (par exemple faire des copies beaucoup trop longues sans faire expres en plus)
+Du coup on passe par un constructeur de copie et des fonctions annexes.
 
 Red black tree :
 Arbre binaire equilibree entre des nodes rouges et noires et suivant des regles strictes.

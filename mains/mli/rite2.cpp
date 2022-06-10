@@ -2,7 +2,7 @@
 #include <string>
 
 #ifdef MINE
-	#include "../../vector/vector.hpp"
+	#include "../../containers/vector.hpp"
 #else
 	#include <vector>
 #endif
@@ -56,7 +56,7 @@ int		main(void)
 	//std::cout << "ite: " << &(*ite) << " it: " << &(*it) << std::endl;
 	ite = ite + 3;
 	//std::cout << (ite == it) << std::endl;
-	std::cout << "ite + 3: "; ite.base().printAddress(); std::cout << " it: " << &(*it) << std::endl;
+	//std::cout << "ite + 3: "; ite.base().printAddress(); std::cout << " it: " << &(*it) << std::endl;
 
 	printSize(vct);
 	return (0);

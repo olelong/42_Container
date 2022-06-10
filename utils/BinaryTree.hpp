@@ -24,7 +24,7 @@ namespace ft
 			typedef				T											mapped_type;
 			typedef				Compare										key_compare;
 			typedef typename	ft::pair<const key_type, mapped_type>		value_type;
-			typedef typename	Alloc::template rebind<Node<key_type,
+			typedef typename	Alloc::template rebind<Node<key_type,					//rebind permet de definir le type que l on veut allouer 
 								mapped_type, key_compare, Alloc> >::other	allocator_type;
 			typedef typename	ft::pair<key_compare, allocator_type>		map_traits_type;
 
@@ -37,6 +37,7 @@ namespace ft
 			: left(NULL), right(NULL), parent(parent), end(false), pair(pair),
 			  compare(map_traits.first), alloc(map_traits.second) {}
 
+			//Constructeur pour node de fin, pas besoin d allocator ou de compare car n alloue rien
 			Node() : left(NULL), right(NULL), parent(NULL), end(true),
 					 pair(value_type()), compare(Compare()), alloc(allocator_type())
 			{}
@@ -45,6 +46,7 @@ namespace ft
 				parent(other.parent), end(other.end), pair(other.pair),
 				compare(other.compare), alloc(other.alloc) {}
 
+			// Copie des descendants maitrisees
 			void copyDescendants(const Node* other) {
 				if (!isLeaf(other->left)) {
 					this->createChild(other->left->pair, true);
@@ -56,17 +58,8 @@ namespace ft
 				}
 			}
 
-			/*Node& operator=(const Node& other) {
-				if (!isLeaf(other.left))
-					this->createChild(other.left->pair, true);
-				if (!isLeaf(other.right))
-					this->createChild(other.right->pair, false);
-				this->end = other.end;
-				//this->pair = other.pair;
-				this->compare = other.compare;
-				return *this;
-			}*/
-
+			// Detruit tout l'arbre, car le gauche fait appel 
+			// a son destructeur qui fait ensuite apel a celui ci et ainsi de suite
 			~Node() {
 				this->deallocate(this->left);
 				this->deallocate(this->right);
@@ -90,13 +83,21 @@ namespace ft
 				return this->pair;
 			}
 
-			// Methods
+			/* Methods */
+			
+			// Sorte de find pour trouver une key selon si elle est inferieure ou
+			// superieure a la key de notre paire
 			Node* next(const key_type& key) const {
 				return this->compare(key, this->pair.first) ? this->left : this->right;
 			}
+			// Permet d'avoir la node suivante, la plus petite node superieure a la notre
+			// Si il y a un child right, on fait droite pour  y acceder 
+			// puis tous ses enfants a gauche
+			// Sinon on remonte jusqu a trouver un plus grand que lui meme
+
 			Node* next() const {
 				Node *p;
-				if (this->right) {
+				if (this->right) {//child right
 					p = this->right;
 					if (!p->end)
 						while (!isLeaf(p->left))
@@ -109,6 +110,9 @@ namespace ft
 				return p;
 			}
 
+
+			// Permet d'ajouter une node a la suite de notre node courante
+			// Si la cle existe deja la valeur est modifie mais aucune node n'est ajoutee
 			Node* add(const value_type& pair) {
 				if (this->pair.first == pair.first) {
 					this->pair.second = pair.second;
@@ -121,7 +125,7 @@ namespace ft
 					return left ? this->left : this->right;
 				}
 				else
-					return child->add(pair);
+					return child->add(pair);// recursive : permet d'aller jusqu a une node qui n a pas d'enfant la ou ca doit etre mis
 			}
 
 			Node* erase() {
@@ -130,20 +134,20 @@ namespace ft
 					return NULL;
 				if ((ret = this->relinkToChild(p, &this->right)))				// Only right
 					return ret;
-				while (p->right)
+				while (p->right) // Si il y a au moins 1 left, on descend tout a droite du gauche
 					p = p->right;
 				if ((ret = this->relinkToChild(p, &this->left, !this->right)))	// Only left
 					return ret;
-				Node *newRoot = p;
-				while (newRoot->parent)
+				Node *newRoot = p;	// Cas ou on doit supprimer la root	
+				while (newRoot->parent) // Cas ou il y a deux enfants 
 					newRoot = newRoot->parent;
-				this->pair = p->pair;											// Both
-				this->changeParentPOV(p, p->left ? &p->left : NULL);
+				this->pair = p->pair;											// Both : pas besoin de relink juste mettre a la place
+				this->changeParentPOV(p, p->left ? &p->left : NULL); // definit le nouvel enfant du parent 
 				this->deallocate(p);
-				return newRoot;
+				return newRoot; // newroot = root
 			}
 
-			Node *first() {
+			Node *first() { // begin
 				Node* p = this;
 				while (p->parent)
 					p = p->parent;
@@ -151,7 +155,7 @@ namespace ft
 					p = p->left;
 				return p;
 			}
-			Node *last() {
+			Node *last() { // end - 1
 				Node* p = this;
 				while (p->parent)
 					p = p->parent;
@@ -160,18 +164,22 @@ namespace ft
 				return p;
 			}
 
+			// droite de end = premier et gauche de end = dernier
+			// a droite du dernier = end et a gauche du premier = end
 			void updateEnd(Node *end, bool checkFirst = true, bool checkLast = true) {
-				if (!checkLast || this->pair.first > end->left->pair.first) {
+				if (!checkLast || this->pair.first > end->left->pair.first) { //dernier
 					this->right = end;
 					end->left = this;
 				}
-				if (!checkFirst || this->pair.first < end->right->pair.first) {
+				if (!checkFirst || this->pair.first < end->right->pair.first) { //premier
 					this->left = end;
 					end->right = this;
 				}
 			}
 
 			// Specific function for end node
+			// Evite de segfault car permet de delier le end de notre arbre car sinon
+			// il aurait boucler a l'infini en tentant de redetruire des child deja detruits
 			void unlink() {
 				if (this->left)
 					this->left->right = NULL;
@@ -181,23 +189,29 @@ namespace ft
 				this->left = NULL;
 			}
 
+			// Permet de savoir si la node est une feuille 
+			//(feuille soit NULL soit end (au bout de l'arbre))
 			friend bool isLeaf<Key, T, Compare, Alloc>(Node *node);
 
 		private:
-			// Links to the tree
-			Node			*left;
-			Node			*right;
+			/* Links to the tree */
+			Node			*left;	//child left
+			Node			*right;	//child right 
 			Node			*parent;
-			bool			end;
+			bool			end; // true if is end node else false
 
-			// Data
+			/* Data */
 			value_type		pair;
 
-			// Map variables
+			/* Map variables */
 			key_compare		compare;
 			allocator_type	alloc;
 
-			// Utils
+			/* Utils */
+
+			// Chaque node a deux childs possible max
+			// si booleen true > creer enfant a gauche sinon a droite
+			// this = le parent
 			void createChild(const value_type& pair, bool left) {
 				Node **child = left ? &this->left : &this->right;
 				*child = this->alloc.allocate(1);
@@ -211,6 +225,7 @@ namespace ft
 				this->alloc.deallocate(p, 1);
 			}
 
+			// Node supprime, p est remplace par un autre enfant newPOV du point de vue des parents
 			void changeParentPOV(Node *p, Node **newPOV) {
 				if (!p->parent)
 					return ;
@@ -223,20 +238,23 @@ namespace ft
 				p->right = NULL;
 			}
 
+			// Si p = child alors on relink sinon non
+			// p->parent c est nous et si p->parent->parent est NULL 
+			// on a pas de parent on est donc une root
 			Node* relinkToChild(Node *p, Node **child, bool additionalCond = true) {
 				if (p == (child ? *child : NULL) && additionalCond) {
 					if (p && !p->parent->parent) { // if we're erasing the root and it has one and only one child
-						*child = NULL;
+						*child = NULL; // Dans ce cas(soit 0 ou 1 seul enfant) pas de relinkage, root supprime
 						this->deallocate(p->parent);
 						p->parent = NULL;
-					} else {
+					} else { //change le pov du parent(nous) par l'enfant
 						this->changeParentPOV(this, child);
 						this->deallocate(this);
 					}
 					if (!p)
-						return this;
+						return this;//renvoie root
 					while (p->parent)
-						p = p->parent;
+						p = p->parent; //sinon remonte jusqu au parent et c est la root
 					return p;
 				}
 				return NULL;
@@ -272,13 +290,15 @@ namespace ft
 		: root(NULL), end_ptr(&endd), sizee(0), map_traits(other.map_traits) {
 			*this = other;
 		}
+
+		// deep copy
 		BinaryTree& operator=(const BinaryTree& other) {
 			// Copying all nodes (by reallocation)
-			if (other.root) {
-				if (this->root)
-					this->deleteRoot();
-				this->createRoot(**other.root);
-				this->root->copyDescendants(other.root);
+			if (other.root) { // si il a une root
+				if (this->root) // on detruit la notre
+					this->deleteRoot(); 
+				this->createRoot(**other.root); // on creer une copie de la sienne
+				this->root->copyDescendants(other.root); // on reconstruit notre arbre
 			}
 			// Initializing end node
 			node_type *begin = this->begin();
@@ -291,7 +311,7 @@ namespace ft
 			return *this;
 		}
 		~BinaryTree() {
-			this->deleteRoot();
+			this->deleteRoot(); // detruit la root et tout le reste en cascade
 		}
 
 		// Methods
@@ -309,10 +329,10 @@ namespace ft
 		}
 
 		bool erase(const key_type& key) {
-			node_type *p = this->find(key);
+			node_type *p = this->find(key); //Existe t'elle?
 			if (!p)
 				return false;
-			node_type *newRoot = p->erase();
+			node_type *newRoot = p->erase(); 
 			this->root = newRoot ? newRoot : this->root;
 			if (--this->sizee == 0)
 				this->root = NULL;
@@ -323,16 +343,16 @@ namespace ft
 			node_type *ret = this->root;
 			while (!isLeaf(ret) && *ret != key)
 				ret = ret->next(key);
-			return isLeaf(ret) ? NULL : ret;
+			return isLeaf(ret) ? NULL : ret;//si c est une feuille return NULL sinon ret
 		}
 
-		node_type *begin() const {
+		node_type *begin() const { // la node la plus petite
 			if (!this->root)
 				return NULL;
 			return this->root->first();
 		}
 
-		node_type *end() const {
+		node_type *end() const { // la end node 
 			return this->end_ptr;
 		}
 

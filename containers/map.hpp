@@ -41,8 +41,9 @@ namespace ft
 		// Constructors & Destructor
 		explicit map(const key_compare& comp = key_compare(),
 						const allocator_type& alloc = allocator_type())
-		: bt(ft::make_pair(comp, alloc)) {}
+		: bt(ft::make_pair(comp, alloc)) {} // creer le binary tree
 
+		// Creer binary tree et le remplit de first a last
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last,
 			const key_compare& comp = key_compare(),
@@ -90,14 +91,22 @@ namespace ft
 			return this->alloc.max_size();
 		}
 
-		// Element access
+		/* Element access */
+		// Operateur[] : peut modifier, lire, inserer 
+		// ex: map['p']; is value_initialized car key n'ayant pas de valeur
+		// 	   map['p'] = 42; insere 42 et si 'p' existe deja la valeur est juste modifie
 		mapped_type& operator[](const key_type& k) {
 			node_type *p = this->bt.find(k);
 			if (!p)
 				p = this->bt.insert(ft::make_pair(k, mapped_type()));
-			value_type& val = **p;
-			return val.second;
+			// p forcement initialise a ce moment la soit par la nouvelle
+			// valeur insere soit parce qu on l a trouve
+			value_type& val = **p; // **p = value_type = paire
+			return val.second;// second = valeur. dans l exemple c est 42
 		}
+
+		// Comme operateur[] sauf que si on trouve pas la cle on renvoie une exception
+		// On peut que modifier ou lire une cle existante pas en inserer
 		mapped_type& at(const key_type& k) {
 			node_type *p = this->bt.find(k);
 			if (!p)
@@ -105,6 +114,8 @@ namespace ft
 			value_type& val = **p;
 			return val.second;
 		}
+
+		// const donc peut que lire
 		const mapped_type& at(const key_type& k) const {
 			node_type *p = this->bt.find(k);
 			if (!p)
