@@ -125,7 +125,7 @@ namespace ft
 						if (n > this->old_resize == 0 || n > this->old_resize * 2)
 							new_capacity = n;
 						else
-							new_capacity = this->old_resize * 2; // add a capacity de size * 2 de la taille precedente
+							new_capacity = this->old_resize * 2; // add a capacity de size * 2 of the previous size
 						this->reallocate(new_capacity);
 					}
 					for (size_type i = this->_size; i < n; i++)
@@ -414,7 +414,7 @@ namespace ft
 					last_to_end++;
 					it++;
 				}
-				//Permet de ne pas perdre les premiers qui ne seraient pas a supprimer
+				//Allows not to lose the first ones which would not be to remove
 				while (i < last_to_end)
 				{
 					this->_alloc.destroy(&this->arr[begin + i]);
