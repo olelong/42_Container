@@ -2,7 +2,7 @@
 #include <string>
 
 #ifdef MINE
-	#include "../../stack/stack.hpp"
+	#include "../../containers/stack.hpp"
 #else
 	#include <stack>
 #endif

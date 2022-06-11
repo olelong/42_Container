@@ -33,7 +33,7 @@ namespace ft
 			vector_iterator<const U> ret((const U*)this->p);
 			return ret;
 		}
-
+		
 		/// OPERATORS
 		// Equality Comparisons
 		bool operator==(const vector_iterator& rhs) const {
@@ -58,12 +58,6 @@ namespace ft
 		}
 		value_type &operator*() { // Dereferencing as an lvalue
 			return *this->p;
-		}
-
-		// temporaire
-		void printAddress() const {
-			std::cout << "print address iterator: ";
-			std::cout << this->p << std::endl;
 		}
 
 		// Increment & Decrement

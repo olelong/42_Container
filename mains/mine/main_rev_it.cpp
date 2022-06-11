@@ -71,13 +71,14 @@ int main()
 	vector<int>::iterator until(vec.end());
 	reverse_iterator<vector<int>::iterator> rev_end(from);
 	reverse_iterator<vector<int>::iterator> rev_begin(until);
-	std::cout << "Compare adress of iterator vec.begin() and rev iterator(vec.begin()): " << std::endl;
+	/*std::cout << "Compare adress of iterator vec.begin() and rev iterator(vec.begin()): " << std::endl;
 	std::cout << &(*from) << " and ";
 	std::cout << &(*rev_end) << std::endl;
 	std::cout << "Compare adress of iterator vec.end() and rev iterator(vec.end()): " << std::endl;
 	std::cout << &(*until) << " and ";
 	std::cout << &(*rev_begin) << std::endl;
 	std::cout << GREEN << "It works! They need to be different!" << END_COLOR << std::endl << std::endl;
+	*/
 	std::cout << "rev_end to rev_begin: ";	
 	while (rev_end != rev_begin) {
 		std::cout << *rev_begin << " ";
@@ -191,7 +192,7 @@ int main()
 	rit4 -= 2;
 	std::cout << "Decrement rit-=2: " << *rit4 << std::endl;
 	std::cout << "Decrement rit-=2: " << *(rit4 -= 2) << std::endl;
-	
+	std::cout << std::endl;	
 
 	std::cout << YELLOW << "Test 7: Non Members Overload operators " << END_COLOR << std::endl;
 	

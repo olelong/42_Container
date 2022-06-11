@@ -70,15 +70,14 @@ namespace ft
 
 				reverse_iterator& operator++() { // pre increment
 					//std::cout << "in operator++()" << std::endl;
-					//this->it--;
-					--this->it;
+					this->it--;
 					return *this;
 				}
 
 				reverse_iterator operator++(int) { // post increment
 				//	std::cout << "in second operator++()" << std::endl;
-					//reverse_iterator tmp(*this);
-					reverse_iterator tmp = *this;
+					reverse_iterator tmp(*this);
+					//reverse_iterator tmp = *this;
 					this->operator++();
 					return tmp;
 				}
@@ -95,16 +94,15 @@ namespace ft
 				}
 
 				reverse_iterator& operator--() { // pre increment
-					//this->it++;
-					++this->it;
+					this->it++;
 				//	std::cout << "in operator--()" << std::endl;
 					return *this;
 				}
 
 				reverse_iterator operator--(int) { // post increment
 				//	std::cout << "in second operator--()" << std::endl;
-					//reverse_iterator tmp(*this);
-					reverse_iterator tmp = *this;
+					reverse_iterator tmp(*this);
+					//reverse_iterator tmp = *this;
 					this->operator--();
 					return tmp;
 				}
@@ -117,8 +115,7 @@ namespace ft
 
 				pointer operator->() const {
 					//std::cout << "in operator->()" << std::endl;
-					//return &(operator*());
-					return &(this->operator*());
+					return &(operator*());
 					//return this->it;
 				}
 
@@ -126,7 +123,6 @@ namespace ft
 				//	std::cout << "in operator[]()" << std::endl;
 					reverse_iterator rev = *this + n;
 					return *rev;
-					//return (this->it[- n - 1]);
 				}
 
 			protected :

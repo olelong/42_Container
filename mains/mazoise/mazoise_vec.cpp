@@ -6,7 +6,7 @@
 /*   By: mchardin <mchardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 13:07:06 by hbaudet           #+#    #+#             */
-/*   Updated: 2022/06/10 21:10:22 by olelong          ###   ########.fr       */
+/*   Updated: 2022/06/11 11:41:43 by olelong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,13 +288,13 @@ int main()
 	copy_swap_tests<int>();
 	reverse_it_tests<int>();
 	erase_clear_tests<int>();
-	max_size_tests();
-	awesome_tests();
-	push_pop_back_tests<Awesome>();
-	resize_tests<Awesome>();
-	insert_tests<Awesome>();
-	reserve_tests<Awesome>();
-	copy_swap_tests<Awesome>();
-	reverse_it_tests<Awesome>();
-	erase_clear_tests<Awesome>();
+	max_size_tests();					//OK
+	awesome_tests();					//before KO now OK
+	push_pop_back_tests<Awesome>();		//OK
+	resize_tests<Awesome>();			//OK
+	insert_tests<Awesome>();			//OK
+	reserve_tests<Awesome>();			//OK
+	copy_swap_tests<Awesome>();			//OK	
+	reverse_it_tests<Awesome>();		//OK
+	erase_clear_tests<Awesome>();		//OK
 }

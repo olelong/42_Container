@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rend_main.cpp                                      :+:      :+:    :+:   */
+/*   rend_vec.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbaudet <hbaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 13:07:06 by hbaudet           #+#    #+#             */
-/*   Updated: 2022/06/10 08:43:53 by olelong          ###   ########.fr       */
+/*   Updated: 2022/06/11 11:14:14 by olelong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../test_utils.hpp"
-#include "VECTOR_UC.HPP"
-#include <vector>
+#include <iostream>
+#include <string>
 
-#ifndef STD
-# define NAMESPACE ft
+#ifdef MINE
+	#include "../../containers/vector.hpp"
 #else
-# define NAMESPACE std
+	#include <vector>
 #endif
 
 using namespace NAMESPACE;

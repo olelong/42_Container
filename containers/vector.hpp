@@ -5,7 +5,6 @@
 # include <string>
 # include <sstream>
 # include <stdexcept>
-# include <algorithm>
 # include <typeinfo>
 # include "../iterators/vector_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
@@ -67,11 +66,8 @@ namespace ft
 			
 			// Operators=
 			vector& operator=(const vector& x) {
-				this->deallocate();
-				this->allocate(x._size);
-				for (size_type i = 0; i < x._size; i++)
-					this->_alloc.construct(arr + i, x.arr[i]);
-				this->_size = x._size;
+				if (this != &x)
+					this->assign(x.begin(), x.end());
 				return *this;
 			}
 
@@ -79,12 +75,11 @@ namespace ft
 
 										/*  Iterator  */
 			iterator begin() {
-				return iterator(arr);
+				return iterator(this->arr);
 			}
 			
 			const_iterator begin() const {
-				const_iterator ret(arr);
-				return ret;
+				return const_iterator(this->arr);
 			}
 
 			iterator end() {
@@ -92,32 +87,23 @@ namespace ft
 			}
 
 			const_iterator end() const {
-				const_iterator ret(arr + this->_size);
-				return ret;
+				return const_iterator(this->arr + this->_size);
 			}
 									/* Reverse Iterator  */
 			reverse_iterator rbegin() {
-				iterator it(this->end());// - 1);//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
-				reverse_iterator rev(it);
-				return rev;
+				return reverse_iterator(this->end());
 			}
 
 			const_reverse_iterator rbegin() const {
-				iterator it(this->end());// - 1);//(arr + this->_size - 1);
-				const_reverse_iterator rev(it);
-				return rev;
+				return const_reverse_iterator(this->end());
 			}
 
 			reverse_iterator rend() {
-				iterator it(this->begin());/// - 1);
-				reverse_iterator rev(it);
-				return rev;
+				return reverse_iterator(this->begin());
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(this->begin());// - 1);//(arr - 1);
-				const_reverse_iterator rev(it);
-				return rev;
+				return const_reverse_iterator(this->begin());
 			}
 
 			// Capacity
@@ -136,7 +122,7 @@ namespace ft
 				else {
 					if (n > this->_capacity) {
 						size_type new_capacity;
-						if (this->old_resize == 0 || n > this->old_resize * 2)
+						if (n > this->old_resize == 0 || n > this->old_resize * 2)
 							new_capacity = n;
 						else
 							new_capacity = this->old_resize * 2; // add a capacity de size * 2 de la taille precedente
@@ -304,8 +290,9 @@ namespace ft
 			}
 
 			void pop_back() { 	// Delete the last element in the vector
-				this->_alloc.destroy(this->arr + this->size() - 1);
-				this->_size--;
+			//	this->_alloc.destroy(this->arr + this->size() - 1);
+			//	this->_size--;
+				this->erase(this->end() - 1);
 			}
 
 								/*   Insert   */
@@ -350,8 +337,8 @@ namespace ft
 						}
 						for (size_type i = 0; i < n; i++) {
 							if (id + i < this->_size) {
-							this->_alloc.destroy(this->arr + id + i);
-							this->_alloc.construct(this->arr + id + i, val);
+								this->_alloc.destroy(this->arr + id + i);
+								this->_alloc.construct(this->arr + id + i, val);
 							}
 							else
 								this->_alloc.construct(this->arr + id + i, val);
@@ -368,12 +355,11 @@ namespace ft
 					size_type new_size = 0;
 					for (InputIterator it = first; it != last; it ++)
 						new_size++;
-					if (this->_size + new_size > this->_capacity) {
-						this->reallocate(/*std::max(*/this->_size * 2 + new_size);
-					}
+					if (this->_size + new_size > this->_capacity)
+						this->reallocate(this->_size * 2 + new_size);
 					if (this->empty()) {
 						size_type i = 0;
-						for (InputIterator it = first; it != last; it ++, i++)
+						for (InputIterator it = first; it != last; it++, i++)
 							this->_alloc.construct(this->arr + i, *it);
 						this->_size += new_size;
 					}
@@ -408,28 +394,49 @@ namespace ft
 				return (this->erase(position, position + 1));
 			}
 
-			/*iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
-				size_type new_size = 0;
-				for (iterator it = first; it != last; it++) {
-					this->_alloc.destroy(this->arr + (it - this->begin())); // Destroy elements from first to last
-					new_size++;												// Recover the size between firts and last
-				}
-				for (size_type i = first - this->begin(); i < this->_size - new_size; i++)
-					this->arr[i] = this->arr[i + new_size];		// Relocate all the elements after the segment erased to their new positions
-				this->_size -= new_size;						// Reduces the container size by the number of elements removed, which are destroyed
-				return first;//this->begin() + (first - this->begin());
-			}*/
-
 			iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
-				size_type new_size = 0;
-				for (iterator it = first; it != last; it++) {
-					this->_alloc.destroy(this->arr + (it - this->begin())); // Destroy elements from first to last
-					new_size++;												// Recover the size between firts and last
+				if (first == this->end() || first == last)
+					return first;
+
+				size_type begin = 0;
+				size_type first_to_last = 0;
+				size_type last_to_end = 0;
+				size_type i = 0;
+
+				iterator it = this->begin();
+
+				//count begin
+				while (it != first) {
+					begin++;
+					it++;
 				}
-				for (size_type i = first - this->begin(); i < this->_size - new_size; i++)
-					this->arr[i] = this->arr[i + new_size];		// Relocate all the elements after the segment erased to their new positions
-				this->_size -= new_size;						// Reduces the container size by the number of elements removed, which are destroyed
-				return first;//this->begin() + (first - this->begin());
+				it = first;
+				while (it != last) {
+					first_to_last++;
+					it ++;
+				}
+
+				//count last to end
+				it = last;
+				while (it != this->end()) {
+					last_to_end++;
+					it++;
+				}
+				//Permet de ne pas perdre les premiers qui ne seraient pas a supprimer
+				while (i < last_to_end)
+				{
+					this->_alloc.destroy(&this->arr[begin + i]);
+					this->_alloc.construct(&this->arr[begin + i], this->arr[begin + i + first_to_last]);
+					i++;
+				}
+				// Destroy tout entre first et last
+				i = 0;
+				while (i < first_to_last) {
+					this->_alloc.destroy(&this->arr[begin + last_to_end + i]);
+					i++;
+				}
+				this->_size -= first_to_last;
+				return first;
 			}
 
 						/*  Swap/Clear  */
