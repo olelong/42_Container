@@ -34,7 +34,9 @@ Height : la plus longue de gauche ou de droite qui se suit
 
 Rotation subtrees:	La position entre des nodes est interchangées, il existe deux type de rotations : left et right.
 Left rotation: 	Les arrangements des noeuds de droite sont transformés en arrangements sur le noeud de gauche.
-Right rotation: 	
+Right rotation: Contraire de left rotation.
+Left-right rotation: left puis right rotation.
+Right-left rotation: right puis left rotation.
 
 Exemple de left rotation:
 
@@ -74,3 +76,6 @@ Exemple de left rotation:
              (X)   Z
             /   \
            A     B
+
+Autres Actions possibles :
+Insert/Delete/find
