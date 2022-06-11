@@ -1,0 +1,27 @@
+/******************* Is_integral ******************/
+
+Renvoie true si le type passe en parametre est un entier sinon false.
+Integer types : bool, char, char8_t (since C++20), char16_t, char32_t, 
+wchar_t, short, int, long, long long.
+
+template< class T >
+struct is_integral;
+
+template<class T> :
+Peut mettre n'importe quel type.
+
+Specialization:
+Definir un comportement different pour un type en particulier.
+Pour is_integral, si T est un int c'est true sinon false.
+
+Exemple:
+
+template<class T>
+class Array { /*...*/ };
+ 
+template<class T> // primary template
+void sort(Array<T>& v);
+template<>        // specialization for T = int
+void sort(Array<int>&); // on precise que c'est un int ici manuellement.
+
+/******************* Enable_if ******************/
