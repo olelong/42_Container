@@ -290,8 +290,6 @@ namespace ft
 			}
 
 			void pop_back() { 	// Delete the last element in the vector
-			//	this->_alloc.destroy(this->arr + this->size() - 1);
-			//	this->_size--;
 				this->erase(this->end() - 1);
 			}
 
@@ -385,12 +383,6 @@ namespace ft
 						/*   Erase   */
 
 			iterator erase(iterator position) {		// Remove a single element at position
-				/*size_type id = position - this->begin();
-				this->_alloc.destroy(this->arr + id);
-				for (size_type i = id; i < this->_size - 1; i++) // Offest elements from begin to position to the left to erase the element at position
-					this->arr[i] = this->arr[i + 1];
-				this->_size--;
-				return position;//this->begin() + id;*/
 				return (this->erase(position, position + 1));
 			}
 
@@ -492,7 +484,6 @@ namespace ft
 					throw std::length_error("vector::reserve");
 				this->arr = NULL;
 				if (n > this->_capacity) {
-					//this->arr = (n != 0) ? this->_alloc.allocate(n) : NULL;
 					this->arr = this->_alloc.allocate(n);
 					this->_capacity = n;
 				}
@@ -511,7 +502,6 @@ namespace ft
 			}
 
 			void reallocate(size_type new_capacity) {
-				//pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
 				pointer tmp = this->_alloc.allocate(new_capacity);
 				for (size_type i = 0; i < this->_size; i++)
 				{
