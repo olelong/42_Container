@@ -2,9 +2,9 @@
 #include <string>
 
 #ifdef MINE
-	#include "../../stack/stack.hpp"
+	#include "../../containers/vector.hpp"
 #else
-	#include <stack>
+	#include <vector>
 #endif
 
 using namespace NAMESPACE;

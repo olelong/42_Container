@@ -5,6 +5,7 @@
 # include <string>
 # include <sstream>
 # include <stdexcept>
+# include <algorithm>
 # include <typeinfo>
 # include "../iterators/vector_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
@@ -56,7 +57,12 @@ namespace ft
 			}
 						
 			~vector() {
-				this->deallocate();
+				if (this->arr != NULL)
+				{
+					for (size_type i = 0; i < this->_size; i++)
+						this->_alloc.destroy(&this->arr[i]);
+					this->_alloc.deallocate(this->arr, this->_capacity);
+				}
 			}
 			
 			// Operators=
@@ -91,25 +97,25 @@ namespace ft
 			}
 									/* Reverse Iterator  */
 			reverse_iterator rbegin() {
-				iterator it(this->end() - 1);//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
+				iterator it(this->end());// - 1);//(arr + this->_size - 1);//(arr - _size); // this->end() - 1
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rbegin() const {
-				iterator it(this->end() - 1);//(arr + this->_size - 1);
+				iterator it(this->end());// - 1);//(arr + this->_size - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
 
 			reverse_iterator rend() {
-				iterator it(this->begin() - 1);
+				iterator it(this->begin());/// - 1);
 				reverse_iterator rev(it);
 				return rev;
 			}
 
 			const_reverse_iterator rend() const {
-				iterator it(this->begin() - 1);//(arr - 1);
+				iterator it(this->begin());// - 1);//(arr - 1);
 				const_reverse_iterator rev(it);
 				return rev;
 			}
@@ -154,10 +160,12 @@ namespace ft
 			}
 
 			void reserve(size_type n) { // Request a change in capacity, for the container be at leat enough to contain n elements
-				if (n > this->_capacity) // if (this->_capacity >= n) return ; this->reallocate(n);
-					this->reallocate(n);
-				//else
-				//	return ;
+				if (n > this->max_size())
+					throw(std::length_error("vector::reserve"));
+				if (this->_capacity >= n)
+					return ;
+				size_type	new_capacity = n;
+				this->reallocate(new_capacity);
 			}
 			
 			// Element Access
@@ -212,35 +220,69 @@ namespace ft
 			template <class InputIterator> // Range // New contents constructed in the range between first and last
 				void assign(InputIterator first, InputIterator last, 
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)  {
-					size_t new_size = 0;
-					for (InputIterator it = first; it != last; it++) // Recover the size of new contents to add
+					size_type new_size = 0;
+					size_type i = 0;
+					InputIterator it = first;
+
+					while (it != last) { // Recover the size of new contents to add
 						new_size++;
-					if (new_size > this->_capacity) { // Check if allocation is needed
-						this->deallocate();
-						this->allocate(new_size);
-						size_type i = 0;
-						for (InputIterator it = first; it != last; it++, i++)
-							this->_alloc.construct(arr + i, *it);
+						it++;
+					}
+					reserve(new_size);
+
+					if (new_size < this->_size) { // Check if allocation is needed
+						while (i < new_size) {
+							this->_alloc.destroy(this->arr + i);
+							this->_alloc.construct(this->arr + i, *first++);
+							i++;
+						}
+						while (i < this->_size) {
+							this->_alloc.destroy(this->arr + i);
+							i++;
+						}
 					} else {
-						size_type i = 0;
-						for (InputIterator it = first; it != last; it++, i++) {
-							this->_alloc.destroy(arr + i);
-							this->_alloc.construct(arr + i, *it);
+						while (i < this->_size) {
+							this->_alloc.destroy(this->arr + i);
+							this->_alloc.construct(this->arr + i, *first++);
+							i++;
+						}
+						while (i < new_size) {
+							this->_alloc.construct(this->arr + i, *first++);
+							i++;
 						}
 					}
 					this->_size = new_size; // Update the size with the new one
 				}
 
 			void assign(size_type n, const value_type& val) { // Fill // new contents are n elements, each initialized to a copy of val
-				if (n > this->_capacity) {
-					this->deallocate();
-					this->allocate(n);
-					for (size_type i = 0; i < n; i++)
-						this->_alloc.construct(arr + i, val);
-				} else {
-					for (size_type i = 0; i < n; i++) {
-						this->_alloc.destroy(arr + i);
-						this->_alloc.construct(arr + i, val);
+				reserve(n);
+				size_type i = 0;
+
+				if (n < this->_size)
+				{
+					while (i < n)
+					{
+						this->_alloc.destroy(this->arr + i);
+						this->_alloc.construct(this->arr + i, val);
+						i++;
+					}
+					while (i < this->_size)
+					{
+						this->_alloc.destroy(this->arr + i);
+						i++;
+					}
+				}
+				else {
+					while (i < this->_size)
+					{
+						this->_alloc.destroy(this->arr + i);
+						this->_alloc.construct(this->arr + i, val);
+						i++;
+					}
+					while (i < n)
+					{
+						this->_alloc.construct(this->arr + i, val);
+						i++;
 					}
 				}
 				this->_size = n;
@@ -286,20 +328,37 @@ namespace ft
 			}
 
 			void insert(iterator position, size_type n, const value_type& val) { // Fill
-				size_type id = position - this->begin();
-				if (this->_size + n > this->_capacity)
-					this->reallocate(this->_size + n);
-				if (this->empty()) {
-					for (size_type i = 0; i < n; i++)
-						this->_alloc.construct(this->arr + i, val);
-					this->_size += n;
-					return ;
+				if (n) {
+					size_type id = position - this->begin();
+					if (this->_size + n > this->_capacity) {
+						if (this->_size * 2 > this->_size + n)
+							this->reallocate(this->_size * 2);
+						else
+							this->reallocate(this->_size + n);
+					}
+					if (this->empty()) {
+						for (size_type i = 0; i < n; i++)
+							this->_alloc.construct(this->arr + i, val);
+						this->_size += n;
+					}
+					else {
+						for (size_type i = this->_size + n - 1; i >= id + n; i--) {
+							if (i >= this->_size)
+								this->_alloc.construct(this->arr + i, this->arr[i - n]);
+							else
+								this->arr[i] = this->arr[i - n];
+						}
+						for (size_type i = 0; i < n; i++) {
+							if (id + i < this->_size) {
+							this->_alloc.destroy(this->arr + id + i);
+							this->_alloc.construct(this->arr + id + i, val);
+							}
+							else
+								this->_alloc.construct(this->arr + id + i, val);
+						}
+						this->_size += n;
+					}
 				}
-				for (size_type i = this->_size + n - 1; i >= id + n; i--)
-					this->arr[i] = this->arr[i - n];
-				for (size_type i = 0; i < n; i++)
-					this->_alloc.construct(this->arr + id + i, val);
-				this->_size += n;				
 			}
 
 			template<class InputIterator>
@@ -309,32 +368,57 @@ namespace ft
 					size_type new_size = 0;
 					for (InputIterator it = first; it != last; it ++)
 						new_size++;
-					if (this->_size + new_size > this->_capacity)
-						this->reallocate(this->_size + new_size);
+					if (this->_size + new_size > this->_capacity) {
+						this->reallocate(/*std::max(*/this->_size * 2 + new_size);
+					}
 					if (this->empty()) {
 						size_type i = 0;
 						for (InputIterator it = first; it != last; it ++, i++)
 							this->_alloc.construct(this->arr + i, *it);
 						this->_size += new_size;
-						return ;
 					}
-					for (size_type i = this->_size + new_size - 1; i >= id + new_size; i--)
-						this->arr[i] = this->arr[i - new_size];
-					size_type i = 0;
-					for (InputIterator it = first; it != last; it ++, i++)
-						this->_alloc.construct(this->arr + id + i, *it);
-					this->_size += new_size;
+					else {
+						for (size_type i = this->_size + new_size - 1; i >= id + new_size; i--)
+							if (i >= this->_size)
+								this->_alloc.construct(this->arr + i, this->arr[i - new_size]);
+							else
+								this->arr[i] = this->arr[i - new_size];
+						size_type i = 0;
+						for (InputIterator it = first; it != last; it ++, i++) {
+							if (id + i < this->_size) {
+								this->_alloc.destroy(this->arr + id + i);
+								this->_alloc.construct(this->arr + id + i, *it);
+							}
+							else {
+								this->_alloc.construct(this->arr + id + i, *it);
+							}
+						}
+						this->_size += new_size;
+					}
 				}
 						/*   Erase   */
 
 			iterator erase(iterator position) {		// Remove a single element at position
-				size_type id = position - this->begin();
+				/*size_type id = position - this->begin();
 				this->_alloc.destroy(this->arr + id);
 				for (size_type i = id; i < this->_size - 1; i++) // Offest elements from begin to position to the left to erase the element at position
 					this->arr[i] = this->arr[i + 1];
 				this->_size--;
-				return position;//this->begin() + id;
+				return position;//this->begin() + id;*/
+				return (this->erase(position, position + 1));
 			}
+
+			/*iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
+				size_type new_size = 0;
+				for (iterator it = first; it != last; it++) {
+					this->_alloc.destroy(this->arr + (it - this->begin())); // Destroy elements from first to last
+					new_size++;												// Recover the size between firts and last
+				}
+				for (size_type i = first - this->begin(); i < this->_size - new_size; i++)
+					this->arr[i] = this->arr[i + new_size];		// Relocate all the elements after the segment erased to their new positions
+				this->_size -= new_size;						// Reduces the container size by the number of elements removed, which are destroyed
+				return first;//this->begin() + (first - this->begin());
+			}*/
 
 			iterator erase(iterator first, iterator last) {		// Remove a range of elements from first to last
 				size_type new_size = 0;
@@ -401,7 +485,8 @@ namespace ft
 					throw std::length_error("vector::reserve");
 				this->arr = NULL;
 				if (n > this->_capacity) {
-					this->arr = (n != 0) ? this->_alloc.allocate(n) : NULL;
+					//this->arr = (n != 0) ? this->_alloc.allocate(n) : NULL;
+					this->arr = this->_alloc.allocate(n);
 					this->_capacity = n;
 				}
 			}
@@ -419,14 +504,16 @@ namespace ft
 			}
 
 			void reallocate(size_type new_capacity) {
-				pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
+				//pointer tmp = (this->_size != 0) ? this->_alloc.allocate(this->_size) : NULL;
+				pointer tmp = this->_alloc.allocate(new_capacity);
 				for (size_type i = 0; i < this->_size; i++)
+				{
 					this->_alloc.construct(tmp + i, this->arr[i]);
-				this->deallocate();
-				this->allocate(new_capacity);
-				for (size_type i = 0; i < this->_size; i++)
-					this->_alloc.construct(this->arr + i, tmp[i]);
-				this->deallocate(tmp, this->_size);
+					this->_alloc.destroy(&this->arr[i]);
+				}
+				this->_alloc.deallocate(this->arr, this->_capacity);
+				this->arr = tmp;
+				this->_capacity = new_capacity;
 			}
 	};
 
