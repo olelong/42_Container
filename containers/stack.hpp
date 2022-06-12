@@ -20,17 +20,21 @@ namespace ft
 				}
 
 				stack& operator=(const stack& other) {
-					*this = other;
+					this->_ctnr = other._ctnr;
+					return *this;
 				}
 
-				~stack()
-				{
+				~stack() {
 					this->_ctnr.clear();
 				}
 
 				// Element access
 
 				value_type& top() { 
+					return this->_ctnr.back();
+				}
+
+				const value_type& top() const {
 					return this->_ctnr.back();
 				}
 
