@@ -3,7 +3,7 @@ NAME		= ft_containers
 REAL		= real
 
 SRCS_DIR	= mains/mine/
-SRCS		= main_vector.cpp
+SRCS		= main_stack.cpp
 
 OBJS_D		= objs/
 OBJS_D_R	= objs_r/

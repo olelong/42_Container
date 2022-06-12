@@ -260,11 +260,11 @@ int main()
 	std::cout << std::endl;
 
 	std::cout << "* ERASE *" << std::endl;
-	std::cout << "myvector.size(): " << myvector.size() << "    capacity: " << myvector.capacity() << std::endl;
+	std::cout << "myvector.size(): " << myvector.size() << std::endl;
 	std::cout << "Erase to myvector: it + 1" << std::endl;
 	itie = myvector.begin();
 	myvector.erase(itie + 1);
-	std::cout << "myvector.size(): " << myvector.size() << "    capacity: " << myvector.capacity() << std::endl;
+	std::cout << "myvector.size(): " << myvector.size() << std::endl;
 	std::cout << "myvector contains:" << GREEN;
     for (vector<int>::iterator it = myvector.begin(); it < myvector.end(); it++)
 	    std::cout << ' ' << *it;
