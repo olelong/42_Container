@@ -203,7 +203,6 @@ namespace ft
 
 		void swap(AVL& other) {
 			std::swap(this->root, other.root);
-			std::swap(this->endd, other.endd);
 			std::swap(this->end_ptr, other.end_ptr);
 			std::swap(this->sizee, other.sizee);
 			std::swap(this->comp, other.comp);
@@ -472,14 +471,20 @@ namespace ft
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator<(const AVL<Key, T, Compare, Alloc>& lhs,
 					const AVL<Key, T, Compare, Alloc>& rhs) {
-		for (typename AVL<Key, T, Compare, Alloc>::node_type *n1 = lhs.begin(), *n2 = rhs.begin()
-				; n1 != lhs.end(); n1 = n1->next(), n2 = n2->next()) {
-			if (operator<(n1->pair, n2->pair))
-				return true;
-			else if (operator<(n2->pair, n1->pair))
+		typename AVL<Key, T, Compare, Alloc>::node_type *first1 = lhs.begin();
+		typename AVL<Key, T, Compare, Alloc>::node_type *last1 = lhs.end();
+		typename AVL<Key, T, Compare, Alloc>::node_type *first2 = rhs.begin();
+		typename AVL<Key, T, Compare, Alloc>::node_type *last2 = rhs.end();
+
+		while (first1 != last1) {
+			if (first2 == last2 || operator<(first2->pair, first1->pair))
 				return false;
+			else if (operator<(first1->pair, first2->pair))
+				return true;
+			first1 = first1->next();
+			first2 = first2->next();
 		}
-		return true;
+		return (first2 != last2);
 	}
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator<=(const AVL<Key, T, Compare, Alloc>& lhs,

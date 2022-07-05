@@ -83,12 +83,20 @@ namespace ft
 			return tmp;
 		}
 		map_iterator &operator--() { // Pre-decrementation
+			//std::cout << "map pre -- key: " << this->node->pair.first << std::endl;
+			//std::cout << "map pre -- value: " << this->node->pair.second << std::endl;
 			this->node = this->node->prev();
+			//std::cout << "map pre -- key after: " << this->node->pair.first << std::endl;
+			//std::cout << "map pre -- value after: " << this->node->pair.second << std::endl;
 			return *this;
 		}
 		map_iterator	operator--(int) { // Post-decrementation
 			map_iterator tmp(*this);
+			//std::cout << "map post -- key: " << tmp.node->pair.first << std::endl;
+			//std::cout << "map post -- value: " << tmp.node->pair.second << std::endl;
 			this->operator--();
+			//std::cout << "map post -- key after: " << tmp.node->pair.first << std::endl;
+			//std::cout << "map post -- value after: " << tmp.node->pair.second << std::endl;
 			return tmp;
 		}
 

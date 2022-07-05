@@ -98,17 +98,17 @@ namespace ft
 		}
 
 		reverse_iterator rbegin() {
-			return reverse_iterator(this->avl.begin());
+			return reverse_iterator(this->avl.end());
 		}
 		const_reverse_iterator rbegin() const {
-			const_reverse_iterator ret(this->avl.begin());
+			const_reverse_iterator ret(this->avl.end());
 			return ret;
 		}
 		reverse_iterator rend() {
-			return reverse_iterator(this->avl.end());
+			return reverse_iterator(this->avl.begin());
 		}
 		const_reverse_iterator rend() const {
-			const_reverse_iterator ret(this->avl.end());
+			const_reverse_iterator ret(this->avl.begin());
 			return ret;
 		}
 
@@ -334,6 +334,12 @@ namespace ft
 	bool operator>=(const map<Key,T,Compare,Alloc>& lhs,
 					const map<Key,T,Compare,Alloc>& rhs) {
 		return lhs.avl >= rhs.avl;
+	}
+
+	template< class Key, class T, class Compare, class Alloc >
+	void swap( map<Key,T,Compare,Alloc>& lhs,
+	           map<Key,T,Compare,Alloc>& rhs ) {
+		lhs.swap(rhs);
 	}
 }
 
