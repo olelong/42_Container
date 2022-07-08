@@ -52,22 +52,13 @@ namespace ft
 				}
 
 				reverse_iterator& operator++() { // pre increment
-					//std::cout << "pre operator++() called" << std::endl;
-					//std::cout << "pre ++ it key: " << this->it->first << std::endl;
-					//std::cout << "pre ++ it value: " << this->it->second << std::endl;
 					this->it--;
-					//std::cout << "pre ++ it key after: " << this->it->first << std::endl;
-					//std::cout << "pre ++ it value after: " << this->it->second << std::endl;
-					//std::cout << " it--: " << *this << std::endl;
 					return *this;
 				}
 
 				reverse_iterator operator++(int) { // post increment
-					//std::cout << "post operator++() called" << std::endl;
 					reverse_iterator tmp(*this);
-				//	std::cout << "post ++ it key_value: " << tmp->first << std::endl;
 					this->operator++();
-				//	std::cout << "post ++ it key_value after: " << tmp->first << std::endl;
 					return tmp;
 				}
 
@@ -81,17 +72,13 @@ namespace ft
 				}
 
 				reverse_iterator& operator--() { // pre increment
-					//std::cout << "post -- it key_value: " << this->it->first << std::endl;
 					this->it++;
-					//std::cout << "post -- it key_value after: " << this->it->first << std::endl;
 					return *this;
 				}
 
 				reverse_iterator operator--(int) { // post increment
 					reverse_iterator tmp(*this);
-				//	std::cout << "post -- it key_value: " << tmp->first << std::endl;
 					this->operator--();
-					//std::cout << "post -- it key_value after: " << tmp->first << std::endl;
 					return tmp;
 				}
 				
