@@ -417,6 +417,9 @@ Arbre binaire equilibree entre des nodes rouges et noires et suivant des regles 
 
 ```
 
+Tests a ecrire
+
+
 ```
 
 ### Others :
@@ -441,10 +444,4 @@ la compilation (et non a l'execution).
 pas egal a range1 et qu'il est plus petit, c'est false et vice-versa.
 
 -> pair et make_pair fonctionnent avec map. Ils permettent de gerer et creer des paires.
-
-///////////
-
-
-##### Ex00 : Megaphone
-![megaphone](./img/day00Ex00.png)  
 
