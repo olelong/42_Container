@@ -23,15 +23,21 @@ Le but du projet est d'implementer les containers Stack, map and vector.
 
 ``` git clone "my_repo_git" ```
 ``` cd my_repo_git ```
+
 Tape la commande ``` make ``` pour lancer seulement mon ft_container.
+
 Ensuite lance l'executable ``` ./executable_name ```.
+
 ##### OU
 Tape la commande ``` make real ``` pour lancer le container de la stl.
+
 Ensuite lance l'executable ``` ./executable_name ```.  
+
 ##### OU
 Tape la commande ``` make test ``` pour compiler les deux containers et faire un make diff des deux.
 
 -> Tu peux tester differents mains, en changeant le PATH dans le makefile:
+
 ``` SRCS_DIR	= mains/mine/
 SRCS		= main_map.cpp ```
 
