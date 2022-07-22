@@ -3,7 +3,7 @@
 C++ language
 A Stack, map and vector reimplementation project.
 
-### How to make the exercises work: 
+### How to make the exercises work : 
 ``` git clone "my_repo_git" ```
 ``` cd my_repo_git ```
 Run the ``` make ``` command to run only my ft_container.
@@ -44,7 +44,7 @@ push(): 	Inserts a new element at the top of the stack, on top of its current
 pop():  	Deletes the top element, reducing its size by 1.
 
 
-#### Example of using Stack:
+#### Example of using Stack :
 
 ```
 	stack<float> lhs; // Create a stack
@@ -72,7 +72,7 @@ pop():  	Deletes the top element, reducing its size by 1.
 
 Le but du projet est d'implementer les containers Stack, map and vector.
 
-### Comment lancer le programme:
+### Comment lancer le programme :
 
 ``` git clone "my_repo_git" ```
 ``` cd my_repo_git ```
@@ -146,9 +146,9 @@ Vector est une sorte de tableau dynamique qui peut changer de taille.
 	et qu'il ne realloue pas a chaque insertion d'un nouvel element mais plutot lorsque cette capacite est depasse.
 	- Peut etre itere avec iterator et reverse_iterator.
 
-#### Ses fonctions principales:
+#### Ses fonctions principales :
 
-##### Iterateurs:
+##### Iterateurs :
 
 Begin():	Retourne un iterateur sur le debut du vector.
 
@@ -159,23 +159,42 @@ End():		Retourne un iterateur sur la fin du vector.
 Rend():		Retourne un iterateur sur l'inverse de la fin du vector.
 
 
-##### Capacity:
+##### Capacity :
 
 size(), resize(), capacity() : Permettent de gerer et connaitre la capacite ou la size.
 
-##### Element access:
+##### Element access :
 
 operateur[], at(), front(), back() : Ce sont des fonctions qui permettent d'acceder a des elements du tableau.
 
-##### Modifiers:
+##### Modifiers :
 
 assign(), push_back(), pop_back(), insert(), erase(), swap(), clear() : Permettent de gerer les elements du tableau.
 
 Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger...
 
 
-#### Exemple d'utilisation de Stack :
+#### Exemple d'utilisation de Vector :
 
+```
+	vector<std::string> vect(1, "ok"); 	// On cree un vector vect qui contiendra des std::string
+	vect.push_back("a");			// On lui ajoute des elements
+	vect.push_back("b");
+	vect.push_back("c");
+
+	std::cout << vect.size();		// On affiche la taille du vecteur 
+	std::cout << vect.capacity();		// On affiche sa capacite
+	
+	vect.assign(5, 12);			// On assigne a notre vector 5 fois la valeur 12
+	// On affiche le contenu de notre vector:
+	for (vector<int>::iterator it = vect.begin(); it != vect.end(); it++)
+		std::cout << *it << " ";
+	
+	vector<int>::iterator itie;		// On creer un vector iterateur
+	itie = vect.begin();			// On met notre nouvel iterateur a la position du begin du vector
+	vect.erase(itie + 1);			// On erase dans notre vector l'element a la position begin + 1
+
+```
 
 ### Map :
 ### Others :
