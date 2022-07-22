@@ -61,6 +61,72 @@ pop():  	Deletes the top element, reducing its size by 1.
 	}
 ```
 
+### Vector:
+
+Vector is a kind of dynamic array that can change its size.
+
+#### The specificities of this container :
+
+	- It can change size dynamically.
+	- It uses a dynamic allocation to store its elements, that is to say that it has a defined capacity
+	  and that it doesn't reallocate at each insertion of a new element but rather when this capacity is exceeded.
+	- Can be iterated with iterator and reverse_iterator.
+
+#### Its main functions:
+
+##### Iterators :
+
+Begin():	Return an iterator on the beginning of the vector.
+
+Rbegin():	Returns an iterator on the inverse of the beginning of the vector.
+
+End():		Returns an iterator on the end of the vector.
+
+Rend():		Returns an iterator on the inverse of the end of the vector.
+
+
+##### Capacity :
+
+size(), resize(), capacity() : Allow to manage and know the capacity or the size.
+
+##### Element access :
+
+operator[], at(), front(), back(): These are functions that allow to access elements of the array.
+
+##### Modifiers :
+
+assign(), push_back(), pop_back(), insert(), erase(), swap(), clear(): Allow to manage the elements of the array.
+
+They will either add/insert one or more elements or delete, swap some...
+
+
+#### Example of using Vector :
+
+```
+	vector<std::string> vect(1, "ok"); // We create a vector vect which will contain std::string
+	vect.push_back("a"); // Add elements to it
+	vect.push_back("b");
+	vect.push_back("c");
+
+	std::cout << vect.size(); // We display the size of the vector 
+	std::cout << vect.capacity(); // Display its capacity
+	
+	vect.assign(5, 12); // We assign to our vector 5 times the value 12
+	// We display the content of our vector:
+	for (vector<int>::iterator it = vect.begin(); it != vect.end(); it++)
+		std::cout << *it << " ";
+	
+	vector<int>::iterator itie; // We create a vector iterator
+	itie = vect.begin(); // We put our new iterator at the position of the vector begin
+	vect.erase(itie + 1); // We erase in our vector the element at the position begin + 1
+
+```
+
+
+
+
+
+
 
 
 
