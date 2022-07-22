@@ -16,47 +16,47 @@ namespace ft
 				
 				// Constructors/Destructors
 								// Default constructor and copy constructor of Ctnr
-				explicit stack(const container_type& ctnr = container_type()) : _ctnr(ctnr) {
+				explicit stack(const container_type& c = container_type()) : c(c) {
 				}
 
 				stack& operator=(const stack& other) {
-					this->_ctnr = other._ctnr;
+					this->c = other.c;
 					return *this;
 				}
 
 				~stack() {
-					this->_ctnr.clear();
+					this->c.clear();
 				}
 
 				// Element access
 
 				value_type& top() { 
-					return this->_ctnr.back();
+					return this->c.back();
 				}
 
 				const value_type& top() const {
-					return this->_ctnr.back();
+					return this->c.back();
 				}
 
 				// Capacity
 
 				bool empty() const {
-					if (this->_ctnr.size() == 0)
+					if (this->c.size() == 0)
 						return true;
 					return false;
 				}
 
 				size_type size() const {
-					return this->_ctnr.size();
+					return this->c.size();
 				}
 
 				// Modifiers
 				void push(const value_type& val) {
-					this->_ctnr.push_back(val);
+					this->c.push_back(val);
 				}
 
 				void pop() {
-					this->_ctnr.pop_back();
+					this->c.pop_back();
 				}
 
 				template <typename U, typename Ctnr>
@@ -73,50 +73,50 @@ namespace ft
 		  			friend bool operator>=(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs);
 			
 
-			private :
-				container_type 		_ctnr;
+			protected:
+				container_type 		c;
 				
 		};
 
 		// Non member relational operators
 		template <typename U, typename Ctnr>
 		  bool operator==(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-			if (lhs._ctnr == rhs._ctnr)
+			if (lhs.c == rhs.c)
 				return true;
 			return false;
 		  }
 
 		template <typename U, typename Ctnr>
 			bool operator!=(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-				if (lhs._ctnr != rhs._ctnr)
+				if (lhs.c != rhs.c)
 					return true;
 				return false;
 			}
 
 		template <typename U, typename Ctnr>
 			bool operator<(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-				if (lhs._ctnr < rhs._ctnr)
+				if (lhs.c < rhs.c)
 					return true;
 				return false;
 			}
 
 		template <typename U, typename Ctnr>
 			bool operator<=(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-				if (lhs._ctnr <= rhs._ctnr)
+				if (lhs.c <= rhs.c)
 					return true;
 				return false;
 			}
 
 		template <typename U, typename Ctnr>
 			bool operator>(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-				if (lhs._ctnr > rhs._ctnr)
+				if (lhs.c > rhs.c)
 					return true;
 				return false;
 			}
 
 		template <typename U, typename Ctnr>
 			bool operator>=(const stack<U,Ctnr>& lhs, const stack<U,Ctnr>& rhs) {
-				if (lhs._ctnr >= rhs._ctnr)
+				if (lhs.c >= rhs.c)
 					return true;
 				return false;
 			}
