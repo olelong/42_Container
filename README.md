@@ -72,8 +72,18 @@ pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
 
 #### Exemple d'utilisation de Stack :
 ```
-
-
+	stack<float> lhs; 	// On cree une stack
+	lhs.push(12); 		// On ajoute a la stack un element
+	lhs.pop(); 		// On supprime le dernier element ajoute
+	
+	std::cout << "size of lhs: " << lhs.size() << std::endl; // On affiche la taille de notre stack
+	for (int i = 0; i < 5; i++) // On ajoute a la stack n elements (ici 5)
+	{
+		mystack.push(i); // On ajoute i
+		// On affiche i et on affiche le dernier element avec top() pour verifier que c'est bien le meme:
+		std::cout << "i: " << i  << std::endl;
+		std::cout << "top(): " << mystack.top() << std::endl;
+	}
 ```
 
 ### Vector :
