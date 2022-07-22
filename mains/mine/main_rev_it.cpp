@@ -234,6 +234,7 @@ int main()
 	t3 = rhss;
 	std::cout << *t3 << std::endl;
 
+	std::cout << std::endl;
 	std::cout << YELLOW << "Test 8: Difference between pointer and base() " << END_COLOR << std::endl;
 	//vector<float>::const_iterator cit = vct.begin();
 	//vector<float>::const_reverse_iterator crit1(it);
