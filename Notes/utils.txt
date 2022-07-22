@@ -24,4 +24,4 @@ void sort(Array<T>& v);
 template<>        // specialization for T = int
 void sort(Array<int>&); // on precise que c'est un int ici manuellement.
 
-/******************* Enable_if ******************/
+
