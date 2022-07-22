@@ -148,11 +148,30 @@ Vector est une sorte de tableau dynamique qui peut changer de taille.
 
 #### Ses fonctions principales:
 
+##### Iterateurs:
+
 Begin():	Retourne un iterateur sur le debut du vector.
+
 Rbegin():	Retourne un iterateur sur l'inverse du debut du vector.
+
 End():		Retourne un iterateur sur la fin du vector.
+
 Rend():		Retourne un iterateur sur l'inverse de la fin du vector.
 
+
+##### Capacity:
+
+size(), resize(), capacity() : Permettent de gerer et connaitre la capacite ou la size.
+
+##### Element access:
+
+operateur[], at(), front(), back() : Ce sont des fonctions qui permettent d'acceder a des elements du tableau.
+
+##### Modifiers:
+
+assign(), push_back(), pop_back(), insert(), erase(), swap(), clear() : Permettent de gerer les elements du tableau.
+
+Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger...
 
 
 #### Exemple d'utilisation de Stack :
