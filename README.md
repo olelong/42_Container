@@ -142,7 +142,21 @@ Vector est une sorte de tableau dynamique qui peut changer de taille.
 #### Les specificites de ce container :
 
 	- Il peut changer de taille de façon dynamique.
-	- Il 
+	- Il utilise une allocation dynamique pour stocker ses elements, c'est a dire qu'il a une capacite definie
+	et qu'il ne realloue pas a chaque insertion d'un nouvel element mais plutot lorsque cette capacite est depasse.
+	- Peut etre itere avec iterator et reverse_iterator.
+
+#### Ses fonctions principales:
+
+Begin():	Retourne un iterateur sur le debut du vector.
+Rbegin():	Retourne un iterateur sur l'inverse du debut du vector.
+End():		Retourne un iterateur sur la fin du vector.
+Rend():		Retourne un iterateur sur l'inverse de la fin du vector.
+
+
+
+#### Exemple d'utilisation de Stack :
+
 
 ### Map :
 ### Others :
