@@ -136,8 +136,38 @@ pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
 ```
 
 ### Vector :
+
+Vector est une sorte de tableau dynamique qui peut changer de taille.
+
+#### Les specificites de ce container :
+
+	- Il peut changer de taille de façon dynamique.
+	- Il 
+
 ### Map :
 ### Others :
+
+-> iterator_traits est un moyen de recuperer les informations
+d'un iterator.
+
+-> enable_if permet d'autoriser ou interdire certains
+overloads (de types) (conditionnels) a la compilation.
+C'est une metafonction*, en effet le
+resultat de cette fonction est obtenu et interprete a
+la compilation (et non a l'execution).
+*une metafonction est une struct.
+
+-> is_integral teste si la class passee en parametre est un
+entier (son attribut value est set a true).
+
+-> equal teste si une range (de first1 a last1) est egale a une
+autre range (a partir de first2).
+
+-> lexicographical_compare compare range1 et range2, si range2 est plus
+petite ou si le premier element n'est pas egal a range1 et qu'il est plus petit, c'est false
+et vice-versa.
+
+-> pair et make_pair fonctionnent avec map. Ils permettent de gerer et creer des paires.
 
 ///////////
 
