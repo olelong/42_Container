@@ -150,31 +150,21 @@ Vector est une sorte de tableau dynamique qui peut changer de taille.
 -> iterator_traits est un moyen de recuperer les informations
 d'un iterator.
 
--> enable_if permet d'autoriser ou interdire certains
+-> enable_if permet d'autoriser ou interdire certains overloads (de types) (conditionnels) a la compilation.
 
-overloads (de types) (conditionnels) a la compilation.
-
-C'est une metafonction*, en effet le
-
-resultat de cette fonction est obtenu et interprete a
+C'est une metafonction*, en effet le resultat de cette fonction est obtenu et interprete a
 
 la compilation (et non a l'execution).
 
 *une metafonction est une struct.
 
--> is_integral teste si la class passee en parametre est un
+-> is_integral teste si la class passee en parametre est un entier (son attribut value est set a true).
 
-entier (son attribut value est set a true).
+-> equal teste si une range (de first1 a last1) est egale a une autre range (a partir de first2).
 
--> equal teste si une range (de first1 a last1) est egale a une
+-> lexicographical_compare compare range1 et range2, si range2 est plus petite ou si le premier element n'est 
 
-autre range (a partir de first2).
-
--> lexicographical_compare compare range1 et range2, si range2 est plus
-
-petite ou si le premier element n'est pas egal a range1 et qu'il est plus petit, c'est false
-
-et vice-versa.
+pas egal a range1 et qu'il est plus petit, c'est false et vice-versa.
 
 -> pair et make_pair fonctionnent avec map. Ils permettent de gerer et creer des paires.
 
