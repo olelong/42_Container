@@ -50,12 +50,31 @@ Tape la commande ``` make test ``` pour compiler les deux containers et faire un
 
 Implementer une classe Stack prenant en parametre de son template notre classe Vector par defaut.
 
-Les specificites de ce container :
+#### Les specificites de ce container :
   - Elle fonctionne comme une pile d'assiette ou on ne peut retirer que celle qui est pose sur le dessus.
     Pour acceder aux elements de la pile, il faut toujours y acceder depuis le dernier.
   - Elle ne peut pas etre iterer.
 
-Ses fonctions :
+#### Ses fonctions :
+
+empty():	Booleen, retourne si la pile est vide(si sa taille est nulle).
+
+size():		Renvoie le nombre d'elements dans la pile.
+
+top():		Renvoie une reference a l'element sommet de la pile. L'element
+			sommet est le dernier element insere dans la pile.
+      
+push(): 	Insere un nouvel element en sommet de la pile, au dessus de son
+			element sommet actuel. Le contenu de ce nouvel element est une
+			copie de val.
+      
+pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
+
+#### Exemple d'utilisation de Stack :
+```
+
+
+```
 
 ### Vector :
 ### Map :
