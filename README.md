@@ -5,18 +5,28 @@ A Stack, map and vector reimplementation project.
 
 ### How to make the exercises work : 
 ``` git clone "my_repo_git" ```
+
 ``` cd my_repo_git ```
+
 Run the ``` make ``` command to run only my ft_container.
+
 Then launch the executable ``` ./executable_name ```.  
+
 ##### OR
+
 Run the ``` make real ``` command to run only the stl container.
+
 Then launch the executable ``` ./executable_name ```.  
+
 ##### OR
+
 Run the ``` make test ``` command to run both and see the difference beteween them.
+
 
 -> You can test differents mains, you just need to change PATH in the makefile:
 
 ``` SRCS_DIR	= mains/mine/ ```
+
 ``` SRCS		= main_map.cpp ```
 
 ### Stack :
@@ -25,8 +35,11 @@ Implement a Stack class taking in parameter of its template our Vector class by 
 
 #### The specificities of this container :
   - It works like a stack of plates where you can only remove the one on top.
+  - 
     To access the elements of the stack, you must always access them from the last one.
+    
   - It cannot be iterated.
+  - 
 
 #### Its functions :
 
@@ -68,9 +81,13 @@ Vector is a kind of dynamic array that can change its size.
 #### The specificities of this container :
 
 	- It can change size dynamically.
+	
 	- It uses a dynamic allocation to store its elements, that is to say that it has a defined capacity
+	
 	  and that it doesn't reallocate at each insertion of a new element but rather when this capacity is exceeded.
+	  
 	- Can be iterated with iterator and reverse_iterator.
+	
 
 #### Its main functions:
 
