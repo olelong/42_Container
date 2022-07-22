@@ -14,6 +14,10 @@ Then launch the executable ``` ./executable_name ```.
 ##### OR
 Run the ``` make test ``` command to run both and see the difference beteween them.
 
+-> You can test differents mains, you just need to change PATH in the makefile:
+
+``` SRCS_DIR	= mains/mine/ ```
+``` SRCS		= main_map.cpp ```
 
 <p align="left"> ******************** FRENCH ********************** </p>
 
@@ -38,8 +42,8 @@ Tape la commande ``` make test ``` pour compiler les deux containers et faire un
 
 -> Tu peux tester differents mains, en changeant le PATH dans le makefile:
 
-``` SRCS_DIR	= mains/mine/
-SRCS		= main_map.cpp ```
+``` SRCS_DIR	= mains/mine/ ```
+``` SRCS		= main_map.cpp ```
 
 
 ### Stack :
