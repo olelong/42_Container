@@ -60,6 +60,8 @@ pop():  	Deletes the top element, reducing its size by 1.
 #### Example of using Stack :
 
 ```
+
+int main {
 	stack<float> lhs; // Create a stack
 	lhs.push(12); // Add an element to the stack
 	lhs.pop(); // Delete the last added element
@@ -72,6 +74,8 @@ pop():  	Deletes the top element, reducing its size by 1.
 		std::cout << "i: " << i << std::endl;
 		std::cout << "top(): " << mystack.top() << std::endl;
 	}
+}
+	
 ```
 
 ### Vector:
@@ -120,6 +124,8 @@ They will either add/insert one or more elements or delete, swap some...
 #### Example of using Vector :
 
 ```
+
+int main {
 	vector<std::string> vect(1, "ok"); // We create a vector vect which will contain std::string
 	vect.push_back("a"); // Add elements to it
 	vect.push_back("b");
@@ -136,6 +142,7 @@ They will either add/insert one or more elements or delete, swap some...
 	vector<int>::iterator itie; // We create a vector iterator
 	itie = vect.begin(); // We put our new iterator at the position of the vector begin
 	vect.erase(itie + 1); // We erase in our vector the element at the position begin + 1
+}
 
 ```
 
@@ -204,6 +211,8 @@ pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
 
 #### Exemple d'utilisation de Stack :
 ```
+
+int main {
 	stack<float> lhs; 	// On cree une stack
 	lhs.push(12); 		// On ajoute a la stack un element
 	lhs.pop(); 		// On supprime le dernier element ajoute
@@ -216,6 +225,8 @@ pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
 		std::cout << "i: " << i  << std::endl;
 		std::cout << "top(): " << mystack.top() << std::endl;
 	}
+}
+
 ```
 
 ### Vector :
@@ -260,6 +271,8 @@ Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger..
 #### Exemple d'utilisation de Vector :
 
 ```
+
+int main {
 	vector<std::string> vect(1, "ok"); 	// On cree un vector vect qui contiendra des std::string
 	vect.push_back("a");			// On lui ajoute des elements
 	vect.push_back("b");
@@ -276,6 +289,7 @@ Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger..
 	vector<int>::iterator itie;		// On creer un vector iterateur
 	itie = vect.begin();			// On met notre nouvel iterateur a la position du begin du vector
 	vect.erase(itie + 1);			// On erase dans notre vector l'element a la position begin + 1
+}
 
 ```
 
@@ -434,8 +448,19 @@ Arbre binaire equilibree entre des nodes rouges et noires et suivant des regles 
 
 ```
 
-Tests a ecrire
+int main {
+	map<char, int> m; 	// On creer une map nommee m qui aura un char comme key et un int comme value 
+	m['d'] = 4;		// On ajoute une paire manuellement
+	m['c'] = 99;
 
+	m.insert(make_pair('r', 7));	// On insert un element en creant une nouvelle paire
+	// On affiche le contenu de notre map:
+	std::cout << "map print after insertion: { ";
+	for (map<char, int>::iterator it = m.begin(); it != m.end(); it++)
+		std::cout << it->first << " " << it->second << "; ";
+	
+	m.erase('p');		// On supprime la paire dont la cle est 'p'
+}
 
 ```
 
