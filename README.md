@@ -191,6 +191,7 @@ Lancez la commande ``` make test ``` pour compiler les deux containers et faire 
 Implémenter une classe Stack prenant en paramètre de son template notre classe Vector par défaut.
 
 #### Les spécificités de ce container :
+
   - Elle fonctionne comme une pile d'assiette dans laquelle on ne peut retirer que celle qui est posé sur le dessus.
     Pour accéder aux éléments de la pile, il faut toujours y accéder depuis le dernier.
   - Elle ne peut pas être itérer.
@@ -296,28 +297,28 @@ int main {
 
 ### Map :
 
-Map est un ensemble de conteneur qui va stocker les éléments formes par une combinaison entre une clé et une valeur.
+Map est un ensemble de conteneur qui va stocker les éléments formés par une combinaison entre une clé et une valeur.
 
 #### Les spécificités de ce container :
 
 La clé permet de trier et d'identifier les éléments. 
-Les types peuvent etre différent entre une clé et sa valeur.
+Les types peuvent être différent entre une clé et sa valeur.
 On créer une paire.
 
 #### Les arbres binaires :
 
-<p>/******Arbre binaire simple sans tri et équilibre:******/</p>
+<p>/******Arbre binaire simple sans tri et non équilibré:******/</p>
 exemple :
 
-				42
+		            42
 			  /    \
-            40      45
-			/\	   /  \
-		  38 41   43   47
-		  /		   \     \
-		37		   44	 49
-						/  \
-					   48   55
+                        40      45
+			/\	/  \
+		       38 41   43   47
+		      /		\     \
+		     37		 44	 49
+				        /  \
+				       48   55
 
 Ici, 42 est le root. 41 est son child de gauche car il est plus petit et 45 son child droit.
 42 est donc le parent de 41 et 45.
@@ -333,18 +334,9 @@ Si on supprime 42, 41 va être celui qui remontera et prendra la place de 42.
 Si on veut ajouter par exemple 44, il arrivera en tant que child droit de 43.
 
 
-erase(): exemples: 
-43 : only right child
-41 : no child
-38 : only left child
-45 : Both child : pas de relink : juste à la place de 45 se met 44
-
-Child droit : plus grand que parent 
-
-Child gauche : plus petit que parent
-
-
 <p>/****************  Binary tree : AVL  ******************/</p>
+
+Vocabulaire :
 
 (Facteur d’équilibre) Balance factor:	La différence entre la hauteur du subtree gauche du facteur - la hauteur du subtree
 droit (height left - height right).
@@ -359,7 +351,7 @@ Exemple d’arbre :
                        /           \
                     (9)           (53)
                   /      \           \
-              (8)    (21)           (61)
+              (8)       (21)         (61)
                          /
                      (11)
 
@@ -380,10 +372,15 @@ Résultat des facteurs d’équilibre de cet arbre :
 Height : la plus longue de gauche ou de droite qui se suit. 
 
 ##### Rotation subtrees:
+
 La position entre des nodes est interchangées, il existe deux type de rotations : left et right.
+
 Left rotation: 	Les arrangements des noeuds de droite sont transformés en arrangements sur le noeud de gauche.
+
 Right rotation: Contraire de left rotation.
+
 Left-right rotation: left puis right rotation.
+
 Right-left rotation: right puis left rotation.
 
 Exemple de left rotation:
