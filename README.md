@@ -12,13 +12,13 @@ Run the ``` make ``` command to run only my ft_container.
 
 Then launch the executable ``` ./executable_name ```.  
 
-##### OR
+##### 		OR
 
 Run the ``` make real ``` command to run only the stl container.
 
 Then launch the executable ``` ./executable_name ```.  
 
-##### OR
+##### 		OR
 
 Run the ``` make test ``` command to run both and see the difference beteween them.
 
@@ -171,12 +171,12 @@ Tape la commande ``` make ``` pour lancer seulement mon ft_container.
 
 Ensuite lance l'executable ``` ./executable_name ```.
 
-##### OU
+##### 		OU
 Tape la commande ``` make real ``` pour lancer le container de la stl.
 
 Ensuite lance l'executable ``` ./executable_name ```.  
 
-##### OU
+##### 		OU
 Tape la commande ``` make test ``` pour compiler les deux containers et faire un make diff des deux.
 
 -> Tu peux tester differents mains, en changeant le PATH dans le makefile:
