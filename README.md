@@ -12,13 +12,13 @@ Run the ``` make ``` command to run only my ft_container.
 
 Then launch the executable ``` ./executable_name ```.  
 
-##### 		OR
+<p> #####		OR </p>
 
 Run the ``` make real ``` command to run only the stl container.
 
 Then launch the executable ``` ./executable_name ```.  
 
-##### 		OR
+##### OR
 
 Run the ``` make test ``` command to run both and see the difference beteween them.
 
