@@ -12,7 +12,7 @@ Run the ``` make ``` command to run only my ft_container.
 
 Then launch the executable ``` ./executable_name ```.  
 
-##### <p>		OR </p>
+##### <p align="center">OR </p>
 
 Run the ``` make real ``` command to run only the stl container.
 
