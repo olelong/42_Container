@@ -159,7 +159,7 @@ int main {
 </br></br></br></br>
 <p align="left"> ******************** FRENCH ********************** </p>
 
-Le but du projet est d'implementer les containers Stack, map and vector.
+Le but du projet est d'implémenter les containers Stack, map and vector.
 
 ### Comment lancer le programme :
 
@@ -167,19 +167,19 @@ Le but du projet est d'implementer les containers Stack, map and vector.
 
 ``` cd my_repo_git_name ```
 
-Tape la commande ``` make ``` pour lancer seulement mon ft_container.
+Lancez la commande ``` make ``` pour lancer seulement mon ft_container.
 
-Ensuite lance l'executable ``` ./ft_containers ```.
-
-##### 		OU
-Tape la commande ``` make real ``` pour lancer le container de la stl.
-
-Ensuite lance l'executable ``` ./real ```.  
+Ensuite lance l'exécutable ``` ./ft_containers ```.
 
 ##### 		OU
-Tape la commande ``` make test ``` pour compiler les deux containers et faire un make diff des deux.
+Lancez la commande ``` make real ``` pour lancer le container de la stl.
 
--> Tu peux tester differents mains, en changeant le PATH dans le makefile:
+Ensuite lance l'exécutable ``` ./real ```.  
+
+##### 		OU
+Lancez la commande ``` make test ``` pour compiler les deux containers et faire un make diff des deux.
+
+-> Tu peux tester différents mains, en changeant le PATH dans le makefile:
 
 ``` SRCS_DIR	= mains/mine/ ```
 
@@ -188,41 +188,41 @@ Tape la commande ``` make test ``` pour compiler les deux containers et faire un
 
 ### Stack :
 
-Implementer une classe Stack prenant en parametre de son template notre classe Vector par defaut.
+Implémenter une classe Stack prenant en paramètre de son template notre classe Vector par défaut.
 
-#### Les specificites de ce container :
-  - Elle fonctionne comme une pile d'assiette ou on ne peut retirer que celle qui est pose sur le dessus.
-    Pour acceder aux elements de la pile, il faut toujours y acceder depuis le dernier.
-  - Elle ne peut pas etre iterer.
+#### Les spécificités de ce container :
+  - Elle fonctionne comme une pile d'assiette dans laquelle on ne peut retirer que celle qui est posé sur le dessus.
+    Pour accéder aux éléments de la pile, il faut toujours y accéder depuis le dernier.
+  - Elle ne peut pas être itérer.
 
 #### Ses fonctions :
 
-empty():	Booleen, retourne si la pile est vide(si sa taille est nulle).
+empty():	Booléen, retourne vraie si la pile est vide(si sa taille est nulle).
 
-size():		Renvoie le nombre d'elements dans la pile.
+size():		Renvoie le nombre d'éléments dans la pile.
 
-top():		Renvoie une reference a l'element sommet de la pile. L'element
-		sommet est le dernier element insere dans la pile.
+top():		Renvoie une référence a l'élément sommet de la pile. L'élément sommet est le dernier élément inséré dans la pile.
       
-push(): 	Insere un nouvel element en sommet de la pile, au dessus de son
-		element sommet actuel. Le contenu de ce nouvel element est une
-		copie de val.
+push(): 	Insére un nouvel élément au sommet de la pile, au dessus de son	élément sommet actuel. 
+
+		Le contenu de ce nouvel élément est une copie de val.
       
-pop():  	Supprime l'element sommet, reduisant ainsi sa taille de 1.
+pop():  	Supprime l'élément sommet, réduisant ainsi sa taille de 1.
 
 #### Exemple d'utilisation de Stack :
+
 ```
 
 int main {
-	stack<float> lhs; 	// On cree une stack
-	lhs.push(12); 		// On ajoute a la stack un element
-	lhs.pop(); 		// On supprime le dernier element ajoute
+	stack<float> lhs; 	// On crée une stack
+	lhs.push(12); 		// On ajoute a la stack un élément
+	lhs.pop(); 		// On supprime le dernier élément ajouté
 	
 	std::cout << "size of lhs: " << lhs.size() << std::endl; // On affiche la taille de notre stack
-	for (int i = 0; i < 5; i++) // On ajoute a la stack n elements (ici 5)
+	for (int i = 0; i < 5; i++) // On ajoute a la stack n éléments (ici 5)
 	{
 		mystack.push(i); // On ajoute i
-		// On affiche i et on affiche le dernier element avec top() pour verifier que c'est bien le meme:
+		// On affiche i et on affiche le dernier élément avec top() pour vérifier que c'est bien le même:
 		std::cout << "i: " << i  << std::endl;
 		std::cout << "top(): " << mystack.top() << std::endl;
 	}
@@ -234,39 +234,39 @@ int main {
 
 Vector est une sorte de tableau dynamique qui peut changer de taille.
 
-#### Les specificites de ce container :
+#### Les spécificités de ce container :
 
 	- Il peut changer de taille de façon dynamique.
-	- Il utilise une allocation dynamique pour stocker ses elements, c'est a dire qu'il a une capacite definie
-	et qu'il ne realloue pas a chaque insertion d'un nouvel element mais plutot lorsque cette capacite est depasse.
-	- Peut etre itere avec iterator et reverse_iterator.
+	- Il utilise une allocation dynamique pour stocker ses éléments, c'est à dire qu'il a une capacité définie
+	et qu'il ne réalloue pas a chaque insertion d'un nouvel élément mais plutôt lorsque cette capacité est dépassé.
+	- Peut être itéré avec iterator et reverse_iterator.
 
 #### Ses fonctions principales :
 
 ##### Iterateurs :
 
-Begin():	Retourne un iterateur sur le debut du vector.
+Begin():	Retourne un itérateur sur le début du vector.
 
-Rbegin():	Retourne un iterateur sur l'inverse du debut du vector.
+Rbegin():	Retourne un itérateur sur l'inverse du début du vector.
 
-End():		Retourne un iterateur sur la fin du vector.
+End():		Retourne un itérateur sur la fin du vector.
 
-Rend():		Retourne un iterateur sur l'inverse de la fin du vector.
+Rend():		Retourne un itérateur sur l'inverse de la fin du vector.
 
 
 ##### Capacity :
 
-size(), resize(), capacity() : Permettent de gerer et connaitre la capacite ou la size.
+size(), resize(), capacity() : Permettent de gérer et connaitre la capacité ou la size.
 
 ##### Element access :
 
-operateur[], at(), front(), back() : Ce sont des fonctions qui permettent d'acceder a des elements du tableau.
+operateur[], at(), front(), back() : Ce sont des fonctions qui permettent d'accéder a des éléments du tableau.
 
 ##### Modifiers :
 
-assign(), push_back(), pop_back(), insert(), erase(), swap(), clear() : Permettent de gerer les elements du tableau.
+assign(), push_back(), pop_back(), insert(), erase(), swap(), clear() : Permettent de gérer les éléments du tableau.
 
-Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger...
+Ils vont soit ajouter/inserer un ou des élément.s ou en supprimer, en échanger...
 
 
 #### Exemple d'utilisation de Vector :
@@ -274,39 +274,39 @@ Ils vont soit ajouter/inserer un ou des element.s ou en supprimer, en echanger..
 ```
 
 int main {
-	vector<std::string> vect(1, "ok"); 	// On cree un vector vect qui contiendra des std::string
-	vect.push_back("a");			// On lui ajoute des elements
+	vector<std::string> vect(1, "ok"); 	// On crée un vector vect qui contiendra des std::string
+	vect.push_back("a");			// On lui ajoute des éléments
 	vect.push_back("b");
 	vect.push_back("c");
 
 	std::cout << vect.size();		// On affiche la taille du vecteur 
-	std::cout << vect.capacity();		// On affiche sa capacite
+	std::cout << vect.capacity();		// On affiche sa capacité
 	
 	vect.assign(5, 12);			// On assigne a notre vector 5 fois la valeur 12
 	// On affiche le contenu de notre vector:
 	for (vector<int>::iterator it = vect.begin(); it != vect.end(); it++)
 		std::cout << *it << " ";
 	
-	vector<int>::iterator itie;		// On creer un vector iterateur
-	itie = vect.begin();			// On met notre nouvel iterateur a la position du begin du vector
-	vect.erase(itie + 1);			// On erase dans notre vector l'element a la position begin + 1
+	vector<int>::iterator itie;		// On créer un vector iterateur
+	itie = vect.begin();			// On met notre nouvel itérateur a la position du begin du vector
+	vect.erase(itie + 1);			// On erase dans notre vector l'élément a la position begin + 1
 }
 
 ```
 
 ### Map :
 
-Map est un ensemble de conteneur qui vont stocker les elements formes par une combinaison entre une cle et une valeur.
+Map est un ensemble de conteneur qui va stocker les éléments formes par une combinaison entre une clé et une valeur.
 
-#### Les specificites de ce container :
+#### Les spécificités de ce container :
 
-La cle permet de trier et d'identifier les elements. 
-Les types peuvent etre different entre une cle et sa valeur.
-On creer une paire.
+La clé permet de trier et d'identifier les éléments. 
+Les types peuvent etre différent entre une clé et sa valeur.
+On créer une paire.
 
 #### Les arbres binaires :
 
-<p>/******Arbre binaire simple sans tri et equilibre:******/</p>
+<p>/******Arbre binaire simple sans tri et équilibre:******/</p>
 exemple :
 
 				42
@@ -328,7 +328,7 @@ Si on supprime 49, c'est 48 qui prend sa place.
 
 Si on supprime 48, il ne se passe rien de special.
 
-Si on supprime 42, 41 va etre celui qui remontera et prendra la place de 42.
+Si on supprime 42, 41 va être celui qui remontera et prendra la place de 42.
 
 Si on veut ajouter par exemple 44, il arrivera en tant que child droit de 43.
 
@@ -337,18 +337,11 @@ erase(): exemples:
 43 : only right child
 41 : no child
 38 : only left child
-45 : Both child : pas de relink juste a la place de 45 se met 44
+45 : Both child : pas de relink : juste à la place de 45 se met 44
 
 Child droit : plus grand que parent 
 
 Child gauche : plus petit que parent
-
-
-Dans un arbre binaire ou listes chainees, on peut pas faire d'operateur=() car est vu comme trop dangereux. 
-
-(par exemple faire des copies beaucoup trop longues sans faire expres en plus)
-
-du coup on passe par un constructeur de copie et des fonctions annexes.
 
 
 <p>/****************  Binary tree : AVL  ******************/</p>
@@ -435,6 +428,7 @@ Exemple de left rotation:
             /   \
            A     B
 
+
 Autres Actions possibles :
 Insert/Delete/find
 
@@ -443,48 +437,48 @@ Autre arbre binaire existant:
 
 Red black tree :
 
-Arbre binaire equilibree entre des nodes rouges et noires et suivant des regles strictes.
+Arbre binaire équilibré entre des nodes rouges et noires et suivant des règles strictes.
 
 #### Exemple d'utilisation de map :
 
 ```
 
 int main {
-	map<char, int> m; 	// On creer une map nommee m qui aura un char comme key et un int comme value 
+	map<char, int> m; 	// On créer une map nommee m qui aura un char comme key et un int comme value 
 	m['d'] = 4;		// On ajoute une paire manuellement
 	m['c'] = 99;
 
-	m.insert(make_pair('r', 7));	// On insert un element en creant une nouvelle paire
+	m.insert(make_pair('r', 7));	// On insert un element en créant une nouvelle paire
 	// On affiche le contenu de notre map:
 	std::cout << "map print after insertion: { ";
 	for (map<char, int>::iterator it = m.begin(); it != m.end(); it++)
 		std::cout << it->first << " " << it->second << "; ";
 	
-	m.erase('p');		// On supprime la paire dont la cle est 'p'
+	m.erase('p');		// On supprime la paire dont la clé est 'p'
 }
 
 ```
 
 ### Others :
 
--> iterator_traits est un moyen de recuperer les informations
-d'un iterator.
+-> iterator_traits : est un moyen de récupérer les informations
+d'un itérateur.
 
--> enable_if permet d'autoriser ou interdire certains overloads (de types) (conditionnels) a la compilation.
+-> enable_if : permet d'autoriser ou interdire certains overloads (de types) (conditionnels) a la compilation.
 
-C'est une metafonction*, en effet le resultat de cette fonction est obtenu et interprete a
+C'est une métafonction*, en effet le résultat de cette fonction est obtenu et interprété a
 
-la compilation (et non a l'execution).
+la compilation (et non a l'exécution).
 
-*une metafonction est une struct.
+*une métafonction est une struct.
 
--> is_integral teste si la class passee en parametre est un entier (son attribut value est set a true).
+-> is_integral : teste si la class passée en paramètre est un entier (son attribut value est set a true).
 
--> equal teste si une range (de first1 a last1) est egale a une autre range (a partir de first2).
+-> equal : teste si une range (de first1 a last1) est égale a une autre range (a partir de first2).
 
--> lexicographical_compare compare range1 et range2, si range2 est plus petite ou si le premier element n'est 
+-> lexicographical_compare : compare range1 et range2, si range2 est plus petite ou si le premier élément n'est 
 
-pas egal a range1 et qu'il est plus petit, c'est false et vice-versa.
+pas égal a range1 et qu'il est plus petit, c'est false et vice-versa.
 
--> pair et make_pair fonctionnent avec map. Ils permettent de gerer et creer des paires.
+-> pair et make_pair : fonctionnent avec map. Ils permettent de gérer et créer des paires.
 
