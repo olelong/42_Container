@@ -4,24 +4,24 @@ C++ language
 A Stack, map and vector reimplementation project.
 
 ### How to make the exercises work : 
-``` git clone "my_repo_git" ```
+``` git clone "git@github.com:olelong/42_container.git" ```
 
-``` cd my_repo_git ```
+``` cd my_repo_git_name ```
 
 Run the ``` make ``` command to run only my ft_container.
 
-Then launch the executable ``` ./executable_name ```.  
+Then launch the executable ``` ./ft_containers ```.  
 
 ##### OR
 
 Run the ``` make real ``` command to run only the stl container.
 
-Then launch the executable ``` ./executable_name ```.  
+Then launch the executable ``` ./real ```.  
 
 ##### OR
 
 Run the ``` make test ``` command to run both and see the difference beteween them.
-
+It is normal that the max size is different between the one of my container and the one of the stl.
 
 -> You can test differents mains, you just need to change PATH in the makefile:
 
@@ -163,17 +163,18 @@ Le but du projet est d'implementer les containers Stack, map and vector.
 
 ### Comment lancer le programme :
 
-``` git clone "my_repo_git" ```
-``` cd my_repo_git ```
+``` git clone "git@github.com:olelong/42_container.git" ```
+
+``` cd my_repo_git_name ```
 
 Tape la commande ``` make ``` pour lancer seulement mon ft_container.
 
-Ensuite lance l'executable ``` ./executable_name ```.
+Ensuite lance l'executable ``` ./ft_containers ```.
 
 ##### 		OU
 Tape la commande ``` make real ``` pour lancer le container de la stl.
 
-Ensuite lance l'executable ``` ./executable_name ```.  
+Ensuite lance l'executable ``` ./real ```.  
 
 ##### 		OU
 Tape la commande ``` make test ``` pour compiler les deux containers et faire un make diff des deux.
@@ -181,6 +182,7 @@ Tape la commande ``` make test ``` pour compiler les deux containers et faire un
 -> Tu peux tester differents mains, en changeant le PATH dans le makefile:
 
 ``` SRCS_DIR	= mains/mine/ ```
+
 ``` SRCS		= main_map.cpp ```
 
 
