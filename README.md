@@ -147,13 +147,165 @@ int main {
 ```
 
 
+### Map:
+
+Map is a set of container that will store the elements formed by a combination between a key and a value.
+
+#### The specificities of this container:
+
+	- The key allows to sort and identify the elements. 
+	- The types can be different between a key and its value.
+	- We create a pair.
+
+#### Binary trees:
+
+<p>/******Simple binary tree without sorting and unbalanced:******/</p>
+
+example:
+
+		            42
+			  / \
+                        40 45
+			/\ / \
+		       38 41 43 47
+		      / \ \
+		     37 44 49
+	                / \
+                       48 55
+
+Here, 42 is the root. 41 is its left child because it is smaller and 45 its right child.
+42 is therefore the parent of 41 and 45.
+
+If we delete 40, 38 will only take the place of 40.
+
+If we delete 49, it is 48 which takes its place.
+
+If we delete 48, nothing special happens.
+
+If we delete 42, 41 will be the one to go up and take the place of 42.
+
+If we want to add for example 44, it will arrive as the right child of 43.
 
 
+<p>/**************** Binary tree: AVL ******************/</p>
+
+Vocabulary:
+
+Balance factor: The difference between the height of the left subtree of the factor - the height of the subtree
+(height left - height right).
+
+Factor: Each node has a balance factor and it must be between -1 and 1 if it is not the case the tree is not balanced. 
+
+Example of tree :
+
+                       (33)
+                       / \
+                    (9) (53)
+                  / \     \
+               (8) (21)   (61)
+                           /
+                         (11)
+
+Result of the equilibrium factors of this tree: 
+
+                          1
+                         / \
+                       -1 -1
+                       / \ \
+                       0 1 0
+                        /
+                       0
+		
+33 : height left 3 - height right 2 = 1 
+9 : height left 1 - height right 2 = -1
+61 : height left 0 - height right 0 = 0 
+
+Height : the longest left or right following each other. 
+
+##### Rotation subtrees:
+
+The position between nodes is interchanged, there are two types of rotation: left and right.
+
+Left rotation: 	Arrangements on the right nodes are transformed into arrangements on the left node.
+
+Right rotation: The opposite of left rotation.
+
+Left-right rotation: left then right rotation.
+
+Right-left rotation: right then left rotation.
+
+Example of left rotation:
+
+1. Initial tree: 
+
+       P 
+      /
+     (X)  
+    / \
+   A (Y)
+     / \
+     B Z
+
+2. If y has a left subtree, we assign x as parent of the left subtree of y: 
+
+       P 
+      /
+     (X)  
+    / \
+   A   B        (Y)
+                 \
+                  Z
+
+3. If the parent of x is NULL, we put y as root of the tree.
+4. If x is the left child of p, make y the left child of p.
+5. Otherwise assign y as the right child of p:
+
+     (X)       P
+    / \        \
+   A   B       (Y)
+                 \
+                  Z
+
+6. Make y the parent of x:
+
+               P
+               \
+               (Y)
+              / \
+             (X) Z
+            / \
+           A   B
 
 
+Other possible actions:
+Insert/Delete/find
 
 
+Other existing binary tree:
 
+Red black tree :
+
+Binary tree balanced between red and black nodes and following strict rules.
+
+#### Example of map use :
+
+```
+
+int main {
+	map<char, int> m; // We create a map named m which will have a char as key and an int as value 
+	m['d'] = 4; // We add a pair manually
+	m['c'] = 99;
+
+	m.insert(make_pair('r', 7)); // We insert an element by creating a new pair
+	// We display the content of our map:
+	std::cout << "map print after insertion: { ";
+	for (map<char, int>::iterator it = m.begin(); it != m.end(); it++)
+		std::cout << it->first << " " << it->second << "; ";
+	
+	m.erase('p'); // We delete the pair whose key is 'p'
+}
+
+```
 
 
 </br></br></br></br>
