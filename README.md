@@ -156,9 +156,7 @@ int main {
 
 
 
-
-</br>
-</br>
+</br></br></br></br>
 <p align="left"> ******************** FRENCH ********************** </p>
 
 Le but du projet est d'implementer les containers Stack, map and vector.
