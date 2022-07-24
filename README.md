@@ -314,7 +314,7 @@ int main {
 
 
 </br></br></br></br>
-<p align="left"> ****************************** FRENCH ******************************** </p>
+<p align="left"> ************************************************************** FRENCH **************************************************************** </p>
 
 Le but du projet est d'implémenter les containers Stack, map and vector.
 
