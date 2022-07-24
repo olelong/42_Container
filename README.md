@@ -29,6 +29,8 @@ It is normal that the max size is different between the one of my container and 
 
 ``` SRCS		= main_map.cpp ```
 
+</br></br>
+
 ### Stack :
 
 Implement a Stack class taking in parameter of its template our Vector class by default.
@@ -77,6 +79,8 @@ int main {
 }
 	
 ```
+
+</br></br>
 
 ### Vector:
 
@@ -146,6 +150,7 @@ int main {
 
 ```
 
+</br></br>
 
 ### Map:
 
@@ -337,6 +342,7 @@ Lancez la commande ``` make test ``` pour compiler les deux containers et faire 
 
 ``` SRCS		= main_map.cpp ```
 
+</br></br>
 
 ### Stack :
 
@@ -382,6 +388,8 @@ int main {
 }
 
 ```
+
+</br></br>
 
 ### Vector :
 
@@ -447,6 +455,8 @@ int main {
 
 ```
 
+</br></br>
+
 ### Map :
 
 Map est un ensemble de conteneur qui va stocker les éléments formés par une combinaison entre une clé et une valeur.
@@ -484,6 +494,7 @@ Si on supprime 48, il ne se passe rien de special.
 Si on supprime 42, 41 va être celui qui remontera et prendra la place de 42.
 
 Si on veut ajouter par exemple 44, il arrivera en tant que child droit de 43.
+
 
 
 <p>/****************  Binary tree : AVL  ******************/</p>
@@ -607,6 +618,7 @@ int main {
 }
 
 ```
+</br></br>
 
 ### Others :
 
