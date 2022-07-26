@@ -37,6 +37,7 @@ Implement a Stack class taking in parameter of its template our Vector class by 
 
 #### The specificities of this container :
 
+```
 
   - It works like a stack of plates where you can only remove the one on top.
   - 
@@ -44,7 +45,7 @@ Implement a Stack class taking in parameter of its template our Vector class by 
     
   - It cannot be iterated.
 
-
+```
 
 #### Its functions :
 
@@ -368,9 +369,13 @@ Implémenter une classe Stack prenant en paramètre de son template notre classe
 
 #### Les spécificités de ce container :
 
+```
+
   - Elle fonctionne comme une pile d'assiette dans laquelle on ne peut retirer que celle qui est posé sur le dessus.
     Pour accéder aux éléments de la pile, il faut toujours y accéder depuis le dernier.
   - Elle ne peut pas être itérer.
+
+```
 
 #### Ses fonctions :
 
@@ -480,9 +485,13 @@ Map est un ensemble de conteneur qui va stocker les éléments formés par une c
 
 #### Les spécificités de ce container :
 
-La clé permet de trier et d'identifier les éléments. 
-Les types peuvent être différent entre une clé et sa valeur.
-On créer une paire.
+```
+
+	- La clé permet de trier et d'identifier les éléments. 
+	- Les types peuvent être différent entre une clé et sa valeur.
+	- On créer une paire.
+
+```
 
 #### Les arbres binaires :
 
