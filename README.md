@@ -243,6 +243,8 @@ Example of left rotation:
 
 1. Initial tree: 
 
+```
+
        P 
       /
      (X)  
@@ -250,9 +252,12 @@ Example of left rotation:
    A (Y)
      / \
      B Z
-     
+   
+```
 
 2. If y has a left subtree, we assign x as parent of the left subtree of y: 
+
+```
 
        P 
       /
@@ -261,20 +266,26 @@ Example of left rotation:
    A   B        (Y)
                  \
                   Z
-		  
+
+```
 
 3. If the parent of x is NULL, we put y as root of the tree.
 4. If x is the left child of p, make y the left child of p.
 5. Otherwise assign y as the right child of p:
+
+```
 
      (X)       P
     / \        \
    A   B       (Y)
                  \
                   Z
-		  
+
+```
 
 6. Make y the parent of x:
+
+```
 
                P
                \
@@ -284,6 +295,7 @@ Example of left rotation:
             / \
            A   B
 
+```
 
 Other possible actions:
 Insert/Delete/find
