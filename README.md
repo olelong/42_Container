@@ -36,12 +36,15 @@ It is normal that the max size is different between the one of my container and 
 Implement a Stack class taking in parameter of its template our Vector class by default.
 
 #### The specificities of this container :
+
+
   - It works like a stack of plates where you can only remove the one on top.
   - 
     To access the elements of the stack, you must always access them from the last one.
     
   - It cannot be iterated.
-  - 
+
+
 
 #### Its functions :
 
