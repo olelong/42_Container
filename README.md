@@ -250,6 +250,7 @@ Example of left rotation:
    A (Y)
      / \
      B Z
+     
 
 2. If y has a left subtree, we assign x as parent of the left subtree of y: 
 
@@ -260,6 +261,7 @@ Example of left rotation:
    A   B        (Y)
                  \
                   Z
+		  
 
 3. If the parent of x is NULL, we put y as root of the tree.
 4. If x is the left child of p, make y the left child of p.
@@ -270,6 +272,7 @@ Example of left rotation:
    A   B       (Y)
                  \
                   Z
+		  
 
 6. Make y the parent of x:
 
