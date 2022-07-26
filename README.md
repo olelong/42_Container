@@ -366,7 +366,6 @@ size():		Renvoie le nombre d'éléments dans la pile.
 top():		Renvoie une référence a l'élément sommet de la pile. L'élément sommet est le dernier élément inséré dans la pile.
       
 push(): 	Insére un nouvel élément au sommet de la pile, au dessus de son	élément sommet actuel. 
-
 		Le contenu de ce nouvel élément est une copie de val.
       
 pop():  	Supprime l'élément sommet, réduisant ainsi sa taille de 1.
@@ -553,6 +552,8 @@ Exemple de left rotation:
 
 1. Initial tree: 
 
+```
+
        P 
       /
      (X)  
@@ -561,7 +562,11 @@ Exemple de left rotation:
         /   \
        B     Z
 
+```
+
 2. Si y a un subtree gauche, on assigne x comme parent du subtree gauche de y: 
+
+```
 
        P 
       /
@@ -571,9 +576,13 @@ Exemple de left rotation:
                  \
                   Z
 
+```
+
 3. Si le parent de x est NULL, on met y comme root de l’arbre.
 4. Si x est le left child de p, faire de y le left child de p.
 5. Sinon assigner y comme right child de p:
+
+```
 
      (X)       P
     /   \      \
@@ -581,7 +590,11 @@ Exemple de left rotation:
                  \
                   Z
 
+```
+
 6. Faire de y le parent de x:
+
+```
 
                P
                \
@@ -591,6 +604,7 @@ Exemple de left rotation:
             /   \
            A     B
 
+```
 
 Autres Actions possibles :
 Insert/Delete/find
