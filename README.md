@@ -65,7 +65,7 @@ pop():  	Deletes the top element, reducing its size by 1.
 
 #### Example of using Stack :
 
-```c
+```cpp
 
 int main {
 	stack<float> lhs; // Create a stack
