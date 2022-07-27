@@ -4,9 +4,9 @@ C++ language
 A Stack, map and vector reimplementation project.
 
 ### How to make the exercises work : 
-``` git clone "git@github.com:olelong/42_container.git" ```
+```c git clone "git@github.com:olelong/42_container.git" ```
 
-``` cd my_repo_git_name ```
+```c cd my_repo_git_name ```
 
 Run the ``` make ``` command to run only my ft_container.
 
