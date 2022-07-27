@@ -67,7 +67,7 @@ pop():  	Deletes the top element, reducing its size by 1.
 
 ```cpp
 
-int main {
+int main() {
 	stack<float> lhs; // Create a stack
 	lhs.push(12); // Add an element to the stack
 	lhs.pop(); // Delete the last added element
@@ -131,9 +131,9 @@ They will either add/insert one or more elements or delete, swap some...
 
 #### Example of using Vector :
 
-```
+```cpp
 
-int main {
+int main() {
 	vector<std::string> vect(1, "ok"); // We create a vector vect which will contain std::string
 	vect.push_back("a"); // Add elements to it
 	vect.push_back("b");
@@ -313,9 +313,9 @@ Binary tree balanced between red and black nodes and following strict rules.
 
 #### Example of map use :
 
-```
+```cpp
 
-int main {
+int main() {
 	map<char, int> m; // We create a map named m which will have a char as key and an int as value 
 	m['d'] = 4; // We add a pair manually
 	m['c'] = 99;
@@ -392,9 +392,9 @@ pop():  	Supprime l'élément sommet, réduisant ainsi sa taille de 1.
 
 #### Exemple d'utilisation de Stack :
 
-```
+```cpp
 
-int main {
+int main() {
 	stack<float> lhs; 	// On crée une stack
 	lhs.push(12); 		// On ajoute a la stack un élément
 	lhs.pop(); 		// On supprime le dernier élément ajouté
@@ -454,9 +454,9 @@ Ils vont soit ajouter/inserer un ou des élément.s ou en supprimer, en échange
 
 #### Exemple d'utilisation de Vector :
 
-```
+```cpp
 
-int main {
+int main() {
 	vector<std::string> vect(1, "ok"); 	// On crée un vector vect qui contiendra des std::string
 	vect.push_back("a");			// On lui ajoute des éléments
 	vect.push_back("b");
@@ -642,9 +642,9 @@ Arbre binaire équilibré entre des nodes rouges et noires et suivant des règle
 
 #### Exemple d'utilisation de map :
 
-```
+```cpp
 
-int main {
+int main() {
 	map<char, int> m; 	// On créer une map nommee m qui aura un char comme key et un int comme value 
 	m['d'] = 4;		// On ajoute une paire manuellement
 	m['c'] = 99;
