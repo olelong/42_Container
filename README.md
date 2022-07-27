@@ -343,6 +343,29 @@ int main() {
 
 ```
 
+</br></br>
+
+### Others:
+
+-> iterator_traits: is a way to retrieve information of an iterator.
+
+-> enable_if : allows to allow or forbid some (conditional) overloads at compile time.
+
+It is a metafunction*, in fact the result of this function is obtained and interpreted at compilation (and not at runtime).
+
+*a metafunction is a struct.
+
+-> is_integral : test if the class passed in parameter is an integer (its value attribute is set to true).
+
+-> equal : test if a range (from first1 to last1) is equal to another range (from first2).
+
+-> lexicographical_compare : compares range1 and range2, if range2 is smaller or if the first element is not equal to range1 and 
+
+equal to range1 and it is smaller, it is false and vice versa.
+
+-> pair and make_pair: work with map. They allow to manage and create pairs.
+
+
 
 </br></br></br></br>
 <p align="left"> **************************************************** FRENCH ******************************************************* </p>
