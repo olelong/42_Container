@@ -172,6 +172,8 @@ Map is a set of container that will store the elements formed by a combination b
 
 example:
 
+```
+
 		            42
 			  / \
                         40 45
@@ -181,6 +183,8 @@ example:
 		     37 44 49
 	                / \
                        48 55
+
+```
 
 Here, 42 is the root. 41 is its left child because it is smaller and 45 its right child.
 42 is therefore the parent of 41 and 45.
@@ -207,6 +211,8 @@ Factor: Each node has a balance factor and it must be between -1 and 1 if it is 
 
 Example of tree :
 
+```
+
                        (33)
                        / \
                     (9) (53)
@@ -215,7 +221,11 @@ Example of tree :
                            /
                          (11)
 
+```
+
 Result of the equilibrium factors of this tree: 
+
+```
 
                           1
                          / \
@@ -224,7 +234,9 @@ Result of the equilibrium factors of this tree:
                        0 1 0
                         /
                        0
-		
+
+```
+
 33 : height left 3 - height right 2 = 1 
 9 : height left 1 - height right 2 = -1
 61 : height left 0 - height right 0 = 0 
