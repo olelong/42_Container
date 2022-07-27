@@ -4,9 +4,9 @@ C++ language
 A Stack, map and vector reimplementation project.
 
 ### How to make the exercises work : 
-```c git clone "git@github.com:olelong/42_container.git" ```
+``` git clone "git@github.com:olelong/42_container.git" ```
 
-```c cd my_repo_git_name ```
+``` cd my_repo_git_name ```
 
 Run the ``` make ``` command to run only my ft_container.
 
@@ -65,7 +65,7 @@ pop():  	Deletes the top element, reducing its size by 1.
 
 #### Example of using Stack :
 
-```
+```c
 
 int main {
 	stack<float> lhs; // Create a stack
