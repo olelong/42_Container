@@ -40,8 +40,8 @@ Implement a Stack class taking in parameter of its template our Vector class by 
 ```
 
   - It works like a stack of plates where you can only remove the one on top.
-  - 
-    To access the elements of the stack, you must always access them from the last one.
+   
+  - To access the elements of the stack, you must always access them from the last one.
     
   - It cannot be iterated.
 
