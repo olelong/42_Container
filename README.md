@@ -3,7 +3,7 @@
 C++ language
 A Stack, map and vector reimplementation project.
 
-<p align="left"> **************************************************** ENGLISH ******************************************************* </p>
+<p align="left"> *************************** ENGLISH *************************** </p>
 
 ### How to make the exercises work : 
 ``` git clone "git@github.com:olelong/42_container.git" ```
@@ -370,7 +370,7 @@ equal to range1 and it is smaller, it is false and vice versa.
 
 
 </br></br></br></br>
-<p align="left"> **************************************************** FRANÇAIS ******************************************************* </p>
+<p align="left"> *************************** FRANCAIS *************************** </p>
 
 Le but du projet est d'implémenter les containers Stack, map and vector.
 
