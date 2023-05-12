@@ -1,8 +1,0 @@
-WHAT IS AN RVALUE AND AN LVALUE?
-
-int a = 1;
-int b = 22;
-	    
-a = b; // a is an lvalue and b is a rvalue
-//lvalue : read and Write
-//rvalue : read
