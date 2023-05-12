@@ -5,7 +5,13 @@ A Stack, map and vector reimplementation project.
 
 <p align="left"> *************************** ENGLISH *************************** </p>
 
-### How to make the exercises work : 
+## Prerequisites
+* A Unix-based operating system (for example: Linux, macOS)
+* GCC compiler
+* GNU Make
+
+
+## How to make the exercises work : 
 ``` git clone "git@github.com:olelong/42_container.git" ```
 
 ``` cd my_repo_git_name ```
@@ -367,14 +373,21 @@ equal to range1 and it is smaller, it is false and vice versa.
 
 -> pair and make_pair: work with map. They allow to manage and create pairs.
 
+## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 </br></br></br></br>
 <p align="left"> *************************** FRANCAIS *************************** </p>
 
 Le but du projet est d'implémenter les containers Stack, map and vector.
 
-### Comment lancer le programme :
+## Prérequis
+* Un système d'exploitation basé sur Unix (par exemple: Linux, macOS)
+* Un compilateur GCC
+* Un GNU Make
+
+## Comment lancer le programme :
 
 ``` git clone "git@github.com:olelong/42_container.git" ```
 
@@ -698,7 +711,7 @@ int main() {
 ```
 </br></br>
 
-### Others :
+### Autres :
 
 -> iterator_traits : est un moyen de récupérer les informations
 d'un itérateur.
@@ -721,3 +734,6 @@ pas égal a range1 et qu'il est plus petit, c'est false et vice-versa.
 
 -> pair et make_pair : fonctionnent avec map. Ils permettent de gérer et créer des paires.
 
+## Licence
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
