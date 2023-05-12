@@ -373,6 +373,12 @@ equal to range1 and it is smaller, it is false and vice versa.
 
 -> pair and make_pair: work with map. They allow to manage and create pairs.
 
+## Example of results with the tester made by the student of 42 @mli:
+
+<div align="center">
+  <img src="./assets/mli-tester.gif" alt="demo" width=400>
+</div>
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -733,6 +739,12 @@ la compilation (et non a l'exécution).
 pas égal a range1 et qu'il est plus petit, c'est false et vice-versa.
 
 -> pair et make_pair : fonctionnent avec map. Ils permettent de gérer et créer des paires.
+
+## Exemple de résultats avec le testeur réalisé par l'étudiant de 42 @mli
+
+<div align="center">
+  <img src="./assets/mli-tester.gif" alt="demo" width=400>
+</div>
 
 ## Licence
 
