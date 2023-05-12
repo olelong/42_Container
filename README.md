@@ -11,7 +11,7 @@ A Stack, map and vector reimplementation project.
 * GNU Make
 
 
-## How to make the exercises work : 
+## How to make the exercises work 
 ``` git clone "git@github.com:olelong/42_container.git" ```
 
 ``` cd my_repo_git_name ```
