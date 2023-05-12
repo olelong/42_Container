@@ -376,7 +376,7 @@ equal to range1 and it is smaller, it is false and vice versa.
 ## Example of results with the tester made by the student of 42 @mli:
 
 <div align="center">
-  <img src="./assets/mli-tester.gif" alt="demo" width=400>
+  <img src="./assets/mli-tester.gif" alt="demo" width=500>
 </div>
 
 ## License
@@ -743,7 +743,7 @@ pas égal a range1 et qu'il est plus petit, c'est false et vice-versa.
 ## Exemple de résultats avec le testeur réalisé par l'étudiant de 42 @mli
 
 <div align="center">
-  <img src="./assets/mli-tester.gif" alt="demo" width=400>
+  <img src="./assets/mli-tester.gif" alt="demo" width=500>
 </div>
 
 ## Licence
