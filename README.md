@@ -389,7 +389,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Le but du projet est d'implémenter les containers Stack, map and vector.
 
 ## Prérequis
-* Un système d'exploitation basé sur Unix (par exemple: Linux, macOS)
+* Un système d'exploitation basé sur Unix (seulement Linux)
 * Un compilateur GCC
 * Un GNU Make
 
