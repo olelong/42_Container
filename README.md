@@ -6,7 +6,7 @@ A Stack, map and vector reimplementation project.
 <p align="left"> *************************** ENGLISH *************************** </p>
 
 ## Prerequisites
-* A Unix-based operating system (for example: Linux, macOS)
+* A Unix-based operating system (only Linux)
 * GCC compiler
 * GNU Make
 
